@@ -1,0 +1,133 @@
+.account-head {
+    background-image: url([%% Header Image %%]);
+    background-size: cover;
+    background-position: 10% 0;
+    min-height: [%% BG-min-height-desktop %%];
+    border-bottom: none;
+}
+
+.space-badge--top img {
+display: [%% Langer Badge Sichtbarkeit %%];
+width: 17%;
+float: right;
+position: absolute;
+right: 3%;
+top: 0;
+}
+.space-badge--top--round img {
+display: [%% Runder Badge Sichtbarkeit %%];
+width: 40%;
+float: right;
+position: absolute;
+right: 3%;
+top: 5%;
+}
+
+h1 {
+color: #d00; font-weight: 700; font-size: 2.2em; line-height: 1.25em; 
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+}
+li, li strong  {
+   font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+}
+li strong {
+    color: #4a7e3e;
+    font-weight: 700;
+}
+
+p.lead {
+    font-weight: 500;
+     font-size: 1.2em;
+     font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+     margin-top: .5rem;
+}
+.btn {
+    max-width: 250px;
+    font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+    float: right;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: .5rem;
+}
+
+.logo {
+    background-image: url([%% Header Image Logo %%]);
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    display: block;
+    height: 4em;
+    width: 4em;
+}
+.space--page-left,
+.start-screen-content
+{ padding-left: 1rem }
+
+.space--top {
+    margin-top: 1.5em;
+}
+.show-mobile-only {
+    display: none;
+}
+@media screen and (max-width: 767px){
+.space-mobile--page-double {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+h1 {
+font-size: 2em; 
+}
+
+.btn {
+    margin-bottom: 1.2rem;
+}
+
+}
+
+@media screen and (max-width: 480px){
+    .hide-mobile {
+        display: none;
+    }
+    .show-mobile-only {
+        display: inline;
+    }
+    .account-head {
+        background-position: 10% 0;
+        min-height: [%% BG-min-height-mobile %%];
+        width: 100%;
+    }
+    .default-offer--inner {
+        display: block;
+    }
+    .space--top {
+        margin-top: 1.2em;
+    }
+    h1 {
+        font-size: 1.5em; 
+    }
+    .custom-offer-list li {
+        font-size: inherit;
+      	display: [%% show_listpoints %%];
+    }
+    p.lead {
+        font-size: 1em;
+    }
+    .logo {
+        height:3em;
+        width: 3em;
+    }
+    .space-mobile--page-double {
+        padding: 0 .75rem
+    }
+   .btn {
+        display: block;
+        float: right;
+        max-width: calc(100% - 60px)
+    }
+    .account-head {
+        background-image: url([%% Header Image Mobile %%]);
+    }
+@media screen and (max-width: 350px){
+    .space-badge--top img {
+
+  }
+}

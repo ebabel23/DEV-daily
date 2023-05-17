@@ -1,0 +1,65 @@
+<div id="template-tracking" external-event external-event-trackingVars="'level': 'billing', 'template': 'M1 2020 Billing','variant': '[%% Tracking_Variant %%]', 'event': 'piano_view'" external-event-params="{{params}}"></div>
+<div custom-script>
+  // Tracking
+  $( "#template-tracking" ).trigger( "click", function() {
+  // window.console.log("Tracking Clicked");
+  });
+</div>
+
+<div class="row default-offer">
+    <div class="row default-offer--inner">
+        <div class="indents-from-border">
+      
+            <div class="row account-head space--page-double space--page-top">
+                 <div class="col-65 col-mobile--100 space-logo--top">
+                    <div class="logo"></div>
+                </div>
+                <div class="col-35 col-mobile--100 space-badge--top">
+                    <img src="[%% Header Image Badge %%]">
+                </div>
+                <div class="col-35 col-mobile--100 space-badge--top--round">
+                    <img src="[%% Header Image Badge Round %%]">
+                </div>
+            </div>
+
+            <div class="start-screen-content space--page-double">
+                <div class="space--top">
+                    <h1>
+                        <t>[%% Headline %%]</t>
+                    </h1>
+                     <p class="lead">
+                        <t class="hide-mobile">[%% Subheadline %%]</t>
+                        <t class="show-mobile-only">[%% Subheadline %%]</t>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="start-screen-content">
+                <ul class="custom-offer-list hide-mobile" >
+                    <li><t>[%% List_point_1 %%]</t></li>
+                    <li><t>[%% List_point_2 %%]</t></li>
+                    <li><t>[%% List_point_3 %%]</t></li>
+                </ul>
+                 </div>
+                <div class="row space--page-left space--page-double-top space--top-double border--top offer-terms">
+          <div ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+            <div class="col-65 col-mobile--100 space--right" ng-if="isPayableTerm(term)">
+              <h3>{{term.name | tc:'term.name'}}</h3>
+              <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+            </div>
+            <div class="col-35 col-mobile--100 space-mobile--top" ng-if="isPayableTerm(term)">
+              <button id="paymentmethode" class="btn btn-icon" ng-click="startCheckout(term.termId)"><t>Zahlart wählen</t></button>
+            </div>
+          </div>
+        </div>
+	    <div class="space--top space--page-left">
+ 			<p><t>[%% Trial_Text %%]</t></p>
+		</div>   
+     </div>
+   </div>
+</div>
+<div custom-script>
+  $( window ).load(function() {
+ $( "#[%% Loading-Trigger-ID %%]" ).trigger("click");
+  });
+</div>

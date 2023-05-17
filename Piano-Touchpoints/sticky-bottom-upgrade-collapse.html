@@ -1,0 +1,104 @@
+<div
+  id="template-tracking"
+  external-event
+  external-event-trackingVars="'level': 'bottom', 'template': 'Jahresabo-Banner Sticky Bottom','variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
+  external-event-params="{{params}}"
+></div>
+<div custom-script>
+  // Tracking $( "#template-tracking" ).trigger( "click", function() { //
+  window.console.log("Tracking Clicked"); });
+</div>
+<div class="plus-banner">
+  <div class="plus-banner__head">
+    <div class="plus-logo"></div>
+    <div class="plus-banner__text">[%% Headline %%]</div>
+    <div class="plus-banner__expand"></div>
+  </div>
+  <div class="plus-banner__body">
+    <h3>[%% Text %%]</h3>
+    <a
+      href="#"
+      target="_[%% Link-Ziel %%]"
+      class="btn"
+      external-event="StickyBottom_LP"
+      external-event-trackingVars="'level': 'bottom', 'template': 'Jahresabo-Banner Sticky Bottom', 'variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoClick'"
+      external-event-params="{{params}}"
+    >
+      [%% CTA %%]
+    </a>
+  </div>
+</div>
+
+<script>
+  console.log("xDEV - 1710 - Bottom-Sticky");
+  const refurl = document.referrer;
+  const url = new URL(refurl);
+  const domain = "https://" + url.hostname;
+  const variolink = domain + "[%% Link %%]";
+  const target = "[%% Link-Ziel %%]";
+  const fieldlink = "[%% Link %%]";
+  const fullurl = fieldlink.includes("https");
+  const redirect = "[%% Redirect_Link %%]";
+
+  let plusBanner = document.getElementsByClassName("plus-banner")[0];
+  console.log(plusBanner);
+  let plusBannerHead = document.getElementsByClassName("plus-banner__head")[0];
+  console.log(plusBannerHead);
+  let loginLink = document.getElementsByClassName("plus-banner__login")[0];
+  console.log(loginLink);
+  let plusLink = document.getElementsByClassName("plus-banner__link")[0];
+  console.log(plusLink);
+
+  window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      if (plusBanner.classList.contains("plus-banner")) {
+        if (fullurl) {
+          plusLink.setAttribute(
+            "href",
+            fieldlink +
+              "?tpcc=[%% Tracking_Variant %%]_subscribe-banner-sticky-bottom-mobile" +
+              redirect
+          );
+        } else {
+          plusLink.setAttribute(
+            "href",
+            variolink +
+              "?tpcc=[%% Tracking_Variant %%]_subscribe-banner-sticky-bottom-mobile" +
+              redirect
+          );
+        }
+      }
+    },
+    false
+  );
+
+  plusBannerHead.addEventListener("click", function (e) {
+    e.preventDefault();
+    plusBanner.classList.toggle("plus-banner--expanded");
+    parent.postMessage(
+      {
+        message: "togglePlusBannerStickyBottom",
+      },
+      refurl
+    );
+  });
+
+  loginLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    parent.postMessage(
+      {
+        message: "hidePlusBannerStickyClick",
+        expires: 1,
+      },
+      refurl
+    );
+    plusBanner.classList.toggle("plus-banner--expanded");
+    parent.postMessage(
+      {
+        message: "openLoginContainer",
+      },
+      refurl
+    );
+  });
+</script>

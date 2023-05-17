@@ -1,0 +1,76 @@
+<div
+  id="template-tracking"
+  external-event
+  external-event-trackingVars="'level': 'viewport', 'template': 'Viewport', 'variant':'[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
+  external-event-params="{{params}}"
+></div>
+<div custom-script>
+  // Tracking $( "#template-tracking" ).trigger( "click", function() { //
+  window.console.log("Tracking Clicked"); });
+</div>
+<div id="viewport-exit-banner-overlay">
+  <a class="viewport__backlink" href="[%% Backlink-URL %%]"
+    >[%% Backlink-Text %%]</a
+  >
+  <a class="plus-banner" href="#" target="_[%% Link-Ziel %%]">
+    <img
+      src="[%% Bild-URL %%]"
+      alt="[%% Bild-Alternativtext %%]"
+      class="viewport-exit-image"
+      external-event="Modal_LP"
+      external-event-trackingVars="'level': 'viewport', 'template': 'Viewport', 'variant':'[%% Tracking_Variant %%]','event': 'eec.promoClick'"
+      external-event-params="{{params}}"
+      ng-click="close()"
+  /></a>
+</div>
+
+<script>
+  var refurl = document.referrer;
+  var url = new URL(refurl);
+  var domain = "https://" + url.hostname;
+  var variolink = domain + "[%% Link %%]";
+  var target = "[%% Link-Ziel %%]";
+  var fieldlink = "[%% Link %%]";
+  var fullurl = fieldlink.includes("https");
+  var redirect = "[%% Redirect_Link %%]";
+
+  window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      var plusBanner = document.getElementsByClassName("plus-banner")[0];
+
+      if (plusBanner.classList.contains("plus-banner")) {
+        if (fullurl) {
+          plusBanner.setAttribute(
+            "href",
+            fieldlink + "?tpcc=[%% Tracking_Variant %%]_modal_field" + redirect
+          );
+        } else {
+          plusBanner.setAttribute(
+            "href",
+            variolink + "?tpcc=[%% Tracking_Variant %%]_modal_vario" + redirect
+          );
+        }
+      }
+    },
+    false
+  );
+
+  $(document).ready(function () {
+    var $plusBanner = $(".plus-banner");
+
+    if ($plusBanner.hasClass("plus-banner")) {
+      if (fullurl == true) {
+        $plusBanner.attr(
+          "href",
+          fieldlink + "?tpcc=[%% Tracking_Variant %%]_modal" + redirect
+        );
+      } else {
+        $plusBanner.attr(
+          "href",
+          variolink + "?tpcc=[%% Tracking_Variant %%]_modal" + redirect
+        );
+      }
+    }
+  });
+</script>

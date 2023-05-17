@@ -1,0 +1,82 @@
+<div
+  id="template-tracking"
+  external-event
+  external-event-trackingVars="'level': 'header', 'template': 'Header Plus-Banner-Sticky','variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
+  external-event-params="{{params}}"
+></div>
+<div custom-script>
+  // Tracking $( "#template-tracking" ).trigger( "click", function() { //
+  window.console.log("Tracking Clicked"); });
+</div>
+
+<a
+  href="[%% Link %%]?tpcc=[%% Tracking_Variant %%]_upgrade-banner-sticky-desktop"
+  target="_[%% Link-Ziel %%]"
+  class="plus-banner"
+  external-event="StickyHeader_LP"
+  external-event-trackingVars="'level': 'header', 'template': 'Header Plus-Banner-Sticky', 'variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoClick'"
+  external-event-params="{{params}}"
+>
+  <span class="plus-banner__close"></span>
+  <div class="banner-main">
+    <div class="plus-logo"></div>
+    <div class="plus-banner__text">[%% Text %%]</div>
+    <span class="plus-banner__arrow"></span>
+  </div>
+</a>
+
+<script>
+  const refurl = document.referrer;
+  const url = new URL(refurl);
+  const domain = "https://" + url.hostname;
+  const variolink = domain + "[%% Link %%]";
+  const target = "[%% Link-Ziel %%]";
+  const fieldlink = "[%% Link %%]";
+  const fullurl = fieldlink.includes("https");
+  const redirect = "[%% Redirect_Link %%]";
+  let plusBanner = document.getElementsByClassName("plus-banner")[0];
+  let closeButton = document.getElementsByClassName("plus-banner__close")[0];
+
+  closeButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    plusBanner.style.display = "none";
+    parent.postMessage(
+      {
+        message: "hidePlusBannerSticky",
+        expires: 10,
+      },
+      refurl
+    );
+  });
+
+  window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      if (plusBanner.classList.contains("has-plus")) {
+        plusBanner.setAttribute(
+          "href",
+          "/angebot-abo/vorteilsprogramm/" + redirect
+        );
+      }
+
+      if (plusBanner.classList.contains("plus-banner")) {
+        if (fullurl) {
+          plusBanner.setAttribute(
+            "href",
+            fieldlink +
+              "?tpcc=[%% Tracking_Variant %%]_upgrade-banner-sticky-desktop" +
+              redirect
+          );
+        } else {
+          plusBanner.setAttribute(
+            "href",
+            variolink +
+              "?tpcc=[%% Tracking_Variant %%]_upgrade-banner-sticky-desktop" +
+              redirect
+          );
+        }
+      }
+    },
+    false
+  );
+</script>

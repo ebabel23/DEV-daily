@@ -1,0 +1,11 @@
+<div class="row space--page-left space--page-double-top space--top-double border--top offer-terms">
+  <div ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+    <div class="col-65 col-mobile--100 space--right" ng-if="isPayableTerm(term)">
+      <h3>{{term.name | tc:'term.name'}}</h3>
+      <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+    </div>
+    <div class="col-35 col-mobile--100 space-mobile--top" ng-if="isPayableTerm(term)">
+      <button id="paymentmethode" class="btn btn-icon" ng-click="startCheckout(term.termId)"><t>Zahlart wählen</t></button>
+    </div>
+  </div>
+</div>

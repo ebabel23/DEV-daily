@@ -1,0 +1,73 @@
+<!-- prettier-ignore -->
+<div>  /*Offer ansehen
+Login ansehen
+Register ansehen
+Payment ansehen
+loader sehen
+</div>
+/*Login-Notification on Top /*Surrounding Template */
+<div class="row default-offer">
+  <div ng-switch="fdpLoading">
+    <div class="loader" ng-switch-when="true">
+      <p>Ladeschnecke</p>
+      <div class="loader-inner"></div>
+    </div>
+    <div ng-switch="useView">
+      <div ng-switch-when="SIGN_UP" ng-show="isUserValid()"></div>
+      <p>Login-Status über Template</p>
+    </div>
+    <div class="row default-offer--inner">
+      <p>The Piano-Template</p>
+      <div ng-switch="useView">
+        <div ng-switch-when="SIGN_UP" ng-show="!isUserValid()">
+          <div
+            class="self-template switch-button"
+            ng-click="trackingView('login'); $parent.useView = 'SIGN_IN'"
+            external-event
+            external-event-params="{{ params }}"
+          >
+            Sie haben bereits einen Zugang? <br />
+            <span>Login</span>
+          </div>
+        </div>
+        <div ng-switch-when="SIGN_REGISTER" ng-show="!isUserValid()">
+          <div
+            class="self-template switch-button left"
+            ng-click="hideErrorMessage(); $parent.useView = 'SIGN_UP'"
+          >
+            <t><span>Zurück</span></t>
+          </div>
+          <div
+            class="self-template switch-button"
+            external-event
+            external-event-trackingVars="'template': '2.1 Multi Offer Kampagne','p_id': '{{term.termId}}', 'name': '{{term.name}}','price': '{{term.price}}','category': 'subscription','variant': 'Multi Offer - [%% Tracking_Variant %%]','position': 'inline', 'event': 'eec.promoClick', 'microConversion': 'Piano_Registration_Print_Out'"
+            external-event-params="{{ params }}"
+          >
+            Sie lesen bereits die gedruckte Zeitung? <br />
+            <a href="[%% Aboshop_URL %%]" target="_blank"><span>Zum Angebot</span></a>
+          </div>
+        </div>
+        <div ng-switch-when="SIGN_IN" ng-show="!isUserValid()">
+          <div
+            class="self-template switch-button left"
+            ng-click="hideErrorMessage(); $parent.useView = 'SIGN_UP'"
+          >
+            <t><span>Zurück</span></t>
+          </div>
+          <div
+            class="self-template switch-button"
+            ng-click="hideErrorMessage(); $parent.useView = 'SIGN_UP'"
+            external-event
+            external-event-trackingVars="'template': '2.1 Multi Offer Kampagne','p_id': '{{term.termId}}', 'name': '{{term.name}}','category': 'subscription','variant': 'Multi Offer - [%% Tracking_Variant %%]','position': '[%% Tracking_position %%]', 'event': 'eec.pianoClick', 'microConversion': 'Piano_Login_Registration'"
+            external-event-params="{{ params }}"
+          >
+            Sie haben keinen Zugang?<br />
+            <span>
+              <t>Jetzt testen!</t>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

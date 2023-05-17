@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main-area>
+      <div class="varlist">
+        <h1 class="varlist__h1">List of Piano-related Variables via tp-push</h1>
+        <div class="varlist__howto">
+          <p>How To use the vars?</p>
+          <p>
+            In Plain HTML: Put Name in double { { custom.variable_goes_here } }
+          </p>
+          <p>In Custom-JS in a Template: scope.[object]</p>
+          <p>
+            Outside Piano in JS (eg. in Flows with RunJS):
+            tp.customVariables.VARNAME
+          </p>
+        </div>
+        <div class="varlist__container">
+          <ul class="varlist__item">
+            <li class="">e2p_refUrl</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light"> Shows-Referring Page</span>
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light"> String / URL</span>
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_refUrl }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_promoSlot</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Used to control Gutschein-Slot</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light">
+                Boolean / from section-property</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_promoSlot }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_titleCode</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light"> Used identify title</span>
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light"> String / e.g. nrw-wp</span>
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_titleCode }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_isSection</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Used identify if page is a section</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light"> Boolean</span>
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_isSection }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_isArticle</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Used identify if page is an article</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light"> Boolean</span>
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_isArticle }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_articleType</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Shows escbnic-article-type of page</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light">
+                String / eg. Nachricht</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_articleType }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_articleId</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Shows escenic-article-id</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light"> String (Number?)</span>
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_articleId }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_paidState</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Shows computed premium-state of page</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light"> Boolean</span>
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_paidState }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_isPlusPage</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Shows if page is a sales-page</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light">
+                Boolean from section-parameter</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_isPlusPage }}</span
+              >
+            </li>
+          </ul>
+
+          <ul class="varlist__item">
+            <li class="">e2p_consentLevel</li>
+            <li class="varlist__subtext">
+              Usage:
+              <span class="varlist__subtext-light">
+                Shows if active user gave consent</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Type:
+              <span class="varlist__subtext-light">
+                Boolean from section-parameter</span
+              >
+            </li>
+            <li class="varlist__subtext">
+              Example:
+              <span class="varlist__subtext-light">
+                {{ custom.e2p_consentLevel }}</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="varlist__footer">
+          <p>
+            More Info on Confluence
+            <span>
+              <a
+                href="https://sconfluence.funkemedien.de/display/FASPS/Verwendung+von+Cookies%2C+Tags+und+System-Variablen+in+Piano"
+                >LINK</a
+              ></span
+            >
+          </p>
+        </div>
+      </div>
+    </main-area>
+    <script type="text/javascript" src="js/delay.js"></script>
+    <script type="text/javascript" src="js/library.js"></script>
+  </body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.waz.de/resources/piano/css/v1/main.min.css?refactor-1" />
+    <link rel="stylesheet" href="/M1/CSS/m1-uno-build.css" />
+
+    <title>M1UNO - Document</title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="[%% SYS_CSS_URL %%]" />
+
+    <script>
+      var scope = angular.element("#error-messages").scope();
+
+      window.addEventListener(
+        "message",
+        function (e) {
+          if (typeof e.data.piano != "undefined") {
+            var result = e.data.piano;
+            if (!scope.$$phase) {
+              scope.$apply(function () {
+                if (!result.success) {
+                  scope.fdpErrorCode = result.message;
+                }
+                // Loader if User click button
+                if (result.message === "loader") {
+                  scope.fdpLoading = result.object.loading;
+                }
+              });
+            } else {
+              if (!result.success) {
+                scope.fdpErrorCode = result.message;
+              }
+              if (result.message === "loader") {
+                scope.fdpLoading = result.object.loading;
+              }
+            }
+
+            if (!result.success) {
+              $("#error-message-wrapper").show();
+            } else {
+              $("#error-message-wrapper").hide();
+            }
+          }
+          //$("input").focusout(function(){
+          //  $('#error-message-wrapper').hide();
+          //});
+
+          //$("input").focusin(function(){
+          //  $('#error-message-wrapper').hide();
+          //});
+          return;
+        },
+        false
+      );
+    </script>
+    <div id="template-tracking" external-event external-event-trackingVars="'level': 'paywall', 'variant': '[%% Tracking_Variant %%]',  'template': 'M1 2020 Paywall', 'event': 'eec.detail'" external-event-params="{{params}}"></div>
+    <script>
+      // Tracking
+      $("#template-tracking").trigger("click", function () {
+        window.console.log("Tracking Clicked");
+      });
+    </script>
+    <script>
+      // Password Visibility
+      function togglePassword() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("pwToggle");
+        if (x.type === "password") {
+          x.type = "text";
+          y.value = "Ausblenden";
+        } else {
+          x.type = "password";
+          y.value = "Zeigen";
+        }
+      }
+    </script>
+
+    <!-- NEW -->
+    <div class="template" ng-init="useView = '[%% Initial_View %%]'">
+      <!-- Template-HTML -->
+      <div class="row default-offer default-offer--bg-a">
+        <!-- Template-Header -->
+        <div ng-switch="fdpLoading">
+          <!-- Ladeschnecke -->
+          <div class="loader" ng-switch-when="true">
+            <div class="loader-inner-NO"></div>
+          </div>
+        </div>
+        <!-- / Ladeschnecke -->
+        <div class="row default-offer--inner">
+          <!-- HEADER with Visual, Logo, Badge -->
+          <div class="indents-from-border">
+            <div class="row account-head space--page-double space--page-top">
+              <div class="col-65 col-mobile--100 space-logo--top">
+                <div class="logo"></div>
+              </div>
+              <div class="col-35 col-mobile--100 space-badge--top">
+                <img src="[%% Header Image Badge %%]" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- / HEADER with Visual, Logo, Badge -->
+        <div class="hide-tablet hide-mobile [%% Login_Switch_Visibility %%] account-head-control-area print-abo">
+          <!-- / SWITCH Login-Options -->
+          <div ng-switch="useView">
+            <div ng-switch-when="SIGN_UP">
+              <p>
+                <t>
+                  Sie haben bereits einen Zugang?
+                  <span class="self-template switch-button" external-event external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Paywall_Login'" external-event-params="{{params}}" ng-click="$parent.useView = 'SIGN_IN'">
+                    <b>Jetzt einloggen</b>
+                  </span>
+                </t>
+              </p>
+            </div>
+            <div ng-switch-when="SIGN_IN">
+              <p>
+                <t
+                  >Sie haben noch keinen Zugang?
+                  <span class="self-template switch-button" external-event external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Login_Registration'" external-event-params="{{params}}" ng-click="$parent.useView = 'SIGN_UP'">
+                    <b>Jetzt testen!</b>
+                  </span>
+                </t>
+              </p>
+            </div>
+            <div ng-switch-when="SIGN_REGISTER">
+              <p>
+                <t
+                  >Sie wollen sich nicht registrieren?
+                  <span class="self-template switch-button" external-event external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Paywall_Login'" external-event-params="{{params}}" ng-click="$parent.useView = 'SIGN_IN'">
+                    <b>Einfach einloggen!</b>
+                  </span>
+                </t>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- / SWITCH Login-Options -->
+      </div>
+      <!-- Template-Header -->
+      <div class="start-screen-content start-screen-content space--page-bottom space--top-double space--page-double">
+        <!-- Template-Body -->
+        <div ng-switch="useView">
+          <div ng-switch-when="SIGN_UP">
+            <!-- SWITCH Offer-View Todo: Tracking!, Mobile Lines -->
+            <h3 class="space--bottom-half">
+              <t><span class="ng-scope">[%% Headline %%]</span></t>
+            </h3>
+            <p>[%% Subline %%]</p>
+            <ul class="custom-offer-list space--page space--top-double space-mobile--page-double hide-mobile [%% List_Point_Visibility %%]">
+              <li><t>[%% List_Point_1 %%]</t></li>
+              <li><t>[%% List_Point_2 %%]</t></li>
+              <li><t>[%% List_Point_3 %%]</t></li>
+            </ul>
+            <div class="row space--page-left space--page-double-top space--top-double border--top offer-terms">
+              <div ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+                <div class="col-65 col-mobile--100 space--right" ng-if="isPayableTerm(term)">
+                  <h3>{{term.name | tc:'term.name'}}</h3>
+                  <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+                </div>
+                <div class="col-35 col-mobile--100 space-mobile--top" ng-if="isPayableTerm(term)">
+                  <button ng-show="!isUserValid()" class="self-template switch-button btn btn-icon" external-event ng-click="hideErrorMessage(); $parent.$parent.$parent.useView = 'SIGN_REGISTER'" external-event-trackingVars="'level': 'paywall','p_id':'waz_plus','name':'WAZ PLUS','position':'inline','price':'7.90', 'variant': '[%% Tracking_Variant %%]',  'template': 'M1 2020 Paywall', 'event': 'eec.addToCart'" external-event-params="{{params}}">
+                    <t>[%% Offer_CTA_Text %%]</t>
+                  </button>
+                  <!-- TODO: Rework Button to trigger payment -->
+                  <button ng-show="isUserValid()" class="btn btn-icon" id="paymentmethode" ng-click="startCheckout(term.termId)" external-event external-event-trackingVars="'level': 'paywall','p_id':'waz_plus','name':'WAZ PLUS','position':'inline','price':'7.90', 'variant': '[%% Tracking_Variant %%]',  'template': 'M1 2020 Paywall', 'event': 'eec.addToCart'" external-event-params="{{params}}">
+                    <t>[%% Payment_CTA_Text %%]</t>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- / SWITCH Offer-View -->
+          <div ng-switch-when="SIGN_IN">
+            <!-- SWITCH Login-View Todo: Tracking!-->
+            <div class="row space--top">
+              <div class="col-65 col-mobile--100">
+                <h3 class="space--bottom-half"><t>[%% Login_Headline %%]</t></h3>
+                <p class="no-space"><t>[%% Login_Subline %%]</t></p>
+              </div>
+            </div>
+            <form id="paywall--login-form" class="paywall--login-form row space--top">
+              <input type="text" class="col-50 col-mobile--100 space-mobile--bottom custom-input-field" ng-model="email" placeholder="E-Mail-Adresse" name="text" />
+              <div class="custom-input-field password-field">
+                <input type="password" id="password" class="col-50 col-mobile--65 custom-input-field" external-event external-event-trackingVars="'microConversion': 'Piano_Login_Billing', 'event': 'piano_click'" external-event-params="{{params}}" ng-model="password" placeholder="Passwort" name="text" minlength="6" />
+                <input type="button" id="pwToggle" class="pw-toggle" value="Zeigen" onclick="togglePassword()" />
+              </div>
+              <input type="submit" class="col-33 col-mobile--35 space-mobile--bottom btn btn--register custom-input-field" external-event="paywall-signin" external-event-email="{{email}}" external-event-pass="{{password}}" value="[%% Login_CTA_Text %%]" external-event-params="{{params}}" />
+            </form>
+          </div>
+          <!-- / SWITCH Login-View -->
+          <div ng-switch-when="SIGN_REGISTER_LOGIN">
+            <!-- SWITCH Register-Login-View -->
+            <script>
+              $("#error-message-wrapper").hide();
+            </script>
+            <div class="row space--top">
+              <h3 class="space--bottom-half">
+                <t>Sie haben bereits einen Zugang?</t>
+              </h3>
+              <p class="no-space">
+                <t>Ihre E-Mail Adresse ist bereits registriert. Bitte melden Sie sich an.</t>
+              </p>
+            </div>
+            <form id="paywall--login-form" class="paywall--login-form row space--top">
+              <input type="text" class="col-50 col-mobile--100 space-mobile--bottom custom-input-field" ng-model="email" placeholder="E-Mail-Adresse" name="text" />
+              <div class="custom-input-field password-field">
+                <input type="password" id="password" class="col-50 col-mobile--65 custom-input-field" ng-model="password" placeholder="Passwort" name="text" minlength="6" />
+                <input type="button" id="pwToggle" class="pw-toggle" value="Zeigen" onclick="togglePassword()" />
+              </div>
+              <input type="submit" class="col-33 col-mobile--35 space-mobile--bottom btn btn--register custom-input-field" external-event="paywall-signin" external-event-email="{{email}}" external-event-pass="{{password}}" value="Einloggen" external-event-params="{{params}}" />
+            </form>
+          </div>
+          <!-- / SWITCH Register-Login-View -->
+          <div ng-switch-when="SIGN_REGISTER">
+            <!-- SWITCH Register-View Head and Form -->
+            <div class="row space--top logo-block">
+              <div ng-repeat="term in terms">
+                <h3 ng-if="isPayableTerm(term)"><span>{{term.name | tc:'term.name'}}</span></h3>
+                <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+              </div>
+            </div>
+            <div class="row space--top">
+              <h3 class="alt-color space--bottom-half">Ihre Daten</h3>
+              <p class="no-space">
+                <t>Registrieren Sie sich mit Ihrer E-Mail Adresse und einem Passwort (min. 6 Zeichen).</t>
+              </p>
+            </div>
+            <form id="paywall--register-form" class="paywall--login-form row space--top">
+              <input type="email" class="col-50 col-mobile--100 space-mobile--bottom custom-input-field" ng-model="registeremail" placeholder="E-Mail-Adresse" name="text" />
+              <div class="custom-input-field password-field">
+                <input type="password" id="password" class="col-50 col-mobile--65 custom-input-field" ng-model="registerpassword" placeholder="Passwort anlegen" name="text" minlength="6" />
+                <input type="button" id="pwToggle" class="pw-toggle" value="Zeigen" onclick="togglePassword()" />
+              </div>
+              <input type="submit" class="col-33 col-mobile--35 space-mobile--bottom btn btn--register custom-input-field" onclick="register_user_cr()" external-event="paywall-register" external-event-email="{{registeremail}}" external-event-pass="{{registerpassword}}" value="[%% Register_CTA_Text %%]" external-event external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Registration_Billing'" external-event-params="{{params}}" />
+            </form>
+          </div>
+          <!-- / SWITCH Register-View Head and Form -->
+          <div id="error-message-wrapper" style="display: none">
+            <!-- / SWITCH Error-Wrapper-Login -->
+            <span id="error-messages">
+              <span ng-switch="fdpErrorCode">
+                <span ng-switch-when="loading" style="display: none"></span>
+                <span ng-switch-when="stoploading" style="display: none"></span>
+                <span ng-switch-when="101">
+                  <t>Das eingegebene Passwort ist falsch.</t>
+                </span>
+                <span ng-switch-when="102">
+                  <t>Dieser Benutzer ist nicht registriert.</t>
+                </span>
+                <span ng-switch-when="103">
+                  <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort ein.</t>
+                </span>
+                <span ng-switch-when="201">
+                  <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort (min. 6 Zeichen) ein.</t>
+                </span>
+                <span ng-switch-when="202">
+                  <t>Ein Benutzer mit dieser E-Mail Adresse ist bereits registriert.</t>
+                  <span class="self-template switch-button underline" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span>
+                </span>
+                <span ng-switch-when="203">
+                  <t>Ein Benutzer mit dieser E-Mail Adresse ist bereits registriert. 203</t>
+                  <span class="self-template switch-button underline" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span>
+                </span>
+                <span ng-switch-default>
+                  <t>Es ist etwas schief gegangen.</t>
+                </span>
+              </span>
+            </span>
+          </div>
+          <!-- / SWITCH Error-Wrapper-Login -->
+          <div ng-switch-when="SIGN_REGISTER">
+            <!-- SWITCH Register-View DOI and AGB -->
+
+            <div class="space--top">
+              <p>
+                <t
+                  >Es gelten die
+                  <a href="/allgemeine-geschaeftsbedingungen" target="_blank">AGB</a>
+                  und
+                  <a href="/datenschutz" target="_blank">Datenschutzbestimmungen</a>
+                  der [%% Legal_Entity %%]. [%% Trial_Text %%]</t
+                >
+              </p>
+              <p class="nl-opt-in">
+                <input type="checkbox" name="nl-opt-in" id="nl-opt-in" class="nl-opt-in" />
+                <label for="nl-opt-in" class="nl-opt-in">[%% Register_Werbeeinwilligung %%]</label>
+              </p>
+            </div>
+            <div>
+              <div class="space--top hide-mobile">
+                <p>
+                  <a href="https://www.waz.de/passwort-vergessen" target="_blank">Passwort vergessen?</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- / SWITCH Register-View DOI and AGB -->
+          <div ng-switch-when="SIGN_IN" class="space--top print-abo">
+            <!-- SWITCH PW-Desktop TODO: Relative Link! Tracking!-->
+            <p>
+              <a href="https://www.waz.de/passwort-vergessen" external-event="3monate_weihnachten" external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Login_PasswordForgot_Out'" external-event external-event-params="{{params}}" target="_blank">Passwort vergessen?</a>
+            </p>
+          </div>
+          <!-- / SWITCH PW-Desktop -->
+          <div class="print-abo--mobile">
+            <div ng-switch-when="SIGN_UP">
+              <p>
+                <a href="#">
+                  <span class="self-template switch-button" ng-click="$parent.useView = 'SIGN_IN'"
+                    ><t>Sie haben einen Zugang? <b>Jetzt einloggen</b></t></span
+                  >
+                </a>
+              </p>
+            </div>
+            <div ng-switch-when="SIGN_REGISTER">
+              <p>
+                <a href="#">
+                  <span class="self-template switch-button" ng-click="$parent.useView = 'SIGN_UP'"
+                    ><t>Zurück zum Offer <b>Jetzt einloggen</b></t></span
+                  >
+                </a>
+              </p>
+            </div>
+            <div ng-switch-when="SIGN_IN">
+              <p>
+                <a href="#">
+                  <span class="self-template switch-button [%% Hide-Login-Switch %%]" ng-click="$parent.useView = 'SIGN_UP'"
+                    ><t>Sie haben keinen Zugang? <b>Jetzt testen!</b></t></span
+                  >
+                </a>
+              </p>
+              <div class="space--top center">
+                <p>
+                  <a href="/passwort-vergessen" external-event external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Login_PasswordForgot_Out'" external-event external-event-params="{{params}}" target="_blank">Passwort vergessen?</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Template-Body -->
+    </div>
+    <!-- Template-HTML -->
+
+    <!-- Code for Register -->
+
+    <script>
+      function register_user_cr(){
+          var user_email = $('#paywall--register-form input[type="email"]').val();
+          var cr_url = '[%% Cleverreach Form URL %%]';
+          if ($('#nl-opt-in').is(':checked') && user_email!=''){
+              $.post('https://api.suse.funkedigital.de/proxy/optin',{
+        				url:cr_url,
+        				email:user_email,
+        				[%% Opt-In-Version Feld ID %%]: '[%% Opt-In-Version Feld Wert %%]'
+        			}).done(function(data){
+                  console.log('user -> '+user_email+' registered');
+
+              });
+          }
+      };
+    </script>
+
+    <!-- Code for Payment -->
+    <div id="template-tracking" external-event external-event-trackingVars="'level': 'billing', 'template': 'M1 2020 Billing','variant': '[%% Tracking_Variant %%]', 'event': 'piano_view'" external-event-params="{{params}}"></div>
+    <script>
+      // Tracking
+      $("#template-tracking").trigger("click", function () {
+        // window.console.log("Tracking Clicked");
+      });
+    </script>
+
+    <script>
+      $(window).load(function () {
+        $("#[%% Loading-Trigger-ID %%]").trigger("click");
+      });
+    </script>
+  </body>
+</html>

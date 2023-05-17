@@ -1,0 +1,36 @@
+console.log("Something happened");
+
+let termarray = [
+  {
+    date: "Today",
+    period: "month",
+    shortPeriod: "/mo",
+    billingPeriod: "1 month",
+    cycles: "2",
+    isFreeTrial: "false",
+    isTrial: "true",
+    isPayWhatYouWant: "false",
+    billing: "2 payments of $0.99 per month",
+    duration: "2 months of access",
+    isFree: "false",
+    pricelessBillingPre: "2 payments of ",
+    price: "$0.99",
+    pricelessBillingPost: " per month",
+    totalBilling: "$10.84 per month",
+  },
+  {
+    date: "Jul 29, 2016",
+    period: "month",
+    shortPeriod: "/mo",
+    billingPeriod: "1 month",
+    cycles: "2147483647",
+    isPayWhatYouWant: false,
+    billing: "$2.99 per month",
+    duration: "monthly until cancelled",
+    isFree: false,
+    pricelessBillingPre: "",
+    price: "$2.99",
+    pricelessBillingPost: " per month",
+    totalBilling: "$99.00 per year",
+  },
+];

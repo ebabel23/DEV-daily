@@ -1,0 +1,73 @@
+<div
+  id="template-tracking"
+  external-event
+  external-event-trackingVars="'level': 'bottom', 'template': 'Plus-Banner Sticky Bottom','variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
+  external-event-params="{{params}}"
+></div>
+
+<div class="plus-banner">
+  <div class="plus-banner__head">
+    <a
+      href="#"
+      target="_[%% Link-Ziel %%]"
+      class="link plus-banner__link"
+      external-event="StickyBottom_LP"
+      external-event-trackingVars="'level': 'bottom', 'template': 'Plus-Banner Sticky Bottom', 'variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoClick'"
+      external-event-params="{{params}}"
+    >
+      <div class="plus-logo"></div>
+      <div class="plus-banner__text">[%% Headline %%]</div>
+    </a>
+    <span class="plus-banner__close"></span>
+  </div>
+</div>
+
+<script>
+  const refurl = document.referrer;
+  const url = new URL(refurl);
+  const domain = "https://" + url.hostname;
+  const variolink = domain + "[%% Link %%]";
+  const target = "[%% Link-Ziel %%]";
+  const fieldlink = "[%% Link %%]";
+  const fullurl = fieldlink.includes("https");
+  const redirect = "[%% Redirect_Link %%]";
+
+  let plusBanner = document.getElementsByClassName("plus-banner__link")[0];
+  let closeButton = document.getElementsByClassName("plus-banner__close")[0];
+
+  closeButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    plusBanner.style.display = "none";
+    parent.postMessage(
+      {
+        message: "hidePlusBannerSticky",
+        expires: 10,
+      },
+      refurl
+    );
+  });
+
+  window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      if (plusBanner.classList.contains("plus-banner__link")) {
+        if (fullurl) {
+          plusBanner.setAttribute(
+            "href",
+            fieldlink +
+              "?tpcc=[%% Tracking_Variant %%]_subscribe-banner-sticky-bottom-mobile-plain" +
+              redirect
+          );
+        } else {
+          plusBanner.setAttribute(
+            "href",
+            variolink +
+              "?tpcc=[%% Tracking_Variant %%]_subscribe-banner-sticky-bottom-mobile-plain" +
+              redirect
+          );
+        }
+      }
+    },
+    false
+  );
+</script>

@@ -1,0 +1,212 @@
+<script>
+  var scope = angular.element("#error-messages").scope();
+
+  window.addEventListener(
+    "message",
+    function (e) {
+      if (typeof e.data.piano != "undefined") {
+        var result = e.data.piano;
+
+        if (!scope.$$phase) {
+          scope.$apply(function () {
+            if (!result.success) {
+              scope.fdpErrorCode = result.message;
+            }
+            // Loader if User click button
+            if (result.message === "loader") {
+              scope.fdpLoading = result.object.loading;
+            }
+          });
+        } else {
+          if (!result.success) {
+            scope.fdpErrorCode = result.message;
+          }
+          if (result.message === "loader") {
+            scope.fdpLoading = result.object.loading;
+          }
+        }
+
+        if (!result.success) {
+          $("#error-message-wrapper").show();
+        } else {
+          $("#error-message-wrapper").hide();
+        }
+      }
+      $("input").focusout(function () {
+        $("#error-message-wrapper").hide();
+      });
+
+      $("input").focusin(function () {
+        $("#error-message-wrapper").hide();
+      });
+      return;
+    },
+    false
+  );
+</script>
+<div id="template-tracking" external-event external-event-trackingVars="'level': 'offer', 'variant': '[%% Tracking_Variant %%]',  'template': '[%% Tracking_Template %%]', 'event': 'eec.detail'" external-event-params="{{params}}"></div>
+<script>
+  // Tracking
+  $("#template-tracking").trigger("click", function () {
+    window.console.log("Tracking Clicked");
+  });
+</script>
+<script>
+  // Password Visibility
+  function togglePassword() {
+    var x = document.getElementById("password");
+    var y = document.getElementById("pwToggle");
+    if (x.type === "password") {
+      x.type = "text";
+      y.value = "Ausblenden";
+    } else {
+      x.type = "password";
+      y.value = "Zeigen";
+    }
+  }
+</script>
+<div class="row default-offer default-offer--bg-a">
+  <div ng-switch="fdpLoading">
+    <div class="loader" ng-switch-when="true">
+      <div class="loader-inner"></div>
+    </div>
+  </div>
+  <div class="row default-offer--inner">
+    <div class="indents-from-border">
+      <div class="row account-head space--page-double space--page-top">
+        <div class="col-65 col-mobile--100 space-logo--top">
+          <div class="logo"></div>
+        </div>
+        <div class="col-35 col-mobile--100 space-badge--top">
+          <img src="[%% Header_Image_Badge %%]" />
+        </div>
+        <div class="col-35 col-mobile--100 space-badge--top--round">
+          <img src="[%% Header_Image_Badge_Round %%]" />
+        </div>
+      </div>
+    </div>
+    <div class="hide-mobile account-head-control-area print-abo [%% Hide-Login-Switch %%]" ng-init="useView = !isUserValid() && !canInitCheckoutWithAnon() ? 'SIGN_UP' : 'SIGN_IN'">
+      <div ng-switch="useView">
+        <div ng-switch-when="SIGN_UP">
+          <p>
+            <t
+              >Sie haben bereits einen Zugang? <span class="self-template switch-button" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span></t
+            >
+          </p>
+        </div>
+        <div ng-switch-when="SIGN_IN">
+          <p>
+            <t
+              >Sie haben noch keinen Zugang? <span class="self-template switch-button" ng-click="$parent.useView = 'SIGN_UP'"><b>Jetzt testen!</b></span></t
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="start-screen-content start-screen-content space--page-bottom space--top-double space--page-double" ng-init="useView = !isUserValid() && !canInitCheckoutWithAnon() ? '[%% Initial_View %%]' : 'SIGN_IN'">
+    <div ng-switch="useView">
+      <div ng-switch-when="SIGN_IN">
+        <div class="row space--top">
+          <div class="col-65 col-mobile--100">
+            <h3 class="space--bottom-half"><t>[%% Login-Headline %%]</t></h3>
+            <p class="no-space"><t>[%% Login-Subline %%]</t></p>
+          </div>
+        </div>
+        <form id="paywall--login-form" class="paywall--login-form row space--top">
+          <!--The ng-model directive is first used in the input field-->
+          <!--to bind the email information to the example variable "newsletterEmail".-->
+          <input type="text" class="col-50 col-mobile--100 space-mobile--bottom custom-input-field" ng-model="email" placeholder="E-Mail-Adresse" name="text" />
+          <div class="custom-input-field password-field">
+            <input type="password" id="password" class="col-50 col-mobile--65 custom-input-field" ng-model="password" placeholder="Passwort" name="text" minlength="6" />
+            <input type="button" id="pwToggle" class="pw-toggle" value="Zeigen" onclick="togglePassword()" />
+          </div>
+          <input type="submit" class="col-33 col-mobile--35 space-mobile--bottom btn btn--register custom-input-field" external-event="paywall-signin" external-event-email="{{email}}" external-event-pass="{{password}}" value="[%% Login-Button %%]" external-event-params="{{params}}" />
+        </form>
+      </div>
+      <div id="error-message-wrapper" style="display: none">
+        <span id="error-messages">
+          <span ng-switch="fdpErrorCode">
+            <span ng-switch-when="101">
+              <t>Das eingegebene Passwort ist falsch.</t>
+            </span>
+            <span ng-switch-when="102">
+              <t>Dieser Benutzer ist nicht registriert.</t>
+            </span>
+            <span ng-switch-when="103">
+              <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort ein.</t>
+            </span>
+            <span ng-switch-default>
+              <t>Es ist etwas schief gegangen.</t>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div ng-switch-when="SIGN_IN" class="space--top print-abo">
+        <p>
+          <a href="[%% Passwort-Vergessen-Link %%]" target="_blank">[%% Passwort-Vergessen-Wording %%]</a>
+        </p>
+      </div>
+      <div ng-switch-when="SIGN_UP">
+        <h3 class="space--bottom-half">
+          <t><span class="ng-scope">[%% headline %%]</span></t>
+        </h3>
+        <p>[%% subline %%]</p>
+
+        <ul class="custom-offer-list space--page space--top-double space-mobile--page-double hide-mobile">
+          <li><t>[%% list_point_1 %%]</t></li>
+          <li><t>[%% list_point_2 %%]</t></li>
+          <li><t>[%% list_point_3 %%]</t></li>
+        </ul>
+        <div class="row space--page-double-top space--top-double offer-terms">
+          <div class="col-65 col-mobile--100 space--right" ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+            <h3 ng-if="isPayableTerm(term)">{{term.name | tc:'term.name'}}</h3>
+            <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+          </div>
+          <div class="col-35 col-mobile--100 space-mobile--top">
+            <button
+              class="btn btn-icon"
+              external-event
+              external-event-offerId="[%% oID %%]"
+              external-event-templateId="[%% tID-R %%]"
+              external-event-templateVariantId="[%% tvID-R %%]"
+              external-event-displaymode="inline"
+              external-event-containerSelector="#paywall-container"
+              external-event
+              external-event-trackingVars="'level': 'offer','p_id':'bzv_plus','name':'BZV PLUS','position':'inline','price':'7.90', 'variant': '[%% Tracking_Variant %%]',  'template': '[%% Tracking_Template %%]', 'event': 'eec.addToCart'"
+              external-event-params="{{params}}"
+            >
+              <t>[%% button_billing_text %%]</t>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="print-abo--mobile">
+        <div ng-switch-when="SIGN_UP">
+          <p>
+            <a href="#">
+              <span class="self-template switch-button" ng-click="$parent.useView = 'SIGN_IN'"
+                ><t>Sie haben einen Zugang? <b>Jetzt einloggen</b></t></span
+              >
+            </a>
+          </p>
+        </div>
+        <div ng-switch-when="SIGN_IN">
+          <p>
+            <a href="#">
+              <span class="self-template switch-button [%% Hide-Login-Switch %%]" ng-click="$parent.useView = 'SIGN_UP'"
+                ><t>Sie haben keinen Zugang? <b>Jetzt testen!</b></t></span
+              >
+            </a>
+          </p>
+          <div class="space--top center">
+            <p>
+              <a href="[%% Passwort-Vergessen-Link %%]" target="_blank">[%% Passwort-Vergessen-Wording %%]</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<script>
+  var scope = angular.element("#error-messages").scope();
+  window.addEventListener(
+    "message",
+    function (e) {
+      if (typeof e.data.piano != "undefined") {
+        var result = e.data.piano;
+        if (!scope.$$phase) {
+          scope.$apply(function () {
+            if (!result.success) {
+              scope.fdpErrorCode = result.message;
+            }
+            /* Loader if User click button */ if (result.message === "loader") {
+              scope.fdpLoading = result.object.loading;
+            }
+          });
+        } else {
+          if (!result.success) {
+            scope.fdpErrorCode = result.message;
+          }
+          if (result.message === "loader") {
+            scope.fdpLoading = result.object.loading;
+          }
+        }
+      }
+      return;
+    },
+    false
+  );
+</script>
+<div id="template-tracking-dialog" external-event external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]','variant': 'Multi Offer - [%% Tracking_Variant %%]','position': '[%% Tracking_position %%]', 'event': 'eec.detail'" external-event-params="{{ params }}"></div>
+<div id="template-tracking-login" external-event external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]',  'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'view': 'login', 'event': 'eec.login'" external-event-params="{{ params }}"></div>
+<script>
+  if (($("h1").text().length) >= [%% Claim_Length %%]) { document.getElementById("subline").style.display = "none"; };
+</script>
+<div class="row default-offer">
+  <div ng-switch="fdpLoading">
+    <div class="loader" ng-switch-when="true">
+      <div class="loader-inner"></div>
+    </div>
+    <div ng-switch="useView">
+      <div ng-switch-when="SIGN_UP" ng-show="isUserValid()">
+        <div class="login-notfication">
+          <span class="long-text"> [%% Decoy_Login_Notification_Desktop %%] </span>
+          <span class="short-text"> [%% Decoy_Login_Notification_Mobile %%] </span>
+        </div>
+      </div>
+    </div>
+    <div class="row default-offer--inner">
+      <div class="start-screen-content row">
+        <div ng-switch="useView">
+          <div ng-switch-when="SIGN_UP" ng-show="!isUserValid()">
+            <!-- add nopid before > to avoid pid parameter-->
+            <div class="self-template switch-button" external-event external-event-trackingVars="'template': '[%% Tracking_Template %%]','p_id': '{{term.termId}}', 'name': '{{term.name}}','price': '{{term.price}}','category': '[%% Tracking_Category %%]','variant': '[%% Tracking_productVariant %%]','position': '[%% Tracking_position %%]', 'event': 'eec.promoClick', 'microConversion': 'Piano_Registration_Print_Out'" external-event-params="{{ params }}">
+              <a onclick="openLogin()">
+                <span>Zum PLUS-Login</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="space--top" ng-class="!app.image1 ? 'no-logo' : ''">
+          <div class="plus-logo"></div>
+          <h1>[%% Claim_Branding %%]</h1>
+          <p class="lead" id="subline">[%% Subheadline %%]</p>
+        </div>
+      </div>
+      <div class="start-screen-content" ng-init="useView = 'SIGN_UP'">
+        <div ng-switch="useView">
+          <div ng-switch-when="SIGN_UP">
+            <script>
+              $(".vorteils-button").click(function () {
+                $(".show-vorteile").toggle();
+                $("#arrow-up").toggleClass("inline-block");
+                $("#arrow-down").toggleClass("display-none");
+              });
+            </script>
+            <div class="vorteils-dropdown-div">
+              <button class="vorteils-button">
+                Ihre Vorteile mit PLUS
+                <i id="arrow-up" class="arrow"></i>
+                <i id="arrow-down" class="arrow"></i>
+              </button>
+              <div class="show-vorteile">
+                <ul class="single-term-list">
+                  <li class="single-term-list-item" ng-repeat="(key, value) in [%% Vorteilsbox %%].conditions">{{value}}</li>
+                </ul>
+                <a id="infos-link" href="[%% Abo_Plus_Info_URL %%]" target="_blank" onClick="moreInfoClick()" class="noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}">[%% Abo_Plus_Info_Text %%]</a>
+              </div>
+            </div>
+            <div class="offer-terms">
+              <!-- FROM BOILERPLATE -->
+              <ul class="offer-terms-inner">
+                <li ng-class="($index == ([%% Preselected_Term_Position %%] - 1)) ? 'pn-offer-list__item single-term selected' : 'pn-offer-list__item single-term'" ng-repeat="term in terms track by $index">
+                  <div ng-class="(($index == ([%% Preselected_Term_Position %%] - 1) && [%% Preselected_Term_Position %%] == 2)) ? 'selected-term-middle' : 'selected-term-first-desktop'">
+                    <div
+                      id="template-tracking-register-{{term.termId}}"
+                      external-event
+                      external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+                      external-event-params="{{ params }}"
+                    ></div>
+                    <input id="term_{{term.termId}}" class="term-selector" type="radio" name="term" value="{{term.termId}}" />
+
+                    <!-- Leads user to SSO -->
+                    <label ng-if="!isUserValid()" ng-class="($index == ([%% Preselected_Term_Position %%] - 1)) ? 'term-select--box-selected' : 'term-select--box'" type="button" for="term_{{term.termId}}" ng-click="setStorage($index); trackingView('register-' + term.termId);" external-event="offer-subscribe-{{ $index }}" onclick="openOnOffer()">
+                      <div class="badge"><p>[%% Badge_Text %%]</p></div>
+                      <h3 ng-if="isPayableTerm(term)">{{[%% Offer_Box_Data %%][ $index ].headline}}</h3>
+                      <h3 class="price" ng-if="isPayableTerm(term)">{{[%% Offer_Box_Data %%][ $index ].price}}<sup class="footnote-price">{{ $index + 1}}</sup></h3>
+                      <div class="term-name">{{[%% Offer_Box_Data %%][ $index ].cta}}</div>
+                      <span class="term-description"><sup>{{ $index + 1}}&nbsp;</sup>{{[%% Offer_Box_Data %%][ $index ].description}}</span>
+                    </label>
+
+                    <!-- Leads user to Checkout -->
+                    <label ng-if="isUserValid()" ng-class="($index == ([%% Preselected_Term_Position %%] - 1)) ? 'term-select--box-selected' : 'term-select--box'" type="button" for="term_{{term.termId}}" ng-click="setStorage($index); trackingView('register-' + term.termId); startCheckout(term.termId)" external-event="offer-subscribe-{{ $index }}">
+                      <div class="badge"><p>[%% Badge_Text %%]</p></div>
+                      <h3 ng-if="isPayableTerm(term)">{{[%% Offer_Box_Data %%][ $index ].headline}}</h3>
+                      <h3 class="price" ng-if="isPayableTerm(term)">{{[%% Offer_Box_Data %%][ $index ].price}}<sup class="footnote-price">{{ $index + 1}}</sup></h3>
+                      <div
+                        class="term-name"
+                        id="template-tracking-register-{{term.termId}}"
+                        external-event
+                        external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+                        external-event-params="{{ params }}"
+                      >
+                        {{[%% Offer_Box_Data %%][ $index ].cta}}
+                      </div>
+                      <span class="term-description"><sup>{{ $index + 1}}&nbsp;</sup>{{[%% Offer_Box_Data %%][ $index ].description}}</span>
+                    </label>
+                  </div>
+                </li>
+              </ul>
+              <div class="sternchen-div">
+                <div class="space--top center link">
+                  <span class="sternchen-text">[%% Sternchen_Text %%]</span>
+                  <a id="infos-link-bottom" href="[%% Abo_Plus_Info_URL %%]" target="_blank" onClick="moreInfoClick()" class="noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}">[%% Abo_Plus_Info_Text %%]</a>
+                </div>
+              </div>
+              <div id="links-box-bottom" class="noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}">[%% Plus_Link_Print %%] [%% Plus_Link_ePaper %%]</div>
+              <div class="single-term" ng-repeat="term in terms track by $index">
+                <div ng-if="$last" ng-init="$last?autoSelectTerm():null"></div>
+              </div>
+              <!-- END FROM BOILERPLATE -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<custom-script> function openOnOffer(url){ let artUrl = urlParams.url; window.parent.location.href = artUrl + "#keycloak-registration"; } function openLogin(){ let artUrl = urlParams.url; window.parent.location.href = artUrl + "#keycloak-login"; } </custom-script>
+
+<script>
+  /* Store selected Term from User and init on load again on load If new session select predifined position from "Preselected Term Position content field." */ /* TODO: Enhance stored term with offer-id and property FDPC-1064 */ const offerId = urlParams.offerId; const offerBR = ""; let termString = "fdp-user-term-" + offerId; scope.autoSelectTerm = function() { try { if (sessionStorage.getItem(termString) !== null) { scope.termIdstorage = sessionStorage.getItem(termString); } else { scope.termIdstorage =
+  $(".single-term").eq(parseInt('[%% Preselected_Term_Position %%]') - 1).find(".term-selector").val(); sessionStorage.setItem(termString, scope.termIdstorage); } } catch(err) { scope.termIdstorage = $(".single-term").eq(parseInt('[%% Preselected_Term_Position %%]') - 1).find(".term-selector").val(); } $("#term_" + scope.termIdstorage).prop('checked', true); scope.fdpLoading = false; return scope.termIdstorage; }; scope.setStorage = function(index) { try { scope.termIdstorage =
+  $(".single-term").eq(index).find(".term-selector").val(); sessionStorage.setItem(termString, $(".single-term").eq(index).find(".term-selector").val()); } catch(err) { scope.termIdstorage = $(".single-term").eq(index).find(".term-selector").val(); } }; scope.descriptionListItemLength = function() { scope.descriptionListItem.length > 1 ? true : false; }; scope.descriptionList = function(string, nb) { var list = []; if (string.indexOf(";") !== -1) { var array = string.split(';'); array.forEach(function(item) {
+  list.push(item); }); scope.descriptionListItem = list } else { scope.descriptionListItem = [string] } } scope.trackingView = function(ident) { $("#template-tracking-" + ident).trigger("click"); $("#error-message-wrapper").hide(); }; $(document).ready(function() { if(scope.isUserValid()) { console.log("User valid"); setTimeout(function() { try { scope.startCheckout(sessionStorage.getItem(termString)); scope.trackingView('register-' + sessionStorage.getItem(termString)); } catch(err) { // var defaultUserTerm =
+  $(".single-term").eq(parseInt('[%% Preselected_Term_Position %%]') - 1).find(".term-selector").val(); // scope.startCheckout(defaultUserTerm); // scope.trackingView('register-' + 'inkognito-' + defaultUserTerm); } }, 100); } }); scope.trackingView('dialog');
+</script>

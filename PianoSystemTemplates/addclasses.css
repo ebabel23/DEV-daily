@@ -1,0 +1,64 @@
+/* NEW Template special */
+.plus-logo:after {
+  height: 45px;
+  width: 115px;
+  background-size: contain;
+  background-image: url("https://extracontent.waz.de/bmo/media/Logo/A-Logo-RGB.svg");
+}
+
+@media screen and (max-width: 575px) {
+  .plus-logo:after {
+    height: 45px;
+    width: 85px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .account-head-contentcol h1,
+  h1 {
+    display: none;
+  }
+  .account-head p {
+    display: block;
+    font-size: 3.5vw;
+  }
+  .space--top {
+    margin-top: 0;
+  }
+}
+
+.flexhead {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Generelle Hide-Klasse */
+.hide-stuff {
+  display: none;
+}
+
+.hide-it {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .hide-desktop {
+    display: none;
+  }
+}

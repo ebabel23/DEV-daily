@@ -1,0 +1,55 @@
+<div
+  id="template-tracking"
+  external-event
+  external-event-trackingVars="'level': 'viewport', 'template': 'Viewport', 'variant':'[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
+  external-event-params="{{params}}"
+></div>
+<div id="viewport-exit-banner-overlay">
+  <a class="viewport__backlink" href="[%% Backlink-URL %%]"
+    >[%% Backlink-Text %%]</a
+  >
+  <a class="plus-banner" href="#" target="_[%% Link-Ziel %%]">
+    <img
+      src="[%% Bild-URL %%]"
+      alt="[%% Bild-Alternativtext %%]"
+      class="viewport-exit-image"
+      external-event="Modal_LP"
+      external-event-trackingVars="'level': 'viewport', 'template': 'Viewport', 'variant':'[%% Tracking_Variant %%]','event': 'eec.promoClick'"
+      external-event-params="{{params}}"
+      ng-click="close()"
+  /></a>
+</div>
+
+<script>
+  const refurl = document.referrer;
+  const url = new URL(refurl);
+  const domain = "https://" + url.hostname;
+  const variolink = domain + "[%% Link %%]";
+  const target = "[%% Link-Ziel %%]";
+  const fieldlink = "[%% Link %%]";
+  const fullurl = fieldlink.includes("https");
+  const redirect = "[%% Redirect_Link %%]";
+
+  let plusBanner = document.getElementsByClassName("plus-banner")[0];
+  //let closeButton = document.getElementsByClassName("plus-banner__close")[0];
+
+  window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      if (plusBanner.classList.contains("plus-banner")) {
+        if (fullurl) {
+          plusBanner.setAttribute(
+            "href",
+            fieldlink + "?tpcc=[%% Tracking_Variant %%]_modal_field" + redirect
+          );
+        } else {
+          plusBanner.setAttribute(
+            "href",
+            variolink + "?tpcc=[%% Tracking_Variant %%]_modal_vario" + redirect
+          );
+        }
+      }
+    },
+    false
+  );
+</script>

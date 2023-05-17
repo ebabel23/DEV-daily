@@ -1,0 +1,195 @@
+<script>
+  var scope = angular.element("#error-messages").scope();
+
+  window.addEventListener(
+    "message",
+    function (e) {
+      if (typeof e.data.piano != "undefined") {
+        var result = e.data.piano;
+        if (!scope.$$phase) {
+          scope.$apply(function () {
+            if (!result.success) {
+              scope.fdpErrorCode = result.message;
+            }
+            // Loader if User click button
+            if (result.message === "loader") {
+              scope.fdpLoading = result.object.loading;
+            }
+          });
+        } else {
+          if (!result.success) {
+            scope.fdpErrorCode = result.message;
+          }
+          if (result.message === "loader") {
+            scope.fdpLoading = result.object.loading;
+          }
+        }
+
+        if (!result.success) {
+          $("#error-message-wrapper").show();
+        } else {
+          $("#error-message-wrapper").hide();
+        }
+      }
+      //$("input").focusout(function(){
+      //  $('#error-message-wrapper').hide();
+      //});
+
+      //$("input").focusin(function(){
+      //  $('#error-message-wrapper').hide();
+      //});
+      return;
+    },
+    false
+  );
+</script>
+<div id="template-tracking" external-event external-event-trackingVars="'step': '1', 'event': 'eec.checkout'" external-event-params="{{params}}"></div>
+<script>
+  // Tracking
+  $("#template-tracking").trigger("click", function () {
+    // window.console.log("Tracking Clicked");
+  });
+</script>
+<script>
+  // Password Visibility
+  function togglePassword() {
+    var x = document.getElementById("password");
+    var y = document.getElementById("pwToggle");
+    if (x.type === "password") {
+      x.type = "text";
+      y.value = "Ausblenden";
+    } else {
+      x.type = "password";
+      y.value = "Zeigen";
+    }
+  }
+</script>
+<div class="row default-offer">
+  <div ng-switch="fdpLoading">
+    <div class="loader" ng-switch-when="true">
+      <div class="loader-inner"></div>
+    </div>
+  </div>
+  <div class="row default-offer--inner">
+    <div class="indents-from-border">
+      <div class="row account-head space--page-double space--page-top">
+        <div class="col-65 col-mobile--100 space-logo--top">
+          <div class="logo"></div>
+        </div>
+        <div class="col-35 col-mobile--100 space-badge--top">
+          <img src="[%% Header_Image_Badge %%]" />
+        </div>
+        <div class="col-35 col-mobile--100 space-badge--top--round">
+          <img src="[%% Header_Image_Badge_Round %%]" />
+        </div>
+      </div>
+    </div>
+    <div class="account-head-control-area print-abo">
+      <p>
+        <t
+          >Sie lesen bereits die gedruckte Zeitung? <a href="[%% printOffer %%]" target="_blank" class="self-template switch-button underline" external-event-trackingVars="'event': 'piano_click_event'" external-event-params="{{params}}"><b>Zum Angebot</b></a></t
+        >
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="start-screen-content space--page-double space--page-bottom space--top-doublespace--page-bottom" ng-init="useView = !isUserValid() && !canInitCheckoutWithAnon() ? 'SIGN_UP' : 'SIGN_IN'">
+  <div ng-switch="useView">
+    <div ng-switch-when="SIGN_IN">
+      <div custom-script>$('#error-message-wrapper').hide();</div>
+      <div class="row space--top">
+        <h3 class="space--bottom-half">
+          <t>Sie haben bereits einen Zugang?</t>
+        </h3>
+        <p class="no-space">
+          <t>Ihre E-Mail Adresse ist bereits registriert. Bitte melden Sie sich an.</t>
+        </p>
+      </div>
+      <form id="paywall--login-form" class="paywall--login-form row space--top">
+        <input type="text" class="col-50 col-mobile--100 space-mobile--bottom custom-input-field" ng-model="email" placeholder="E-Mail-Adresse" name="text" />
+        <div class="custom-input-field password-field">
+          <input type="password" id="password" class="col-50 col-mobile--65 custom-input-field" ng-model="password" placeholder="Passwort" name="text" minlength="6" />
+          <input type="button" id="pwToggle" class="pw-toggle" value="Zeigen" onclick="togglePassword()" />
+        </div>
+        <input type="submit" class="col-33 col-mobile--35 space-mobile--bottom btn btn--register custom-input-field" external-event="paywall-signin" external-event-email="{{email}}" external-event-pass="{{password}}" value="Einloggen" external-event-params="{{params}}" />
+      </form>
+    </div>
+    <div ng-switch-when="SIGN_UP">
+      <div class="row space--top logo-block">
+        <div ng-repeat="term in terms">
+          <h3 ng-if="isPayableTerm(term)"><span>{{term.name | tc:'term.name'}}</span></h3>
+          <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+        </div>
+      </div>
+      <div class="row space--top">
+        <h3 class="alt-color space--bottom-half">Ihre Daten</h3>
+        <p class="no-space">
+          <t>Registrieren Sie sich mit Ihrer E-Mail Adresse und einem Passwort (min. 6 Zeichen).</t>
+        </p>
+      </div>
+      <form id="paywall--register-form" class="paywall--login-form row space--top">
+        <input type="email" class="col-50 col-mobile--100 space-mobile--bottom custom-input-field" ng-model="registeremail" placeholder="E-Mail-Adresse" name="text" />
+        <div class="custom-input-field password-field">
+          <input type="password" id="password" class="col-50 col-mobile--65 custom-input-field" ng-model="registerpassword" placeholder="Passwort anlegen" name="text" minlength="6" />
+          <input type="button" id="pwToggle" class="pw-toggle" value="Zeigen" onclick="togglePassword()" />
+        </div>
+        <input type="submit" class="col-33 col-mobile--35 space-mobile--bottom btn btn--register custom-input-field" onclick="register_user_cr()" external-event="paywall-register" external-event-email="{{registeremail}}" external-event-pass="{{registerpassword}}" value="[%% CTA %%]" external-event external-event-trackingVars="'event': 'piano_click', 'microConversion': 'Piano_Registration_Billing'" external-event-params="{{params}}" />
+      </form>
+    </div>
+    <!--This block is an example of displaying an error message inside the template. By default it's hidden.-->
+    <div id="error-message-wrapper" style="display: none">
+      <span id="error-messages">
+        <span ng-switch="fdpErrorCode">
+          <span ng-switch-when="loading" style="display: none"></span>
+          <span ng-switch-when="stoploading" style="display: none"></span>
+          <span ng-switch-when="101">
+            <t>Das eingegebene Passwort ist falsch.</t>
+          </span>
+          <span ng-switch-when="102">
+            <t>Dieser Benutzer ist nicht registriert.</t>
+          </span>
+          <span ng-switch-when="103">
+            <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort ein.</t>
+          </span>
+          <span ng-switch-when="201">
+            <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort (min. 6 Zeichen) ein.</t>
+          </span>
+          <span ng-switch-when="202">
+            <t>Ein Benutzer mit dieser E-Mail Adresse ist bereits registriert.</t>
+            <span class="self-template switch-button underline" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span>
+          </span>
+          <span ng-switch-when="203">
+            <t>Ein Benutzer mit dieser E-Mail Adresse ist bereits registriert.</t>
+            <span class="self-template switch-button underline" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span>
+          </span>
+          <span ng-switch-default>
+            <t>Es ist etwas schief gegangen.</t>
+          </span>
+        </span>
+      </span>
+    </div>
+    <div ng-switch-when="SIGN_UP" class="space--top">
+      <p>
+        <t>Es gelten die <a href="[%% Datenschutzerklaerung-Link %%]" target="_blank">Datenschutzerklärung</a> und <a href="[%% AGB-Link %%]" target="_blank">AGB</a> der FUNKE Medien Niedersachsen GmbH. [%% Trial_Text %%]</t>
+      </p>
+      <p class="nl-opt-in">
+        <input type="checkbox" name="nl-opt-in" id="nl-opt-in" class="nl-opt-in" />
+        <label for="nl-opt-in" class="nl-opt-in">[%% Werbeeinwilligung %%]</label>
+      </p>
+    </div>
+    <div ng-switch-when="SIGN_IN">
+      <div class="space--top hide-mobile">
+        <p>
+          <a href="[%% Passwort-Vergessen-Link %%]" target="_blank">[%% Passwort-Vergessen-Wording %%]</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="print-abo--mobile">
+    <p>
+      <a href="[%% Passwort-Vergessen-Link %%]" target="_blank">[%% Passwort-Vergessen-Wording %%]</a>
+    </p>
+  </div>
+</div>
+<custom-script> function register_user_cr(){ var user_email = $('#paywall--register-form input[type="email"]').val(); var cr_url = '[%% Cleverreach_Form_URL %%]'; if ($('#nl-opt-in').is(':checked') && user_email!=''){ $.post('https://api.suse.funkedigital.de/proxy/optin',{ url:cr_url, email:user_email, [%% Opt-In-Version-Feld-ID %%]: '[%% Opt-In-Version-Feld-Wert %%]' }).done(function(data){ console.log('user -> '+user_email+' registered'); }); } }; </custom-script>

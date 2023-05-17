@@ -1,0 +1,38 @@
+S3
+wget https://aws-codedeploy-eu-central-1.s3.eu-central-1.amazonaws.com/latest/install
+
+CodeAgent
+Thanks @moosthuizen42
+
+For anyone who doesn't know how to do anything like me, here's the noob steps:
+
+Enter the following command:
+touch install-code-deploy-ubuntu22-ec2.sh
+
+Enter the following command:
+cat > install-code-deploy-ubuntu22-ec2.sh
+
+Paste the following:
+
+#!/bin/bash
+# This installs the CodeDeploy agent and its prerequisites on Ubuntu 22.04.
+sudo apt-get update
+sudo apt-get install ruby-full ruby-webrick wget -y
+cd /tmp
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/releases/codedeploy-agent_1.3.2-1902_all.deb
+mkdir codedeploy-agent_1.3.2-1902_ubuntu22
+dpkg-deb -R codedeploy-agent_1.3.2-1902_all.deb codedeploy-agent_1.3.2-1902_ubuntu22
+sed 's/Depends:.*/Depends:ruby3.0/' -i ./codedeploy-agent_1.3.2-1902_ubuntu22/DEBIAN/control
+dpkg-deb -b codedeploy-agent_1.3.2-1902_ubuntu22/
+sudo dpkg -i codedeploy-agent_1.3.2-1902_ubuntu22.deb
+systemctl list-units --type=service | grep codedeploy
+Press ctrl + d
+
+Enter the following command:
+chmod u+x install-code-deploy-ubuntu22-ec2.sh
+
+Enter the following command:
+./install-code-deploy-ubuntu22-ec2.sh
+
+Enter the following command:
+sudo service codedeploy-agent status

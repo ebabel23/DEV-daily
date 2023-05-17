@@ -1,0 +1,44 @@
+snippets.txt
+
+//Find XHR-Requests in Log
+var xhr3 = new XMLHttpRequest();
+xhr3.onreadystatechange = function() {
+    if (xhr3.readyState == XMLHttpRequest.DONE) {
+        alert(xhr3.responseText);
+    }
+}
+xhr3.open('POST', 'https://www.waz.de/secure/sso/login/', true);
+xhr3.send(null);
+
+
+
+// Looping throu array and find index by a value
+   function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
+
+    for (var i = 0; i < arraytosearch.length; i++) {
+
+    if (arraytosearch[i][key] == valuetosearch) {
+    return i;
+    }
+    }
+    return null;
+    }
+
+    var index = functiontofindIndexByKeyValue(catJSon, "price" > 10
+    );
+
+
+    // Bash to replace a file
+    // https://unix.stackexchange.com/questions/204335/how-can-i-copy-a-file-in-a-bash-script-and-rename-it-while-copying-and-place-it
+#!/bin/bash
+
+if [[ ! -f $1 && $(($# != 1)) ]]; then 
+    printf '%s\n' "Provide a filename"
+    exit 1
+fi
+
+inFile="$1"
+fileExt="${1#*.}"
+destFile="${1%.*}"
+
+cp -- "$inFile" "${destFile}_copy.$fileExt"  # As suggested, so the files that start with a dash are not ignored.

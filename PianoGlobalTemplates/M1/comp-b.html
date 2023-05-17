@@ -1,0 +1,43 @@
+<div ng-switch-when="SIGN_UP">
+  <!-- SWITCH Offer-View -->
+  <h3 class="space--bottom-half">
+    <t><span class="ng-scope">Pure Text [%% headline %%]</span></t>
+  </h3>
+  <p>Pure Subline [%% subline %%]</p>
+
+  <ul class="custom-offer-list space--page space--top-double space-mobile--page-double hide-mobile">
+    <li><t>[%% list_point_1 %%]</t></li>
+    <li><t>[%% list_point_2 %%]</t></li>
+    <li><t>[%% list_point_3 %%]</t></li>
+  </ul>
+
+  <div class="row space--page-left space--page-double-top space--top-double border--top offer-terms">
+    <div class="col-65 col-mobile--100 space--right" ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+      <h3 ng-if="isPayableTerm(term)">{{term.name | tc:'term.name'}}</h3>
+      <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+    </div>
+    <div class="col-35 col-mobile--100 space-mobile--top">
+      <!-- TODO: Rework Button to switch to Register-->
+
+      <div class="row space--page-left space--page-double-top space--top-double border--top offer-terms">
+        <div ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+          <div class="col-65 col-mobile--100 space--right" ng-if="isPayableTerm(term)">
+            <h3>{{term.name | tc:'term.name'}}</h3>
+            <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+          </div>
+          <div class="col-35 col-mobile--100 space-mobile--top" ng-if="isPayableTerm(term)">
+            <button id="paymentmethode" class="btn btn-icon" ng-click="startCheckout(term.termId)"><t>Zahlart wählen</t></button>
+          </div>
+        </div>
+      </div>
+
+      <button ng-switch-when="SIGN_UP" ng-show="!isUserValid()" class="self-template switch-button btn btn-icon" external-event ng-click="hideErrorMessage(); $parent.useView = 'SIGN_REGISTER'" external-event-trackingVars="'level': 'paywall','p_id':'waz_plus','name':'WAZ PLUS','position':'inline','price':'7.90', 'variant': '[%% Tracking_Variant %%]',  'template': 'M1 2020 Paywall', 'event': 'eec.addToCart'" external-event-params="{{params}}">
+        <t>Register [%% button_billing_text %%]</t>
+      </button>
+      <!-- TODO: Rework Button to trigger payment -->
+      <button ng-switch-when="SIGN_UP" ng-show="isUserValid()" class="btn btn-icon" id="paymentmethode" ng-click="startCheckout(term.termId)" external-event external-event-trackingVars="'level': 'paywall','p_id':'waz_plus','name':'WAZ PLUS','position':'inline','price':'7.90', 'variant': '[%% Tracking_Variant %%]',  'template': 'M1 2020 Paywall', 'event': 'eec.addToCart'" external-event-params="{{params}}">
+        <t>Kaufen [%% button_billing_text %%]</t>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div
+  id="template-tracking"
+  external-event
+  external-event-trackingVars="'level': 'header', 'template': 'Header Plus-Banner-Sticky','variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
+  external-event-params="{{params}}"
+></div>
+<div custom-script>
+  // Tracking $( "#template-tracking" ).trigger( "click", function() { //
+  window.console.log("Tracking Clicked"); });
+</div>
+
+<a
+  class="plus-banner"
+  external-event="StickyHeader_LP"
+  external-event-trackingVars="'level': 'header', 'template': 'Header Plus-Banner-Sticky', 'variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoClick'"
+  external-event-params="{{params}}"
+>
+  <span class="plus-banner__close"></span>
+  <div class="banner-main">
+    <div class="plus-logo"></div>
+    <div class="plus-banner__text">[%% Text %%]</div>
+    <span class="plus-banner__arrow"></span>
+  </div>
+</a>
+
+<script>
+  var refurl = document.referrer;
+  var url = new URL(refurl);
+  var domain = "https://" + url.hostname;
+  var variolink = domain + "[%% Link %%]";
+  var target = "[%% Link-Ziel %%]";
+
+  $(document).ready(function () {
+    var $plusBanner = $(".plus-banner");
+    var $closeButton = $plusBanner.find(".plus-banner__close");
+
+    $closeButton.click((e) => {
+      e.preventDefault();
+      $plusBanner.hide();
+      parent.postMessage(
+        {
+          message: "hidePlusBannerSticky",
+          expires: 10,
+        },
+        refurl
+      );
+    });
+
+    if ($plusBanner.hasClass("plus-banner")) {
+      $plusBanner.attr("href", variolink);
+    }
+  });
+</script>

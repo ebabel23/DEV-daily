@@ -1,0 +1,134 @@
+<!-- Checkout -->
+<div view="state1">
+  <div account-header-component></div>
+  <div class="row account-head">
+    <div class="business-logo" ng-show="app.image1">
+      <img class="logo-img" ng-src="{{app.image1}}" />
+    </div>
+    <div
+      class="account-head-contentcol"
+      ng-class="!app.image1 ? 'no-logo' : ''"
+    >
+      <div class="account-head-content">
+        <h2>
+          <t>Checkout with {{app.name}}</t>
+        </h2>
+        <p>
+          <t>Choose from any one of our options below.</t>
+        </p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div>
+    <div term-selector-component></div>
+  </div>
+</div>
+<div view="state2">
+  <div
+    id="template-tracking"
+    external-event
+    external-event-trackingVars="'level': 'billing', 'template': '{{trackingVersion}}', 'event': 'piano_view'"
+    external-event-params="{{params}}"
+  ></div>
+  <div custom-script>
+    // Tracking $( "#template-tracking" ).trigger( "click" );
+  </div>
+  <div id="default-checkout" class="default-offer default-offer--bg-b">
+    <div class="row account-head space--page space--page-top flexhead">
+      <div
+        class="account-head-contentcol no-space space--top"
+        ng-class="!app.image1 ? 'no-logo' : ''"
+      >
+        <div ng-class="!app.image1 ? 'no-logo' : ''" class="center">
+          <div class="plus-logo"></div>
+        </div>
+      </div>
+      <div class="logo-block--inner">
+        <h3>
+          <t>{{selectedTerm.name | tc:'selectedTerm.name'}}</t>
+        </h3>
+        <p class="no-space">
+          <t> {{selectedTerm.description | tc:'selectedTerm.description'}} </t>
+        </p>
+      </div>
+    </div>
+    <div class="row space--page space--page-top space--bottom hide-it">
+      <div>
+        <div class="center">
+          <h1>Regional. Informativ. Aktuell.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row space--page space--page-top spaceX--bottom">
+      <h3 class="alternative-color">
+        <t>Wählen Sie eine Zahlungsmethode</t>
+      </h3>
+    </div>
+    <div auth-component></div>
+
+    <div
+      promo-code-component
+      class="{{custom.showpromo !== 'true' ? 'hide-stuff' : 'show-from-checkout'}}"
+    ></div>
+    <!--<div id="payment-form-premium-user" ng-if="custom.userStateIsPremium" style="    display: block;
+         width: 100%;
+         padding: 20px 0;
+         background: red;
+         text-align: center;
+         font-weight: bold;
+         font-size: 16px;
+         margin-bottom: 10px;
+         box-shadow: 0 2px 10px #333;
+         border-bottom: 1px solid #999;">
+           <t>FDP_INFO__USER_STATE_IS_PREMIUM</t>
+         </div>-->
+    <!--<div payment-form-component ng-if="!custom.userStateIsPremium"></div>-->
+    <div payment-form-component></div>
+  </div>
+</div>
+<!-- Receipt Screen -->
+<div view="alreadyHasAccess">
+  <div already-has-access-component></div>
+</div>
+<div view="auth">
+  <div account-header-component></div>
+  <div auth-component></div>
+</div>
+<div view="lockedPromoCode">
+  <div account-header-component></div>
+  <div promo-code-component></div>
+</div>
+<div view="externalVerification">
+  <div account-header-component></div>
+  <div external-verification-component></div>
+</div>
+<div view="printAddress">
+  <div account-header-component></div>
+  <div print-address-component></div>
+</div>
+<div view="confirmation">
+  <div confirmation-component></div>
+</div>
+<div view="giftParams">
+  <div account-header-component></div>
+  <div gift-form-component></div>
+</div>
+<div view="redemption">
+  <div redemption-component></div>
+</div>
+<div view="bankSecure">
+  <div bank-secure-component></div>
+</div>
+
+<div view="subscriptionReactivation">
+  <div reactivate-subscription-component></div>
+</div>
+
+<div view="upgradeSubscription">
+  <div complete-upgrade-component></div>
+</div>
+
+<div view="upgradeSharedSubscription">
+  <div upgrade-shared-subscription-component></div>
+</div>

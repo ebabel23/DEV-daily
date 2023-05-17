@@ -1,0 +1,69 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.3;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  color: black;
+}
+
+.varlist {
+  margin: 1rem 5%;
+}
+
+.varlist__container {
+  display: flex;
+  margin-top: 1rem;
+  gap: 01rem 1rem;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.varlist__h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.varlist__list {
+}
+
+.varlist__item {
+  border: solid;
+  margin: 0;
+  font-size: 1rem;
+  flex-grow: 1;
+  flex-basis: 33%;
+  & :last-of-type {
+    margin-bottom: 30px;
+  }
+}
+
+.varlist__subtext {
+  margin-left: 5%;
+}
+.varlist__subtext-light {
+  font-style: italic;
+  color: darkgray;
+}
+
+.varlist__howto {
+  background-color: lightgray;
+  border: solid;
+  font-size: 1rem;
+  line-height: 0.5rem;
+}
+
+.varlist__footer {
+  padding: 2rem 0;
+}

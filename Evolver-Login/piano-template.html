@@ -1,0 +1,530 @@
+<script>
+  var scope = angular.element("#error-messages").scope();
+  window.addEventListener(
+    "message",
+    function (e) {
+      if (typeof e.data.piano != "undefined") {
+        var result = e.data.piano;
+        if (!scope.$$phase) {
+          scope.$apply(function () {
+            if (!result.success) {
+              scope.fdpErrorCode = result.message;
+            }
+            /* Loader if User click button */
+            if (result.message === "loader") {
+              scope.fdpLoading = result.object.loading;
+            }
+          });
+        } else {
+          if (!result.success) {
+            scope.fdpErrorCode = result.message;
+          }
+          if (result.message === "loader") {
+            scope.fdpLoading = result.object.loading;
+          }
+        }
+        if (!result.success) {
+          $("#error-message-wrapper").show();
+        } else {
+          $("#error-message-wrapper").hide();
+        }
+      }
+      $("input.login-form").focusout(function () {
+        $("#error-message-wrapper").hide();
+      });
+      $("input").focusin(function () {
+        $("#error-message-wrapper").hide();
+      });
+      return;
+    },
+    false
+  );
+</script>
+<div
+  id="template-tracking-dialog"
+  external-event
+  external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]','variant': 'Multi Offer - [%% Tracking_Variant %%]','position': '[%% Tracking_position %%]', 'event': 'eec.detail'"
+  external-event-params="{{ params }}"
+></div>
+<div
+  id="template-tracking-login"
+  external-event
+  external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]',  'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'view': 'login', 'event': 'eec.login'"
+  external-event-params="{{ params }}"
+></div>
+<div custom-script>
+  if (($("h1").text().length) >= [%% Claim_Length %%]) {
+  document.getElementById("subline").style.display = "none"; };
+</div>
+<script>
+  window.onload = function () {
+    setTimeout(function () {
+      console.log("window loaded");
+      var links = document.getElementsByTagName("a");
+      if ('"[%% Primary_Text_Color %%]"' == '"[%% Secondary_Text_Color %%]"') {
+        for (var i = links.length - 1; i >= 0; i--) {
+          links[i].style.textDecoration = "underline";
+          links[i].addEventListener("mouseenter", (event) => {
+            event.target.style.opacity = "0.7";
+          });
+          links[i].addEventListener("mouseleave", (event) => {
+            event.target.style.opacity = "1";
+          });
+        }
+      }
+    }, 1000);
+  };
+</script>
+
+<div
+  id="evolverRegister"
+  external-event="Paywall_Registration"
+  external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+  external-event-offerId="[%% external-event-offerId %%]"
+  external-event-templateId="OTTCA9VSRPZC"
+  external-event-templateVariantId=" "
+  external-event-displaymode="modal"
+  external-event-containerSelector="#paywall-container"
+  external-event-params="{{params}}"
+>
+  {{term.name | tc:'term.name'}}
+</div>
+
+<div
+  id="evolverLogin"
+  external-event="Paywall_Login"
+  external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]',  'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'view': 'login', 'event': 'eec.login'"
+  external-event-offerId="[%% external-event-offerId %%]"
+  external-event-templateId="OT4TRXJBQBSA"
+  external-event-templateVariantId="OTV4M7L7503Q9"
+  external-event-displaymode="modal"
+  external-event-containerSelector="#paywall-container"
+  external-event-params="{{params}}"
+>
+  {{term.name | tc:'term.name'}}
+</div>
+
+<div class="row default-offer">
+  <div ng-switch="fdpLoading">
+    <div class="loader" ng-switch-when="true">
+      <div class="loader-inner"></div>
+    </div>
+    <div ng-switch="useView">
+      <div ng-switch-when="SIGN_UP" ng-show="isUserValid()">
+        <div class="login-notfication">
+          <span class="long-text">
+            [%% Decoy_Login_Notification_Desktop %%]
+          </span>
+          <span class="short-text">
+            [%% Decoy_Login_Notification_Mobile %%]
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row default-offer--inner">
+      <div class="start-screen-content row">
+        <div ng-switch="useView">
+          <div
+            ng-switch-when="SIGN_UP"
+            ng-show="!isUserValid()"
+            class="row-login"
+          >
+            <!-- add nopid before > to avoid pid parameter-->
+            <div
+              class="self-template switch-button"
+              external-event
+              external-event-trackingVars="'template': '[%% Tracking_Template %%]','p_id': '{{term.termId}}', 'name': '{{term.name}}','price': '{{term.price}}','category': '[%% Tracking_Category %%]','variant': '[%% Tracking_productVariant %%]','position': '[%% Tracking_position %%]', 'event': 'eec.promoClick', 'microConversion': 'Piano_Registration_Print_Out'"
+              external-event-params="{{ params }}"
+            >
+              <a ng-click="[%% sso_type %%]Login()">
+                <span>Zum PLUS-Login</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="space--top" ng-class="!app.image1 ? 'no-logo' : ''">
+          <div class="plus-logo"></div>
+          <h1>[%% Claim_Branding %%]</h1>
+          <p class="lead" id="subline">[%% Subheadline %%]</p>
+        </div>
+      </div>
+      <!-- Error messages for Login and Register Form. By default it's hidden. -->
+      <div id="error-message-wrapper" style="display: none">
+        <span id="error-messages">
+          <span ng-switch="fdpErrorCode">
+            <span ng-switch-when="loading" style="display: none"></span>
+            <span ng-switch-when="stoploading" style="display: none"></span>
+            <span ng-switch-default>
+              <t>Es ist etwas schief gegangen.</t>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div class="start-screen-content" ng-init="useView = 'SIGN_UP'">
+        <div ng-switch="useView">
+          <div ng-switch-when="SIGN_UP">
+            <script>
+              $(".vorteils-button").click(function () {
+                $(".show-vorteile").toggle();
+                $("#arrow-up").toggleClass("inline-block");
+                $("#arrow-down").toggleClass("display-none");
+              });
+            </script>
+            <div class="vorteils-dropdown-div">
+              <button class="vorteils-button">
+                Ihre Vorteile mit PLUS
+                <i id="arrow-up" class="arrow"></i>
+                <i id="arrow-down" class="arrow"></i>
+              </button>
+              <div class="show-vorteile">
+                <ul class="single-term-list">
+                  <li
+                    class="single-term-list-item"
+                    ng-repeat="(key, value) in [%% Vorteilsbox %%].conditions"
+                  >
+                    {{value}}
+                  </li>
+                </ul>
+                <a
+                  id="infos-link"
+                  href="[%% Abo_Plus_Info_URL %%]"
+                  target="_blank"
+                  onClick="moreInfoClick()"
+                  class="noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}"
+                  >[%% Abo_Plus_Info_Text %%]</a
+                >
+              </div>
+            </div>
+            <div class="offer-terms">
+              <!-- FROM BOILERPLATE -->
+              <ul
+                ng-class="(terms.length >= 2) ? 'offer-terms-inner' : 'offer-terms-inner-small'"
+              >
+                <li
+                  ng-class="($index == ([%% Preselected_Term_Position %%] - 1)) ? 'pn-offer-list__item single-term selected' : 'pn-offer-list__item single-term'"
+                  ng-repeat="term in terms track by $index"
+                >
+                  <div
+                    ng-class="(($index == ([%% Preselected_Term_Position %%] - 1) && [%% Preselected_Term_Position %%] == 2)) ? 'selected-term-middle' : 'selected-term-first-desktop'"
+                  >
+                    <div
+                      id="template-tracking-register-{{term.termId}}"
+                      external-event
+                      external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+                      external-event-params="{{ params }}"
+                    ></div>
+                    <input
+                      id="term_{{term.termId}}"
+                      class="term-selector"
+                      type="radio"
+                      name="term"
+                      value="{{term.termId}}"
+                    />
+
+                    <!-- Leads user to SSO -->
+                    <label
+                      ng-if="!isUserValid()"
+                      ng-class="($index == ([%% Preselected_Term_Position %%] - 1)) ? 'term-select--box-selected' : 'term-select--box'"
+                      type="button"
+                      for="term_{{term.termId}}"
+                      ng-click="setStorage($index); trackingView('register-' + term.termId); [%% sso_type %%]Register()"
+                      external-event="offer-subscribe-{{ $index }}"
+                    >
+                      <div class="badge"><p>[%% Badge_Text %%]</p></div>
+                      <h3 ng-if="isPayableTerm(term)">
+                        {{[%% Offer_Box_Data %%][ $index ].headline}}
+                      </h3>
+                      <h3 class="price" ng-if="isPayableTerm(term)">
+                        {{[%% Offer_Box_Data %%][ $index ].price}}<sup
+                          class="footnote-price"
+                          >{{ $index + 1}}</sup
+                        >
+                      </h3>
+                      <div class="term-name">
+                        {{[%% Offer_Box_Data %%][ $index ].cta}}
+                      </div>
+                      <span class="term-description"
+                        ><sup>{{ $index + 1}}&nbsp;</sup>{{[%% Offer_Box_Data
+                        %%][ $index ].description}}</span
+                      >
+                    </label>
+
+                    <!-- Leads user to Checkout -->
+                    <label
+                      ng-if="isUserValid()"
+                      ng-class="($index == ([%% Preselected_Term_Position %%] - 1)) ? 'term-select--box-selected' : 'term-select--box'"
+                      type="button"
+                      for="term_{{term.termId}}"
+                      ng-click="setStorage($index); trackingView('register-' + term.termId); startCheckout(term.termId)"
+                      external-event="offer-subscribe-{{ $index }}"
+                    >
+                      <div class="badge"><p>[%% Badge_Text %%]</p></div>
+                      <h3 ng-if="isPayableTerm(term)">
+                        {{[%% Offer_Box_Data %%][ $index ].headline}}
+                      </h3>
+                      <h3 class="price" ng-if="isPayableTerm(term)">
+                        {{[%% Offer_Box_Data %%][ $index ].price}}<sup
+                          class="footnote-price"
+                          >{{ $index + 1}}</sup
+                        >
+                      </h3>
+                      <div
+                        class="term-name"
+                        id="template-tracking-register-{{term.termId}}"
+                        external-event
+                        external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'Multi Offer - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+                        external-event-params="{{ params }}"
+                      >
+                        {{[%% Offer_Box_Data %%][ $index ].cta}}
+                      </div>
+                      <span class="term-description"
+                        ><sup>{{ $index + 1}}&nbsp;</sup>{{[%% Offer_Box_Data
+                        %%][ $index ].description}}</span
+                      >
+                    </label>
+                  </div>
+                </li>
+              </ul>
+              <div class="sternchen-div">
+                <div class="space--top center link">
+                  <span class="sternchen-text">[%% Sternchen_Text %%]</span>
+                  <a
+                    id="infos-link-bottom"
+                    href="[%% Abo_Plus_Info_URL %%]"
+                    target="_blank"
+                    onClick="moreInfoClick()"
+                    class="noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}"
+                    >[%% Abo_Plus_Info_Text %%]</a
+                  >
+                </div>
+              </div>
+              <div
+                id="links-box-bottom"
+                class="noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}"
+              >
+                [%% Plus_Link_Print %%] [%% Plus_Link_ePaper %%] [%%
+                Plus_Link_Unternehmen %%]
+              </div>
+              <div
+                class="single-term"
+                ng-repeat="term in terms track by $index"
+              >
+                <div ng-if="$last" ng-init="$last?autoSelectTerm():null"></div>
+              </div>
+              <!-- END FROM BOILERPLATE -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //Evolver with Escenic
+
+  scope.evolverEscenicLogin = function () {
+    console.log("try scoped evolverEscenicLogin");
+    $("#evolverLogin").trigger("click");
+  };
+
+  scope.evolverEscenicRegister = function () {
+    console.log("try scoped evolverEscenicRegister");
+    $("#evolverRegister").trigger("click");
+  };
+
+  function evng() {
+    document.getElementById("evolverLogin").click();
+  }
+
+  //KeyCloak with Escenic
+
+  function openOnOffer(url) {
+    let articleUrl = new URL(urlParams.url);
+    let nohashUrl = articleUrl.origin + articleUrl.pathname + articleUrl.search;
+    window.parent.location.href = nohashUrl + "#keycloak-registration";
+  }
+  function openLogin() {
+    let articleUrl = new URL(urlParams.url);
+    let nohashUrl = articleUrl.origin + articleUrl.pathname + articleUrl.search;
+    window.parent.location.href = nohashUrl + "#keycloak-login";
+  }
+
+  scope.keycloakEscenicRegister = function (url) {
+    let articleUrl = new URL(urlParams.url);
+    let nohashUrl = articleUrl.origin + articleUrl.pathname + articleUrl.search;
+    window.parent.location.href = nohashUrl + "#keycloak-registration";
+    console.log("try scoped keycloakEscenicRegister");
+  };
+
+  scope.keycloakEscenicLogin = function () {
+    let articleUrl = new URL(urlParams.url);
+    let nohashUrl = articleUrl.origin + articleUrl.pathname + articleUrl.search;
+    window.parent.location.href = nohashUrl + "#keycloak-login";
+    console.log("try scoped keycloakEscenicLogin");
+  };
+
+  //KeyCloak with Spark-News
+</script>
+
+<script>
+  //Replace URLs and utm_terms in Aboshop-Links
+
+  let bottomUrls = document.getElementsByClassName("links");
+
+  function buildAndPasteUrl(changeUrl) {
+    let workUrl = new URL(changeUrl);
+    let refurl = urlParams.url;
+    if (workUrl.href.includes("aboshop.")) {
+      switch (true) {
+        case refurl.includes("/salzgitter/") == true:
+          workUrl.host = "aboshop.salzgitter-zeitung.de";
+          workUrl.searchParams.set("utm_term", "sz");
+          changeUrl.href = workUrl.href;
+          break;
+        case refurl.includes("/wolfsburg/") == true:
+          workUrl.host = "aboshop.wolfsburger-nachrichten.de";
+          workUrl.searchParams.set("utm_term", "wn");
+          changeUrl.href = workUrl.href;
+          break;
+        case refurl.includes("/wolfenbuettel/") == true:
+          workUrl.host = "aboshop.wolfenbuetteler-zeitung.de";
+          workUrl.searchParams.set("utm_term", "wz");
+          changeUrl.href = workUrl.href;
+          break;
+        case refurl.includes("/helmstedt/") == true:
+          workUrl.host = "aboshop.helmstedter-nachrichten.de";
+          workUrl.searchParams.set("utm_term", "hn");
+          changeUrl.href = workUrl.href;
+          break;
+        default:
+      }
+    } else {
+    }
+  }
+
+  function loopedUrlChange() {
+    Array.from(bottomUrls).forEach((url) => {
+      console.log("Starting Array-OP");
+      buildAndPasteUrl(url);
+    });
+  }
+  setTimeout(loopedUrlChange, 200);
+</script>
+
+<script>
+  /* Store selected Term from User and init on load again on load If new session select predifined position from "Preselected Term Position content field." */
+  /* TODO: Enhance stored term with offer-id and property FDPC-1064 */
+  const offerId = urlParams.offerId;
+  const offerBR = "";
+  let termString = "fdp-user-term-" + offerId;
+
+  scope.autoSelectTerm = function () {
+    try {
+      if (localStorage.getItem(termString) !== null) {
+        scope.termIdstorage = localStorage.getItem(termString);
+      } else {
+        scope.termIdstorage = $(".single-term")
+          .eq(parseInt("[%% Preselected_Term_Position %%]") - 1)
+          .find(".term-selector")
+          .val();
+        localStorage.setItem(termString, scope.termIdstorage);
+        localStorage.setItem("fdp-term-selection", "automatic");
+        localStorage.setItem("fdp-term-settime", Math.floor(Date.now() / 1000));
+      }
+    } catch (err) {
+      scope.termIdstorage = $(".single-term")
+        .eq(parseInt("[%% Preselected_Term_Position %%]") - 1)
+        .find(".term-selector")
+        .val();
+    }
+    $("#term_" + scope.termIdstorage).prop("checked", true);
+    scope.fdpLoading = false;
+    return scope.termIdstorage;
+  };
+
+  scope.setStorage = function (index) {
+    try {
+      scope.termIdstorage = $(".single-term")
+        .eq(index)
+        .find(".term-selector")
+        .val();
+      localStorage.setItem(
+        termString,
+        $(".single-term").eq(index).find(".term-selector").val()
+      );
+      localStorage.setItem("fdp-term-selection", "selected");
+      localStorage.setItem("fdp-term-settime", Math.floor(Date.now() / 1000));
+    } catch (err) {
+      scope.termIdstorage = $(".single-term")
+        .eq(index)
+        .find(".term-selector")
+        .val();
+    }
+  };
+
+  scope.descriptionListItemLength = function () {
+    scope.descriptionListItem.length > 1 ? true : false;
+  };
+
+  scope.descriptionList = function (string, nb) {
+    var list = [];
+    if (string.indexOf(";") !== -1) {
+      var array = string.split(";");
+      array.forEach(function (item) {
+        list.push(item);
+      });
+      scope.descriptionListItem = list;
+    } else {
+      scope.descriptionListItem = [string];
+    }
+  };
+
+  scope.trackingView = function (ident) {
+    $("#template-tracking-" + ident).trigger("click");
+    $("#error-message-wrapper").hide();
+  };
+
+  scope.hideErrorMessage = function () {
+    $("#error-message-wrapper").hide();
+  };
+
+  $(document).ready(function () {
+    if (scope.isUserValid()) {
+      setTimeout(function () {
+        const localStorageDateQuery = Number(
+          localStorage.getItem("fdp-term-settime")
+            ? localStorage.getItem("fdp-term-settime")
+            : 0
+        );
+        let termMode = localStorage.getItem("fdp-term-selection");
+        console.log("TimeSet:", localStorageDateQuery);
+        try {
+          let localStorageDateEdit = (() => {
+            const now = Math.floor(Date.now() / 1000);
+            if (300 > now - localStorageDateQuery) {
+              return true;
+            } else {
+              return false;
+            }
+          })();
+
+          if (localStorageDateEdit && termMode != "automatic") {
+            console.log(localStorageDateEdit);
+            scope.startCheckout(localStorage.getItem(termString));
+            scope.trackingView("register-" + localStorage.getItem(termString));
+            localStorage.setItem("fdp-term-selection", "sawautopopover");
+          } else {
+            console.log("Nothing happens");
+          }
+        } catch (err) {
+          // var defaultUserTerm = $(".single-term").eq(parseInt('[%% Preselected_Term_Position %%]') - 1).find(".term-selector").val();
+          // scope.startCheckout(defaultUserTerm);
+          // scope.trackingView('register-' + 'inkognito-' + defaultUserTerm);
+        }
+      }, 500);
+    }
+  });
+
+  scope.trackingView("dialog");
+</script>

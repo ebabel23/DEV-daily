@@ -1,0 +1,12 @@
+*/node_modules
+/node_modules
+*/files/logs
+/.vscode
+*.vscode
+*.code-workspace
+*/todo.txt
+/todo.txt
+*.todo
+.todo
+*/.env
+/.env

@@ -1,0 +1,113 @@
+<div id="plus-banner" class="plus-banner-hidden"></div>
+<div id="plus-banner--sticky-detector"></div>
+<div id="plus-banner--sticky" class="sticky-hidden"></div>
+
+<style>
+	#plus-banner {
+        position: absolute;
+        bottom: 140px;
+        right: 0;
+        width: 85px;
+        height: 55px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .pub-bzv-hk #plus-banner {
+    		top: 83px;
+    		bottom: unset;
+    	}
+
+    .plus-banner-hidden {
+        display: none;
+    }
+
+    #plus-banner .tp-container-inner {
+        height: 55px!important;
+        overflow: hidden;
+    }
+
+    .header--sticky #plus-banner {
+        display: none;
+    }
+
+    #plus-banner--sticky {
+        width: 940px;
+        height: 56px;
+        overflow: hidden;
+        display: none;
+    }
+
+    #plus-banner--sticky.fixed {
+        position: fixed;
+        display: block;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    #plus-banner--sticky.sticky-hidden {
+        display: none;
+    }
+
+	 .header .header-top__bzv-logo {
+    		position: absolute;
+    		top: 50px;
+    	}
+
+    @media screen and (max-width: 47.9375em) {
+         #plus-banner--sticky {
+        	display: none!important;
+   	   }
+
+        #plus-banner, plus-banner--subscribed {
+           display: none!important;
+        }
+
+        .header .header-top__bzv-logo {
+    		top: 0;
+    	   }
+    }
+    .header .header-top__links {
+    		width: 26%
+    	}
+    	
+</style>
+
+<script>
+    jQuery(document).ready(function(){
+        var showPlusBannerVal = "${showPlusBanner}";
+        var showPlusBanner = showPlusBannerVal == 'true';
+
+        function stickToTop() {
+        	console.log('stick to top');
+            var window_top = jQuery(window).scrollTop();
+            var top = jQuery('#plus-banner--sticky-detector').offset().top;
+            if (window_top > top) {
+                jQuery('#plus-banner--sticky').addClass('fixed');
+                jQuery('#plus-banner--sticky-detector').height(jQuery('#plus-banner--sticky').outerHeight());
+            } else {
+                jQuery('#plus-banner--sticky').removeClass('fixed');
+                jQuery('#plus-banner--sticky-detector').height(0);
+            }
+        }
+
+        function receiveMessage(event) {
+            if (event.data.message !== 'hidePlusBannerSticky') return;
+            jQuery('#plus-banner--sticky').addClass('sticky-hidden');
+            createCookie('hide-plus-banner-sticky', true, event.data.expires);
+        }
+
+        if (showPlusBanner) {
+        	  
+        	  jQuery('#plus-banner').removeClass('plus-banner-hidden');
+            if (!readCookie('hide-plus-banner-sticky') && !jQuery('#plus-banner--sticky').hasClass('has-plus')) {
+                jQuery('#plus-banner--sticky').removeClass('sticky-hidden');
+                jQuery(window).scroll(stickToTop);
+                stickToTop();
+                window.addEventListener('message', receiveMessage);
+            }
+        }
+    });
+</script>

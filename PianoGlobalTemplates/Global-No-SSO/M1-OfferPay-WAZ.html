@@ -1,0 +1,302 @@
+<!-- Offer-Template-Code-->
+<link rel="stylesheet" href="[%% SYS_CSS_URL %%]" />
+
+<script>
+  var scope = angular.element("#error-messages").scope();
+
+  window.addEventListener(
+    "message",
+    function (e) {
+      if (typeof e.data.piano != "undefined") {
+        var result = e.data.piano;
+        if (!scope.$$phase) {
+          scope.$apply(function () {
+            if (!result.success) {
+              scope.fdpErrorCode = result.message;
+            }
+            // Loader if User click button
+            if (result.message === "loader") {
+              scope.fdpLoading = result.object.loading;
+            }
+          });
+        } else {
+          if (!result.success) {
+            scope.fdpErrorCode = result.message;
+          }
+          if (result.message === "loader") {
+            scope.fdpLoading = result.object.loading;
+          }
+        }
+
+        if (!result.success) {
+          $("#error-message-wrapper").show();
+        } else {
+          $("#error-message-wrapper").hide();
+        }
+      }
+      //$("input").focusout(function(){
+      //  $('#error-message-wrapper').hide();
+      //});
+
+      //$("input").focusin(function(){
+      //  $('#error-message-wrapper').hide();
+      //});
+      return;
+    },
+    false
+  );
+</script>
+
+<div id="template-tracking-dialog" external-event="'{{ !isUserValid() ? 'detail-view-loggedOut' : 'detail-view-loggedIn' }}'" external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]','variant': 'M1 Uno - [%% Tracking_Variant %%]' ,'position': '[%% Tracking_Position %%]', 'view': '{{ !isUserValid() ? 'loggedOut' : 'loggedIn' }}', 'event': 'eec.detail'" external-event-params="{{params}}"></div>
+
+<!-- NEW -->
+<div class="template" ng-init="useView = 'SIGN_UP'">
+  <!-- Template-HTML -->
+  <div class="row default-offer default-offer--bg-a">
+    <!-- Template-Header -->
+    <div ng-switch="fdpLoading">
+      <!-- Ladeschnecke -->
+      <div class="loader" ng-switch-when="true">
+        <div class="loader-inner"></div>
+      </div>
+    </div>
+    <!-- / Ladeschnecke -->
+    <div class="row default-offer--inner">
+      <!-- HEADER with Visual, Logo, Badge -->
+      <div class="indents-from-border" ng-init="hiM = '[%% Header_URL_mobile %%]'">
+        <div ng-class="hiM == '' ? 'account-head--fallback' : 'nothing'" class="row account-head space--page-double space--page-top">
+          <div class="[%% Logo_Visibility %%] col-65 col-mobile--100 space-logo--top">
+            <div class="logo"></div>
+          </div>
+          <div class="col-35 col-mobile--100 space-badge--top">
+            <img src="[%% Header_Image_Badge %%]" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / HEADER with Visual, Logo, Badge -->
+  </div>
+  <!-- Template-Header -->
+  <div class="start-screen-content start-screen-content space--page-bottom space--top-double space--page-double">
+    <!-- Template-Body -->
+    <div ng-switch="useView">
+      <div ng-switch-when="SIGN_UP">
+        <!-- SWITCH Offer-View Todo: Tracking!, Mobile Lines -->
+        <h1 ng-init="hlM = '[%% Headline_mobile %%]'" class="[%% Headline_Visibility %%] no-space--page-left no-space--bottom-half">
+          <t><span ng-class="hlM == '' ? 'class_added' : 'hide-mobile'" class="ng-scope">[%% Headline %%]</span></t>
+          <t><span class="ng-scope hide-desktop">[%% Headline_mobile %%]</span></t>
+        </h1>
+        <p ng-init="slM = '[%% Subline_mobile %%]'" class="[%% Subline_Visibility %%] no-space--page-left subline">
+          <span ng-class="slM == '' ? 'class_added' : 'hide-mobile'" class="">[%% Subline %%]</span>
+          <span class="hide-desktop">[%% Subline_mobile %%]</span>
+        </p>
+        <ul class="custom-offer-list space--page space--top-double [%% List_Point_Visibility %%]">
+          <li><t>[%% List_Point_1 %%]</t></li>
+          <li><t>[%% List_Point_2 %%]</t></li>
+          <li><t>[%% List_Point_3 %%]</t></li>
+        </ul>
+        <div class="row no-space--page-left space--page-double-top space--top-double border--top offer-terms">
+          <div ng-repeat="term in terms | filter: {restrictCheckoutProcess:false}">
+            <div class="col-65 col-mobile--100 space--right" ng-if="isPayableTerm(term)">
+              <h3>{{term.name | tc:'term.name'}}</h3>
+              <p class="no-space" ng-if="isPayableTerm(term)">{{term.description | tc:'term.description'}}</p>
+            </div>
+            <div class="col-35 col-mobile--100 space-mobile--top" ng-if="isPayableTerm(term)">
+              <button
+                ng-show="!isUserValid()"
+                class="self-template switch-button btn btn-icon"
+                ng-click="setStorage(term.termId)"
+                external-event="'{{ !isUserValid() ? 'addToCart-click-loggedOut' : 'addToCart-click-loggedIn' }}'"
+                external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'M1 Uno - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+                external-event-params="{{params}}"
+                onclick="openOnOffer()"
+              >
+                <t>[%% Offer_CTA_Text %%]</t>
+              </button>
+
+              <button
+                ng-show="isUserValid()"
+                class="btn btn-icon"
+                id="paymentmethode"
+                ng-click="setStorage(term.termId); startCheckout(term.termId)"
+                external-event="'{{ !isUserValid() ? 'addToCart-click-loggedOut' : 'addToCart-click-loggedIn' }}'"
+                external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'p_id': '{{term.termId}}', 'name': '{{term.name}}', 'price': '{{term.price}}', 'category': '[%% Tracking_Category %%]', 'variant': 'M1 Uno - [%% Tracking_Variant %%]', 'position': '[%% Tracking_position %%]', 'step': '{{ !isUserValid() ? 1 : 2 }}', 'view': '{{ !isUserValid() ? 'register' : 'payment' }}', 'event': '{{ !isUserValid() ? 'eec.addToCart' : 'eec.addToCart' }}'"
+                external-event-params="{{params}}"
+              >
+                <t>[%% Payment_CTA_Text %%]</t>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / SWITCH Offer-View -->
+
+      <div id="error-message-wrapper" style="display: none">
+        <!-- / SWITCH Error-Wrapper-Login Muss irgendwie noch rausoperiert werden, (Script-Block oben korrespondiert-->
+        <span id="error-messages">
+          <span ng-switch="fdpErrorCode">
+            <span ng-switch-when="loading" style="display: none"></span>
+            <span ng-switch-when="stoploading" style="display: none"></span>
+            <span ng-switch-when="101">
+              <t>Das eingegebene Passwort ist falsch.</t>
+            </span>
+            <span ng-switch-when="102">
+              <t>Dieser Benutzer ist nicht registriert.</t>
+            </span>
+            <span ng-switch-when="103">
+              <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort ein.</t>
+            </span>
+            <span ng-switch-when="201">
+              <t>Bitte geben Sie eine E-Mail Adresse und ein Passwort (min. 6 Zeichen) ein.</t>
+            </span>
+            <span ng-switch-when="202">
+              <t>Ein Benutzer mit dieser E-Mail Adresse ist bereits registriert.</t>
+              <span class="self-template switch-button underline" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span>
+            </span>
+            <span ng-switch-when="203">
+              <t>Ein Benutzer mit dieser E-Mail Adresse ist bereits registriert. 203</t>
+              <span class="self-template switch-button underline" ng-click="$parent.useView = 'SIGN_IN'"><b>Jetzt einloggen</b></span>
+            </span>
+            <span ng-switch-default>
+              <t>Es ist etwas schief gegangen.</t>
+            </span>
+          </span>
+        </span>
+      </div>
+      <!-- / SWITCH Error-Wrapper-Login -->
+
+      <div class="sternchen-div">
+        <div class="space--top link">
+          <span class="sternchen-text">[%% Trial_Text %%]</span>
+          <a external-event="'{{ !isUserValid() ? 'more-info-click-loggedOut' : 'more-info-click-loggedIn' }}'" external-event-trackingVars="'template': '[%% Tracking_Template %%]', 'category': '[%% Tracking_Category %%]','variant': 'M1 Uno - [%% Tracking_Variant %%]' ,'position': '[%% Tracking_Position %%]', 'view': '{{ !isUserValid() ? 'loggedOut' : 'loggedIn' }}', 'event': 'eec.pianoClick', 'microConversion': 'Piano_moreInfo-Click'" external-event-params="{{ params }}" href="[%% Abo_Info_Link %%]" target="_blank" class="plusLink noclass {{custom.pageType === 'PlusLP' ? 'hide-stuff' : 'show'}}">[%% Abo_Info_Text %%]</a>
+        </div>
+      </div>
+
+      <div class="login-bar" ng-show="!isUserValid()">
+        <p>
+          <a href="#">
+            <span class="self-template sso-link switch-button" external-event="login-click" external-event-trackingVars="'template': '[%% Tracking_Template %%]','p_id': '{{term.termId}}', 'name': '{{term.name}}','category': '[%% Tracking_Category %%]','variant': 'M1 Uno - [%% Tracking_Variant %%]','position': '[%% Tracking_Position %%]', 'event': 'eec.pianoClick', 'microConversion': 'Piano_Login_Registration'" external-event-params="{{ params }}" onclick="openLogin()"><t>Sie haben einen Zugang? Jetzt einloggen.</t></span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Template-Body -->
+</div>
+<!-- Template-HTML -->
+
+<script>
+  function openOnOffer(url) {
+    let artUrl = urlParams.url;
+    window.parent.location.href = artUrl + "#keycloak-registration";
+    // console.log("PIANO- Register-Click")
+  }
+
+  function openLogin(url) {
+    let artUrl = urlParams.url;
+    window.parent.location.href = artUrl + "#keycloak-login";
+    // console.log("PIANO- Login-Click")
+  }
+</script>
+
+<script>
+  const offerId = urlParams.offerId;
+  const offerBR = "";
+  let termString = "fdp-user-term-" + offerId;
+
+  scope.setStorage = function (termId) {
+    try {
+      let term = termId;
+      sessionStorage.setItem(termString, term);
+      sessionStorage.setItem("fdp-term-selection", "selected");
+      sessionStorage.setItem("fdp-term-settime", Math.floor(Date.now() / 1000));
+    } catch (err) {
+      consoloe.log(err);
+    }
+  };
+
+  scope.trackingView = function (ident) {
+    $("#template-tracking-" + ident).trigger("click");
+    $("#error-message-wrapper").hide();
+  };
+
+  scope.hideErrorMessage = function () {
+    $("#error-message-wrapper").hide();
+  };
+
+  $(document).ready(function () {
+    if (scope.isUserValid()) {
+      setTimeout(function () {
+        const sessionStorageDateQuery = Number(sessionStorage.getItem("fdp-term-settime") ? sessionStorage.getItem("fdp-term-settime") : 0);
+        let termMode = sessionStorage.getItem("fdp-term-selection");
+        try {
+          let sessionStorageDateEdit = (() => {
+            const now = Math.floor(Date.now() / 1000);
+            if (300 > now - sessionStorageDateQuery) {
+              return true;
+            } else {
+              return false;
+            }
+          })();
+
+          if (sessionStorageDateEdit && termMode != "automatic") {
+            scope.startCheckout(sessionStorage.getItem(termString));
+            sessionStorage.setItem("fdp-term-selection", "sawautopopover");
+          } else {
+            console.log("Nothing happens");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }, 500);
+    }
+  });
+
+  let userState = scope.isUserValid();
+  switch (true) {
+    case userState == false:
+      sessionStorage.setItem("fdp-user-recentLogin", "true");
+      scope.trackingView("dialog");
+      break;
+    case userState == true && sessionStorage.getItem("fdp-user-recentLogin") == "true":
+      sessionStorage.removeItem("fdp-user-recentLogin");
+      break;
+    case userState == true && sessionStorage.getItem("fdp-user-recentLogin") != "true":
+      scope.trackingView("dialog");
+      break;
+    default:
+      console.log("some default");
+      break;
+  }
+</script>
+
+<script>
+  const refurl = document.referrer;
+  const url = new URL(refurl);
+  const domain = "https://" + url.hostname;
+  const variolink = domain + "[%% Abo_Info_Link %%]";
+  const target = "[%% Link-Ziel %%]";
+  const fieldlink = "[%% Abo_Info_Link %%]";
+  const fullurl = fieldlink.includes("https");
+  const redirect = "[%% Redirect_Link %%]";
+  const originUrl = urlParams.url;
+  const plusLink = document.getElementsByClassName("plusLink")[0];
+
+  document.addEventListener(
+    "load",
+    function () {
+      if (originUrl.includes("/plus")) {
+        plusLink.classList.add("hide-it");
+      } else {
+        if (plusLink.classList.contains("plusLink")) {
+          if (fullurl) {
+            plusLink.setAttribute("href", fieldlink + "?tpcc=[%% Tracking_Variant %%]_modal" + redirect);
+          } else {
+            plusLink.setAttribute("href", variolink + "?tpcc=[%% Tracking_Variant %%]_modal" + redirect);
+          }
+        }
+      }
+    },
+    true
+  );
+</script>

@@ -1,0 +1,19 @@
+Create Content-Field:
+sso_type
+evolverEscenic | keycloakEscenic | keycloakSpark
+
+Default Master-Entry = evolverEscenic
+
+Add-divs with login and register (and passwort-forgotten?)
+
+rework and rename openLogin and openRegister to scoped-functions
+change function-calls to ng-clivk (from onclick)
+Z. 201 , remove onclick
+Z.130, change click
+
+ID global register: OTTCA9VSRPZC
+ID global Login: OT4TRXJBQBSA
+
+Optin-Content-Fields alle Werte beim Deploy beachten
+
+Script  mit Login und Register-Abfrage

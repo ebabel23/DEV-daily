@@ -1,0 +1,311 @@
+.account-head {
+  background-image: url([%% Header_URL %%]); 
+  background-size: cover;
+  background-position: 10% 0;
+  min-height: [%% BG_min_height_desktop %%];
+  border-bottom: none;
+}
+
+.space-badge--top img {
+  display: [%% Badge_Visibility %%];
+  width: 17%;
+  float: right;
+  position: absolute;
+  right: 3%;
+  top: 0;
+}
+.space-badge--top--round img {
+  display: [%% Badge_Visibility %%];
+  width: 40%;
+  float: right;
+  position: absolute;
+  right: 3%;
+  top: 5%;
+}
+
+h1 {
+  color: #d00;
+  font-weight: 700;
+  font-size: 2.2em;
+  line-height: 1.25em;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+}
+li,
+li strong {
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+}
+li strong {
+  color: #4a7e3e;
+  font-weight: 700;
+}
+
+p.lead {
+  font-weight: 500;
+  font-size: 1.2em;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  margin-top: 0.5rem;
+}
+.btn {
+  max-width: 250px;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  float: right;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-top: 0.5rem;
+  background: [%% Portal_Color %%];
+  background: [%% CTA_Color %%];
+  color: [%% CTA_Text_Color %%];
+}
+.btn:hover {
+  background: [%% CTA_Hover_Color %%];
+}
+
+.logo {
+  background-image: url([%% Logo_URL %%]);
+  background-repeat: no-repeat;
+  border-radius: 0%;
+  display: block;
+  height: 4em;
+  width: [%% Logo_Size %%];
+}
+.space--page-left,
+.start-screen-content {
+  padding-left: 1rem;
+}
+
+.space--top {
+  margin-top: 1.5em;
+}
+.show-mobile-only {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .space-mobile--page-double {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .btn {
+    margin-bottom: 1.2rem;
+  }
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+#password:focus {
+  outline: 0;
+  box-shadow: 0 0 5px #4688f1;
+  border: 1px solid #4688f1;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.password-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #d8dadd;
+  position: relative;
+  background-color: #fff;
+  font-size: 15px;
+  height: 34px;
+  padding: 6px 8px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025);
+  transition: border linear 0.1s, box-shadow linear 0.1s;
+  border-radius: revert;
+  padding-left: 0;
+  margin-bottom: 1em;
+}
+
+.pw-toggle {
+  align-self: center;
+  border: none;
+  align-self: center;
+  border: none;
+  background-color: #f7f7f7;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  cursor: pointer;
+  color: [%% Portal_Color %%];
+  width: 20%;
+  height: 100%;
+}
+
+#password {
+  border-style: none;
+  align-self: center;
+  border: 1px solid #d8dadd;
+  border-left: none;
+  border-right: none;
+  width: 80.5%;
+  padding: 6px 8px;
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 680px) {
+  .pw-toggle {
+    width: 35%;
+  }
+
+  #password {
+    width: 65.5%;
+  }
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+#password:focus {
+  outline: 0;
+  box-shadow: 0 0 5px #4688f1;
+  border: 1px solid #4688f1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  font-size: 15px;
+}
+
+.btn--register {
+  float: left;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.password-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #d8dadd;
+  position: relative;
+  background-color: #fff;
+  font-size: 15px;
+  height: 34px;
+  padding: 6px 8px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025);
+  transition: border linear 0.1s, box-shadow linear 0.1s;
+  border-radius: revert;
+  padding-left: 0;
+  margin-bottom: 1em;
+}
+
+.pw-toggle {
+  align-self: center;
+  border: none;
+  align-self: center;
+  border: none;
+  background-color: #f7f7f7;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  cursor: pointer;
+  color: [%% Portal_Color %%];
+  width: 30%;
+  height: 100%;
+}
+
+#password {
+  border-style: none;
+  align-self: center;
+  border: 1px solid #d8dadd;
+  border-left: none;
+  border-right: none;
+  width: 70.5%;
+  padding: 8px;
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 680px) {
+  .pw-toggle {
+    width: 35%;
+  }
+
+  #password {
+    width: 65.5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hide-mobile {
+    display: none;
+  }
+  .show-mobile-only {
+    display: inline;
+  }
+  .account-head {
+    background-position: 10% 0;
+    min-height: [%% BG_min_height_mobile %%];
+    width: 100%;
+  }
+  .default-offer--inner {
+    display: block;
+  }
+  .space--top {
+    margin-top: 1.2em;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  .custom-offer-list li {
+    font-size: inherit;
+    display: block;
+  }
+  p.lead {
+    font-size: 1em;
+  }
+  .logo {
+    height: 3em;
+    width: 3em;
+  }
+  .space-mobile--page-double {
+    padding: 0 0.75rem;
+  }
+  .btn {
+    display: block;
+    float: right;
+    max-width: calc(100% - 60px);
+  }
+  .account-head {
+    background-image: url([%% Header_URL_mobile %%]);
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .space-badge--top img {
+  }
+}
+
+.hide-it {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .hide-desktop {
+    display: none;
+  }
+}

@@ -1,0 +1,79 @@
+/* Store selected Term from User and init on load again on load If new session select predifined position from "Preselected Term Position content field." */
+/* TODO: Enhance stored term with offer-id and property FDPC-1064 */
+const offerId = urlParams.offerId;
+const offerBR = "";
+let termString = "fdp-user-term-" + offerId;
+
+scope.autoSelectTerm = function () {
+  try {
+    if (sessionStorage.getItem(termString) !== null) {
+      scope.termIdstorage = sessionStorage.getItem(termString);
+    } else {
+      scope.termIdstorage = $(".single-term")
+        .eq(parseInt("[%% Preselected_Term_Position %%]") - 1)
+        .find(".term-selector")
+        .val();
+      sessionStorage.setItem(termString, scope.termIdstorage);
+    }
+  } catch (err) {
+    scope.termIdstorage = $(".single-term")
+      .eq(parseInt("[%% Preselected_Term_Position %%]") - 1)
+      .find(".term-selector")
+      .val();
+  }
+  $("#term_" + scope.termIdstorage).prop("checked", true);
+  scope.fdpLoading = false;
+  return scope.termIdstorage;
+};
+
+scope.setStorage = function (index) {
+  try {
+    scope.termIdstorage = $(".single-term").eq(index).find(".term-selector").val();
+    sessionStorage.setItem(termString, $(".single-term").eq(index).find(".term-selector").val());
+  } catch (err) {
+    scope.termIdstorage = $(".single-term").eq(index).find(".term-selector").val();
+  }
+};
+
+scope.descriptionListItemLength = function () {
+  scope.descriptionListItem.length > 1 ? true : false;
+};
+
+scope.descriptionList = function (string, nb) {
+  var list = [];
+  if (string.indexOf(";") !== -1) {
+    var array = string.split(";");
+    array.forEach(function (item) {
+      list.push(item);
+    });
+    scope.descriptionListItem = list;
+  } else {
+    scope.descriptionListItem = [string];
+  }
+};
+
+scope.trackingView = function (ident) {
+  $("#template-tracking-" + ident).trigger("click");
+  $("#error-message-wrapper").hide();
+};
+
+scope.hideErrorMessage = function () {
+  $("#error-message-wrapper").hide();
+};
+
+$(document).ready(function () {
+  if (scope.isUserValid()) {
+    setTimeout(function () {
+      try {
+        scope.startCheckout(sessionStorage.getItem(termString));
+        scope.trackingView("register-" + sessionStorage.getItem(termString));
+      } catch (err) {
+        // var defaultUserTerm = $(".single-term").eq(parseInt('[%% Preselected_Term_Position %%]') - 1).find(".term-selector").val();
+        // scope.startCheckout(defaultUserTerm);
+        // scope.trackingView('register-' + 'inkognito-' + defaultUserTerm);
+      }
+    }, 100);
+  }
+});
+
+scope.trackingView("dialog");
