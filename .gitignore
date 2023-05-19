@@ -10,3 +10,4 @@
 .todo
 */.env
 /.env
+*.DS_Store
