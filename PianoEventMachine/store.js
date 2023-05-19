@@ -71,7 +71,8 @@ function setScope(params) {
     custom: {
       __cm_composer: "opt-in",
       default: "true",
-      e2p_refUrl: "https://www.wr.de/staedte/dortmund/erdbebenkatastrophe-ich-erkenne-meine-heimat-nicht-wieder-id237589241.html",
+      e2p_refUrl:
+        "https://www.wr.de/staedte/dortmund/erdbebenkatastrophe-ich-erkenne-meine-heimat-nicht-wieder-id237589241.html",
       e2p_promoSlot: "",
       e2p_staticAccount: "",
       e2p_titleCode: "nrw-wr",
@@ -185,7 +186,8 @@ function setScope(params) {
       templateVariantId: "OTVFAXK9H3MF4",
       url: "https://www.wr.de/staedte/dortmund/erdbebenkatastrophe-ich-erkenne-meine-heimat-nicht-wieder-id237589241.html",
       width: 684,
-      trackingId: "{kpdx}AAAAvVkt7nrwrgoKemVod3paaDVJNxIQbGR3eGVwNXBldm5yc3FzdBoMRVg2SzFXTzVLSTI0IiUxODA3dDJnMGJvLTAwMDAzMWhsamY3NnEwam1jdWFxajQwMjJjKhhzaG93T2ZmZXJFMkRBRFM4RlMwN0paRDkwAToMT1RFNUxSMzQzTFZIQg1PVFZGQVhLOUgzTUY0UhJ2LWxkd3c2bWx0YW52M2J5cjdaDDUuMTQ3LjQ5LjE5NWIDZHdjaIiqmJ8GcAN4DA",
+      trackingId:
+        "{kpdx}AAAAvVkt7nrwrgoKemVod3paaDVJNxIQbGR3eGVwNXBldm5yc3FzdBoMRVg2SzFXTzVLSTI0IiUxODA3dDJnMGJvLTAwMDAzMWhsamY3NnEwam1jdWFxajQwMjJjKhhzaG93T2ZmZXJFMkRBRFM4RlMwN0paRDkwAToMT1RFNUxSMzQzTFZIQg1PVFZGQVhLOUgzTUY0UhJ2LWxkd3c2bWx0YW52M2J5cjdaDDUuMTQ3LjQ5LjE5NWIDZHdjaIiqmJ8GcAN4DA",
       experienceId: "EX6K1WO5KI24",
     },
     terms: [
@@ -201,7 +203,8 @@ function setScope(params) {
           url: null,
           imageUrl: null,
         },
-        displayLine: "4,99 € pro Monat / mit Probeversion zu 0,99 € für 1 Monat",
+        displayLine:
+          "4,99 € pro Monat / mit Probeversion zu 0,99 € für 1 Monat",
         billingPlanTable: [
           {
             date: "Heute",
@@ -385,7 +388,8 @@ function setScope(params) {
           url: null,
           imageUrl: null,
         },
-        displayLine: "4,99 € pro Monat / mit Probeversion zu 40,00 € für 1 Jahr",
+        displayLine:
+          "4,99 € pro Monat / mit Probeversion zu 40,00 € für 1 Jahr",
         billingPlanTable: [
           {
             date: "Heute",
@@ -569,7 +573,8 @@ function setScope(params) {
           url: null,
           imageUrl: null,
         },
-        displayLine: "4,99 € pro Monat / mit Probeversion zu 72,00 € für 24 Monate",
+        displayLine:
+          "4,99 € pro Monat / mit Probeversion zu 72,00 € für 24 Monate",
         billingPlanTable: [
           {
             date: "Heute",
@@ -841,7 +846,9 @@ const trackingPosition = [%% Tracking_Position %%];
 const trackingCategory = [%% Tracking_Category %%]; */
 
 let selectedTermId = "TMBWZE8NIOE7";
-let selectedTermIndex = scope.terms.findIndex((x) => x.termId === selectedTermId);
+let selectedTermIndex = scope.terms.findIndex(
+  (x) => x.termId === selectedTermId
+);
 
 function setSelectedTermId() {
   //ng-click {{ term.termId }}
@@ -910,19 +917,35 @@ class PiObject {
       this.content.id = scope.custom.e2p_articleId;
       this.offerId = scope.params.offerId;
       this.terms.listed = scope.terms.map((term) => term.termId);
-      this.terms.selected.description = scope.terms[selectedTermIndex].description;
-      this.terms.selected.displayLine = scope.terms[selectedTermIndex].displayLine;
+      this.terms.selected.description =
+        scope.terms[selectedTermIndex].description;
+      this.terms.selected.displayLine =
+        scope.terms[selectedTermIndex].displayLine;
       this.terms.selected.hasTrial = scope.terms[0].billingPlanTable.length > 1;
       this.terms.selected.termId = scope.terms[selectedTermIndex].termId;
-      this.terms.selected.regularPrice = scope.terms[0].billingPlanTable.length > 1 ? scope.terms[selectedTermIndex].billingPlanTable[1].price : scope.terms[selectedTermIndex].billingPlanTable[0].price;
-      this.terms.selected.regularPriceValue = scope.terms[0].billingPlanTable.length > 1 ? scope.terms[selectedTermIndex].billingPlanTable[1].priceValue : scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
-      this.terms.selected.regularBillingPeriod = scope.terms[0].billingPlanTable.length > 1 ? scope.terms[selectedTermIndex].billingPlanTable[1].billingPeriod : scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+      this.terms.selected.regularPrice =
+        scope.terms[0].billingPlanTable.length > 1
+          ? scope.terms[selectedTermIndex].billingPlanTable[1].price
+          : scope.terms[selectedTermIndex].billingPlanTable[0].price;
+      this.terms.selected.regularPriceValue =
+        scope.terms[0].billingPlanTable.length > 1
+          ? scope.terms[selectedTermIndex].billingPlanTable[1].priceValue
+          : scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+      this.terms.selected.regularBillingPeriod =
+        scope.terms[0].billingPlanTable.length > 1
+          ? scope.terms[selectedTermIndex].billingPlanTable[1].billingPeriod
+          : scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
       this.terms.selected.resource = {};
-      this.terms.selected.resource.name = scope.terms[selectedTermIndex].resource.name;
-      this.terms.selected.resource.rid = scope.terms[selectedTermIndex].resource.rid;
-      this.terms.selected.trialPrice = scope.terms[selectedTermIndex].billingPlanTable[0].price;
-      this.terms.selected.trialPriceValue = scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
-      this.terms.selected.trialBillingPeriod = scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+      this.terms.selected.resource.name =
+        scope.terms[selectedTermIndex].resource.name;
+      this.terms.selected.resource.rid =
+        scope.terms[selectedTermIndex].resource.rid;
+      this.terms.selected.trialPrice =
+        scope.terms[selectedTermIndex].billingPlanTable[0].price;
+      this.terms.selected.trialPriceValue =
+        scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+      this.terms.selected.trialBillingPeriod =
+        scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
       this.actualState = "enhanced on click via function";
       //TODO: Check if User-Object edits term for trial, if user had trial before
     };
@@ -934,6 +957,10 @@ class PiObject {
     };
     this.pasteString = function createStringifiedObject() {
       let clone = JSON.stringify(Object.assign({}, this));
+      return clone;
+    };
+    this.pasteString64 = function createStringifiedObject64() {
+      let clone = btoa(encodeURI(JSON.stringify(Object.assign({}, this))));
       return clone;
     };
   }
@@ -979,19 +1006,35 @@ function enhancePiObject(obname) {
   obname.content.url = scope.custom.e2p_refUrl;
   obname.content.id = scope.e2p_articleId;
   obname.terms.listed = scope.terms.map((term) => term.termId);
-  obname.terms.selected.description = scope.terms[selectedTermIndex].description;
-  obname.terms.selected.displayLine = scope.terms[selectedTermIndex].displayLine;
+  obname.terms.selected.description =
+    scope.terms[selectedTermIndex].description;
+  obname.terms.selected.displayLine =
+    scope.terms[selectedTermIndex].displayLine;
   obname.terms.selected.hasTrial = scope.terms[0].billingPlanTable.length > 1;
   obname.terms.selected.termId = scope.terms[selectedTermIndex].termId;
-  obname.terms.selected.regularPrice = scope.terms[0].billingPlanTable.length > 1 ? scope.terms[selectedTermIndex].billingPlanTable[1].price : scope.terms[selectedTermIndex].billingPlanTable[0].price;
-  obname.terms.selected.regularPriceValue = scope.terms[0].billingPlanTable.length > 1 ? scope.terms[selectedTermIndex].billingPlanTable[1].priceValue : scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
-  obname.terms.selected.regularBillingPeriod = scope.terms[0].billingPlanTable.length > 1 ? scope.terms[selectedTermIndex].billingPlanTable[1].billingPeriod : scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+  obname.terms.selected.regularPrice =
+    scope.terms[0].billingPlanTable.length > 1
+      ? scope.terms[selectedTermIndex].billingPlanTable[1].price
+      : scope.terms[selectedTermIndex].billingPlanTable[0].price;
+  obname.terms.selected.regularPriceValue =
+    scope.terms[0].billingPlanTable.length > 1
+      ? scope.terms[selectedTermIndex].billingPlanTable[1].priceValue
+      : scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+  obname.terms.selected.regularBillingPeriod =
+    scope.terms[0].billingPlanTable.length > 1
+      ? scope.terms[selectedTermIndex].billingPlanTable[1].billingPeriod
+      : scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
   obname.terms.selected.resource = {};
-  obname.terms.selected.resource.name = scope.terms[selectedTermIndex].resource.name;
-  obname.terms.selected.resource.rid = scope.terms[selectedTermIndex].resource.rid;
-  obname.terms.selected.trialPrice = scope.terms[selectedTermIndex].billingPlanTable[0].price;
-  obname.terms.selected.trialPriceValue = scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
-  obname.terms.selected.trialBillingPeriod = scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+  obname.terms.selected.resource.name =
+    scope.terms[selectedTermIndex].resource.name;
+  obname.terms.selected.resource.rid =
+    scope.terms[selectedTermIndex].resource.rid;
+  obname.terms.selected.trialPrice =
+    scope.terms[selectedTermIndex].billingPlanTable[0].price;
+  obname.terms.selected.trialPriceValue =
+    scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+  obname.terms.selected.trialBillingPeriod =
+    scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
   obname.actualState = "enhanced on click via function";
   //TODO: Check if User-Object edits term for trial, if user had trial before
 }
