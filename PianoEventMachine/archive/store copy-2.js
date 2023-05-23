@@ -798,6 +798,43 @@ let fdpObj = {
   },
 };
 
+//too string and encode and base64
+
+function encodeAndStore(obj, localStore) {
+  let encoded64fdpObj = btoa(encodeURI(JSON.stringify(obj)));
+  localStorage.setItem(localStore, encoded64fdpObj);
+}
+
+function grabAndDecode(localStore) {
+  let importFdpObj = localStorage.getItem(localStore);
+  return JSON.parse(decodeURI(atob(importFdpObj)));
+}
+
+encodeAndStore(fdpObj, "piO64");
+let lsFdpObj = grabAndDecode("piO64");
+
+let selfexport = fdpObj;
+selfexport.export = function encodeAndStore(localStore) {
+  let encoded64fdpObj = btoa(encodeURI(JSON.stringify(this)));
+  localStorage.setItem(localStore, encoded64fdpObj);
+};
+
+selfexport.import = function grabAndDecode(localStore) {
+  let importFdpObj = localStorage.getItem(localStore);
+  selfexport = JSON.parse(decodeURI(atob(importFdpObj)));
+};
+
+function PiTrackerObject() {
+  this.import = function grabAndDecode(localStore) {
+    let importFdpObj = localStorage.getItem(localStore);
+    selfexport = JSON.parse(decodeURI(atob(importFdpObj)));
+  };
+  this.export = function encodeAndStore(localStore) {
+    let encoded64fdpObj = btoa(encodeURI(JSON.stringify(this)));
+    localStorage.setItem(localStore, encoded64fdpObj);
+  };
+}
+
 const trackingTemplate = "M1 Uno with Keycloak";
 const trackingVariant = "22.easteregg";
 const trackingPosition = "inline";
@@ -923,15 +960,88 @@ class PiObject {
       return clone;
     };
     this.pasteString64 = function createStringifiedObject64() {
-     let clone = btoa(encodeURI(JSON.stringify(Object.assign({}, this))));
+      let clone = btoa(encodeURI(JSON.stringify(Object.assign({}, this))));
       return clone;
     };
-    }
   }
+}
 
+setTimeout;
 
+function fillPiObject(obname) {
+  obname.app.aid = scope.app.aid;
+  obname.app.name = scope.app.name;
+  obname.app.code = scope.custom.e2p_titleCode;
+  obname.template.name = trackingTemplate;
+  obname.template.variantname = trackingVariant;
+  obname.template.position = trackingPosition;
+  obname.template.category = trackingCategory;
+  obname.template.id = scope.params.templateId;
+  obname.template.variantId = scope.params.templateVariantId;
+  obname.content.article = scope.custom.e2p_isArticle;
+  obname.content.section = scope.custom.e2p_isSection;
+  obname.content.type = scope.custom.e2p_articleType;
+  obname.content.paid = scope.custom.e2p_paidState;
+  obname.content.url = scope.custom.e2p_refUrl;
+  obname.content.id = scope.e2p_articleId;
+  obname.terms.listed = scope.terms.map((term) => term.termId);
+  obname.actualState = "initialized on load via function";
+  //TODO: Check if User-Object edits term for trial, if user had trial before
+}
+
+function enhancePiObject(obname) {
+  obname.app.aid = scope.app.aid;
+  obname.app.name = scope.app.name;
+  obname.app.code = scope.custom.e2p_titleCode;
+  obname.template.name = trackingTemplate;
+  obname.template.variantname = trackingVariant;
+  obname.template.position = trackingPosition;
+  obname.template.category = trackingCategory;
+  obname.template.id = scope.params.templateId;
+  obname.template.variantId = scope.params.templateVariantId;
+  obname.content.article = scope.custom.e2p_isArticle;
+  obname.content.section = scope.custom.e2p_isSection;
+  obname.content.type = scope.custom.e2p_articleType;
+  obname.content.paid = scope.custom.e2p_paidState;
+  obname.content.url = scope.custom.e2p_refUrl;
+  obname.content.id = scope.e2p_articleId;
+  obname.terms.listed = scope.terms.map((term) => term.termId);
+  obname.terms.selected.description =
+    scope.terms[selectedTermIndex].description;
+  obname.terms.selected.displayLine =
+    scope.terms[selectedTermIndex].displayLine;
+  obname.terms.selected.hasTrial = scope.terms[0].billingPlanTable.length > 1;
+  obname.terms.selected.termId = scope.terms[selectedTermIndex].termId;
+  obname.terms.selected.regularPrice =
+    scope.terms[0].billingPlanTable.length > 1
+      ? scope.terms[selectedTermIndex].billingPlanTable[1].price
+      : scope.terms[selectedTermIndex].billingPlanTable[0].price;
+  obname.terms.selected.regularPriceValue =
+    scope.terms[0].billingPlanTable.length > 1
+      ? scope.terms[selectedTermIndex].billingPlanTable[1].priceValue
+      : scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+  obname.terms.selected.regularBillingPeriod =
+    scope.terms[0].billingPlanTable.length > 1
+      ? scope.terms[selectedTermIndex].billingPlanTable[1].billingPeriod
+      : scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+  obname.terms.selected.resource = {};
+  obname.terms.selected.resource.name =
+    scope.terms[selectedTermIndex].resource.name;
+  obname.terms.selected.resource.rid =
+    scope.terms[selectedTermIndex].resource.rid;
+  obname.terms.selected.trialPrice =
+    scope.terms[selectedTermIndex].billingPlanTable[0].price;
+  obname.terms.selected.trialPriceValue =
+    scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+  obname.terms.selected.trialBillingPeriod =
+    scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+  obname.actualState = "enhanced on click via function";
+  //TODO: Check if User-Object edits term for trial, if user had trial before
+}
 
 let testobj = new PiObject("export");
+let testobj_filled = new PiObject("export");
+fillPiObject(testobj_filled);
 
 let listenerObject = new PiObject("listenexport");
 
