@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <tr>
+      <td bgcolor="#FFFFFF" style="padding: 20px">
+        <span
+          style="
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            color: #000001;
+            line-height: 25px;
+            font-weight: bold;
+          "
+        >
+          Details zu Ihrem WAZ PLUS Zugang:
+        </span>
+        <br />
+        <span
+          style="
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            color: #000001;
+            line-height: 23px;
+            font-weight: normal;
+          "
+        >
+          - Zahlungsbestätigung vom {{current_date}}
+        </span>
+        <br />
+        <br />
+
+        <table
+          style="
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            color: #000001;
+            line-height: 23px;
+            font-weight: normal;
+          "
+        >
+          <tr>
+            <th width="150px"><t>Ihr Zugang:</t></th>
+            <td>{{user_email}}</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th width="150px"><t>Ihr Produkt:</t></th>
+            <td><a href="{{resource_url}}">{{resource_name}}</a></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th width="150px"><t></t></th>
+            <td>{{purchase_term}}</td>
+            <td></td>
+          </tr>
+        </table>
+        <br /><br />
+        <table
+          style="
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            color: #000001;
+            line-height: 23px;
+            font-weight: normal;
+          "
+        >
+          <tr>
+            <th width="150px"><t>Rechungsdatum:</t></th>
+            <td>{{payment_datetime}}</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th width="150px"><t>Produkt:</t></th>
+            <td><a href="{{resource_url}}">{{resource_name}}</a></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th width="150px"><t>Menge:</t></th>
+            <td>1</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th width="150px"><t>Betrag:</t></th>
+            <td>{{payment_amount}} *</td>
+            <td></td>
+          </tr>
+        </table>
+        <br />
+        <span
+          style="
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            color: #252525;
+            line-height: 13px;
+            font-weight: normal;
+          "
+        >
+          Sämtliche Preisangaben erhalten die gesetzliche Umsatzsteuer von
+          7%.<br />
+          Diese Kleinbetragsrechnung berechtigt gemäß § 33 UStDV zum
+          Vorsteuerabzug.<br /><br />
+        </span>
+        <span
+          >Wir w&uuml;nschen Ihnen weiterhin viel Lesevergn&uuml;gen auf
+          <a
+            href="https://www.waz.de/?tpcc=systemmail.email.transaction_info&utm_source=systemmail&utm_medium=email&utm_campaign=transaction_info&utm_content=home_textlink1"
+            style="
+              font-family: Helvetica, Arial, sans-serif;
+              font-size: 16px;
+              color: #000001;
+              line-height: 23px;
+              font-weight: normal;
+              text-decoration: none;
+            "
+            ><u>waz.de</u>
+          </a>
+          .
+        </span>
+        <br /><br />
+        <span>Ihr WAZ-Leserservice</span>
+      </td>
+    </tr>
+    <br />
+  </body>
+</html>

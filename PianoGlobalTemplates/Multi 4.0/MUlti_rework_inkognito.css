@@ -1,0 +1,678 @@
+@import url("https: //www.waz.de/resources/piano/css/v1/main.min.css?refactor=1");
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.offer-terms {
+    border-radius: 14px;
+    padding: 18px 0;
+    -webkit-animation: fadein 1s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1s;
+    /* Firefox < 16 */
+    -ms-animation: fadein 1s;
+    /* Internet Explorer */
+    -o-animation: fadein 1s;
+    /* Opera < 12.1 */
+    animation: fadein 1s;
+}
+
+.offer-terms-inner {
+    display: flex;
+    margin: 44px 28px 0 28px;
+}
+
+.offer-terms-inner-small {
+    display: flex;
+    margin: 24px auto 0 auto;
+    width: 50%;
+}
+
+.default-offer {
+    font-family: 'Fira Sans', sans-serif;
+    background-color: [%% Background_Color %%];
+    padding: 0 0 28px;
+}
+
+.row-login {
+    margin-top: 32px;
+}
+
+.default-offer--inner {
+    position: relative;
+    background-color: [%% Background_Color %%];
+}
+
+h1 {
+    font-family: 'Fira Sans', sans-serif;
+    color: [%% Primary_Text_Color %%];
+    text-align: center;
+    font-size: 21px;
+    max-width: 100%;
+}
+
+.term-select--box {
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    border-radius: 5px;
+    margin: 0;
+    padding: 15px 6px;
+    width: 100%;
+    background: [%% Background_Color_Term_Box %%];
+    text-align: center;
+    height: 100%;
+    box-shadow: 0px 3px 10px [%% Offer_Box_Shadow_Color %%];
+}
+
+.term-select--box:hover {
+    box-shadow: 0px 6px 15px [%% Offer_Box_Shadow_Color %%];
+}
+
+.start-screen-content {
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.single-term {
+    flex-grow: 1;
+    background: [%% Background_Color_Term_Box %%];
+    width: 80%;
+}
+
+.selected {
+    flex-grow: 1;
+    background: [%% Background_Color_Term_Box %%];
+    width: 100%;
+    margin: -12px 10px;
+}
+
+.term-description {
+    display: block;
+    line-height: 1.5em;
+    color: [%% Text_Color_Term_Box %%];
+    font-size: 14px;
+    text-align: [%% Text_Align_Property %%];
+}
+
+.single-term-list {
+    padding: 0 50px 12px 80px;
+    text-align: left;
+    width: 60%;
+    margin: auto;
+}
+
+.selected-term-middle {
+    height: 100%;
+}
+
+.selected-term-first-desktop {
+    height: 100%;
+}
+
+.term-name {
+    color: [%% CTA_Color %%];
+    border: 1px solid [%% CTA_Color %%];
+    border-radius: 23px;
+    line-height: 44px;
+    text-align: center;
+    margin: 16px 16px 12px 16px;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: [%% CTA_Second_Color %%];
+    text-transform: uppercase;
+}
+
+.link a {
+    color: [%% Primary_Color %%];
+}
+
+a.links:hover {
+    text-decoration: underline;
+}
+
+p.lead {
+    text-align: center;
+    padding: 18px 18px 0 18px;
+    font-size: 16px;
+    color: [%% Primary_Text_Color %%];
+}
+
+h3 {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 20px;
+    color: [%% Text_Color_Term_Box %%];
+    text-align: center;
+    line-height: 1em;
+    margin-top: 12px;
+}
+
+.term-select--box-selected h3 {
+    font-size: 26px;
+    margin-top: 16px;
+}
+
+.single-term-list-item {
+    color: [%% Primary_Text_Color %%];
+    font-size: 16px;
+    line-height: 1.75em;
+    padding-bottom: 8px;
+    display: table-row;
+    width: 60px;
+}
+
+.switch-button {
+    color: [%% Primary_Color %%];
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 18px;
+    height: 50px;
+    text-align: right;
+    padding: 0 24px;
+}
+
+.switch-button span span,
+.switch-button a span {
+    color: [%% Secondary_Text_Color %%];
+}
+
+.switch-button a {
+    text-decoration: none;
+    color: [%% Secondary_Text_Color %%];
+}
+
+.switch-button span:hover {
+    text-decoration: underline;
+}
+
+.plus-logo {
+    width: [%% Logo_Width_Desktop %%];
+    height: [%% Logo_Height_Desktop %%];
+    margin: auto;
+    margin-bottom: 24px;
+}
+
+.plus-logo:after {
+    background: url("[%% Logo_URL %%]") no-repeat center;
+    height: [%% Logo_Height_Desktop %%];
+    width: [%% Logo_Width_Desktop %%];
+    content: "";
+    background-size: contain;
+}
+
+.term-select--box-selected .term-name {
+    background: [%% CTA_Color %%];
+    color: [%% CTA_Second_Color %%];
+    border: 1px solid [%% CTA_Color %%];
+}
+
+.badge {
+    display: none;
+}
+
+.term-select--box-selected .badge {
+    background: [%% Badge_Color_Desktop %%];
+    height: auto;
+    width: 56%;
+    border-radius: 2px;
+    border: solid 1px [%% Badge_Text_Color %%];
+    position: absolute;
+    right: 22%;
+    top: -20px;
+    text-align: center;
+    display: [%% Show_Badge %%];
+    padding: 8px;
+}
+
+.term-select--box-selected .badge p {
+    color: [%% Badge_Text_Color %%];
+}
+
+.term-select--box-selected {
+    -webkit-transition: all .2s;
+    transition: all .2s;
+    position: relative;
+    border-radius: 5px;
+    margin: 0;
+    padding: 15px 6px;
+    width: 100%;
+    background: [%% Background_Color_Term_Box %%];
+    text-align: center;
+    height: 100%;
+    box-shadow: 0px 3px 10px [%% Offer_Box_Shadow_Color %%];
+}
+
+.term-select--box-selected:hover {
+    box-shadow: 0px 6px 15px [%% Offer_Box_Shadow_Color %%];
+}
+
+/*input[type=radio]+label.term-select--box*/
+.single-term-list-item:before {
+    content: url[%% Checkmark_Color %%];
+    display: table-cell;
+    width: 30px;
+    vertical-align: top;
+    padding-right: 4px;
+}
+
+label {
+    color: #525252;
+}
+
+button {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.sternchen-div {
+    display: block;
+    width: 80%;
+    padding: 18px 0 16px 0;
+    margin: 8px auto;
+}
+
+.sternchen-text {
+    font-size: 14px;
+    color: [%% Primary_Text_Color %%];
+}
+
+.login-notfication {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background: [%% Decoy_Login_Notification_Background %%];
+}
+
+.long-text {
+    font-family: 'Fira Sans', sans-serif;
+    letter-spacing: 0px;
+    color: [%% Decoy_Login_Notification_Text_Color %%];
+    margin: 0;
+}
+
+.short-text {
+    display: none;
+}
+
+.vorteils-dropdown-div {
+    display: block;
+}
+
+.vorteils-button {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    color: [%% Secondary_Text_Color %%];
+    background: [%% Background_Color %%];
+    width: 100%;
+    height: 50px;
+}
+
+.vorteils-button:hover {
+    color: [%% Hover_Color %%];
+}
+
+.arrow {
+    border: solid;
+    border-width: 0 2px 2px 0;
+    padding: 4px;
+    margin: 3px;
+}
+
+#arrow-down {
+    display: inline-block;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-bottom: 3px;
+}
+
+#arrow-up {
+    display: none;
+    margin-bottom: -3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.show-vorteile {
+    display: none;
+    background: [%% Background_Vorteilsbox %%];
+    font-family: 'Fira Sans', sans-serif;
+    text-align: center;
+    margin: 0 -28px;
+    padding: 12px;
+}
+
+#infos-link {
+    text-decoration: none;
+    font-size: 16px;
+    color: [%% Secondary_Text_Color %%];
+    padding-bottom: 8px;
+}
+
+#infos-link-bottom {
+
+    text-decoration: none;
+    font-size: 14px;
+    color: [%% Secondary_Text_Color %%];
+    padding: 12px 0 0;
+}
+
+#infos-link:hover,
+#infos-link-bottom:hover {
+    text-decoration: underline;
+}
+
+#links-box-bottom {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    border-top: 1px solid [%% Primary_Text_Color %%];
+    margin: 24px 24px -12px 24px;
+    padding-top: 24px;
+}
+
+a.links {
+    text-decoration: none;
+    color: [%% Secondary_Text_Color %%];
+}
+
+.price {
+    font-size: 32px;
+}
+
+.term-select--box-selected .price {
+    font-size: 44px;
+    margin-top: 12px;
+}
+
+sup {
+    font-size: 8px;
+    display: [%% Show_Footnote_Number %%];
+}
+
+.footnote-price {
+    font-size: 22px;
+    line-height: initial;
+}
+
+/* Code for Salesprice*/
+.priceblock {
+    display: flex;
+    flex-direction: [%% salesprice_direction %%];
+    justify-content: center;
+}
+
+.pricebox {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.salesprice {
+    font-size: [%% salesprice_fontsize %%];
+    color: [%% salesprice_fontcolor %%];
+    text-decoration: line-through solid [%% salesprice_linecolor %%];
+    padding-right: [%% salesprice_padding %%];
+}
+
+/* END: Code for Salesprice*/
+
+
+#error-message-wrapper .switch-button {
+    font-size: 12px;
+    color: [%% Primary_Color %%];
+}
+
+.hide-stuff {
+    display: none;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .default-offer {
+        padding: 0;
+    }
+
+    .plus-logo {
+        width: [%% Logo_Width_Mobile %%];
+        height: [%% Logo_Height_Mobile %%];
+    }
+
+    .plus-logo:after {
+        height: [%% Logo_Height_Mobile %%];
+        width: [%% Logo_Width_Mobile %%];
+    }
+
+    p.lead {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .offer-terms {
+        display: block;
+        padding: 12px;
+    }
+
+    .offer-terms-inner,
+    .offer-terms-inner-small {
+        display: block;
+        margin: 18px 0 0 0;
+        width: auto;
+    }
+
+    .offer-terms-inner-small .single-term {
+        margin: 28px 0;
+    }
+
+    .offer-terms-inner {
+        display: block;
+        margin: 0;
+    }
+
+    .switch-button {
+        font-size: 14px;
+        padding: 0 12px;
+    }
+
+    .vorteils-dropdown-div {
+        margin-bottom: 0;
+    }
+
+    .term-select--box-selected {
+        border: 0.281rem solid [%% Selected_Box_Border %%];
+    }
+
+    .term-select--box-selected .badge {
+        background: [%% Badge_Color_Mobile %%];
+        border: [%% Badge_Color_Mobile %%];
+        padding: 6px;
+        color: #000;
+    }
+
+    .term-select--box-selected .badge p {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .single-term {
+        width: 100%;
+    }
+
+    .single-term+.single-term {
+        margin-top: 40px;
+        margin-left: 0;
+        border-radius: 5px;
+    }
+
+    .selected {}
+
+    h3 {
+        font-size: 24px;
+    }
+
+    .term-select--box-selected h3 {
+        font-size: 24px;
+        margin: 10px 10px 0 10px;
+    }
+
+    .price,
+    .term-select--box-selected .price {
+        font-size: 38px;
+        margin-top: 4px;
+    }
+
+    .term-name {
+        margin: 8px 28px;
+        font-size: 16px;
+    }
+
+    .single-term-list {
+        display: table;
+        margin: auto;
+        width: auto;
+        padding: 0 20px 12px 40px;
+    }
+
+    .term-description {
+        width: 90%;
+        margin: auto;
+    }
+
+    .switch-button span span {
+        font-size: 14px;
+    }
+
+    .form-area {
+        padding: 0;
+    }
+
+    .default-offer--inner {
+        padding: 24px 12px 12px 12px;
+    }
+
+    #error-message-wrapper {
+        padding-left: 0;
+    }
+
+    .long-text {
+        display: none;
+    }
+
+    .short-text {
+        display: inline-block;
+        font-family: 'Fira Sans', sans-serif;
+        ;
+        letter-spacing: 0px;
+        color: [%% Decoy_Login_Notification_Text_Color %%];
+        margin: 0;
+    }
+
+    .show-vorteile {
+        margin: 0 -12px;
+    }
+
+    .sternchen-div {
+        padding-top: 0;
+        width: auto;
+    }
+
+    #links-box-bottom {
+        margin: 0;
+    }
+}
+
+.hide-stuff {
+    display: none;
+}
+
+#infos-link-bottom.hide-stuff {
+    display: none;
+}
+
+.hide-it {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .hide-tablet {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hide-mobile {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .hide-desktop {
+        display: none;
+    }
+}
+
+.pointer {
+    cursor: pointer;
+    color: green;
+}

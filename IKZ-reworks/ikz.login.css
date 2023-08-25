@@ -1,0 +1,374 @@
+.header .paywall-header-stylemodifier {
+  display: none;
+}
+@media screen and (max-width: 47.9375em) {
+  .header .paywall-header-stylemodifier {
+    position: relative;
+    z-index: 1000000;
+  }
+}
+.header .header-top-paywall {
+  margin-bottom: 0;
+}
+.header .header-top-abo {
+  text-align: center;
+  text-decoration: none;
+}
+.header .header-top-abo:before {
+  color: #097;
+}
+.header .header-top-buttons {
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 999999;
+}
+@media screen and (max-width: 47.9375em) {
+  .header .header-top-buttons {
+    display: none;
+  }
+}
+.header .header-top-button {
+  border-radius: 0.25rem 0.25rem 0 0;
+  color: #097;
+  cursor: pointer;
+  margin-right: 0.25em;
+  padding: 0.4em 0.5em;
+  display: inline-block;
+}
+.header .header-top-button:hover:before {
+  opacity: 0.5;
+}
+.header .header-top-button:before {
+  display: inline-block;
+  font-family: "icon-font";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  vertical-align: middle;
+  /* stylelint-disable */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  /* stylelint-enable */
+  font-size: 2.5em;
+  text-align: center;
+  transition: opacity 0.2s;
+  margin-bottom: 0.1em;
+  width: 100%;
+  will-change: opacity;
+}
+.header .header-top-button .header-top-abo-text {
+  display: inline-block;
+  font-size: 0.8125em;
+}
+.header .header-top-button--profile .header-top-abo-text:after {
+  display: inline-block;
+  font-family: "icon-font";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  vertical-align: middle;
+  /* stylelint-disable */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  /* stylelint-enable */
+  content: "";
+  font-size: 1.25em;
+  vertical-align: text-top;
+  margin-left: 0.25em;
+}
+@media screen and (max-width: 47.9375em) {
+  .header .header-top-button--profile .header-top-abo-text:after {
+    font-size: 2em;
+  }
+}
+.header .header-top-button--keycloak-login,
+.header .header-top-button--login {
+  padding-right: 0;
+}
+.header .header-top-button--keycloak-login .header-top-abo-text:after,
+.header .header-top-button--login .header-top-abo-text:after {
+  display: inline-block;
+  font-family: "icon-font";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  vertical-align: middle;
+  /* stylelint-disable */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  /* stylelint-enable */
+  content: "";
+  font-size: 1.25em;
+  vertical-align: text-top;
+}
+@media screen and (max-width: 47.9375em) {
+  .header .header-top-button--keycloak-login .header-top-abo-text:after,
+  .header .header-top-button--login .header-top-abo-text:after {
+    font-size: 2em;
+  }
+}
+.header .header-top-button--keycloak-login.state-loading:before,
+.header .header-top-button--login.state-loading:before {
+  background-image: url(../img/paywall/paywall-loader.gif);
+  background-size: 0.75em;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: "";
+  margin: auto;
+  min-height: 2.1875rem;
+  margin-top: -0.5625rem;
+  float: left;
+  width: 2.1875rem;
+  display: inline-block;
+}
+.header .header-top-button--keycloak-logout,
+.header .header-top-button--logout {
+  padding-right: 0;
+}
+.header .header-top-button--keycloak-logout .header-top-abo-text:after,
+.header .header-top-button--logout .header-top-abo-text:after {
+  display: inline-block;
+  font-family: "icon-font";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  vertical-align: middle;
+  /* stylelint-disable */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  /* stylelint-enable */
+  content: "";
+  font-size: 1.25em;
+  vertical-align: text-top;
+}
+@media screen and (max-width: 47.9375em) {
+  .header .header-top-button--keycloak-logout .header-top-abo-text:after,
+  .header .header-top-button--logout .header-top-abo-text:after {
+    font-size: 2em;
+  }
+}
+.header #paywall-header-logedin:checked ~ .header-top-buttons-logedout {
+  display: none;
+}
+.header #paywall-header-logedin:checked ~ .header-top-buttons-logedin {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: -2.6em;
+}
+@media screen and (max-width: 47.9375em) {
+  .header #paywall-header-logedin:checked ~ .header-top-buttons-logedin {
+    display: none;
+  }
+}
+.header
+  #paywall-header-logedin:checked
+  ~ .header-top--mobile
+  .header-top-button--keycloak-login,
+.header
+  #paywall-header-logedin:checked
+  ~ .header-top--mobile
+  .header-top-buttons-logedout {
+  display: none;
+}
+.header #paywall-header-logedin:not(:checked) ~ .header-top-buttons-logedout {
+  display: inline-block;
+  top: -2.6em;
+  right: 0;
+  position: absolute;
+}
+@media screen and (max-width: 47.9375em) {
+  .header #paywall-header-logedin:not(:checked) ~ .header-top-buttons-logedout {
+    display: none;
+  }
+}
+.header #paywall-header-logedin:not(:checked) ~ .header-top-buttons-logedin {
+  display: none;
+}
+.header
+  #paywall-header-logedin:not(:checked)
+  ~ .header-top--mobile
+  .header-top-button--keycloak-logout,
+.header
+  #paywall-header-logedin:not(:checked)
+  ~ .header-top--mobile
+  .header-top-buttons-logedin {
+  display: none;
+}
+@media screen and (max-width: 47.9375em) {
+  .header #paywall-header-button-one:checked ~ .header-top-buttons-logedout {
+    display: none;
+  }
+}
+@media screen and (max-width: 47.9375em) {
+  .header #paywall-header-button-one:checked ~ .header-top-buttons-logedin {
+    display: none;
+  }
+}
+.header
+  #paywall-header-button-one:checked
+  ~ .header-top--mobile
+  .header-top-buttons-logedin {
+  display: none;
+}
+.header
+  #paywall-header-button-one:checked
+  ~ .header-top--mobile
+  .header-top-buttons-logedout {
+  display: none;
+}
+.header
+  #paywall-header-button-one:checked
+  ~ .header-top--mobile
+  .header-top-buttons-close {
+  display: block;
+}
+.header .header-top--mobile {
+  display: none;
+}
+@media screen and (max-width: 47.9375em) {
+  .header .header-top--mobile {
+    display: block;
+  }
+  .header .header-top--mobile .header-top-buttons {
+    float: right;
+    display: inline-block;
+    padding: 0.9em 0.5em;
+    margin: 0;
+    height: 3.625rem;
+    right: 0;
+    top: 0;
+    position: absolute;
+    width: 3.625rem;
+    border: none;
+    border-radius: 0;
+  }
+  .header .header-top--mobile .header-top-buttons-close {
+    display: none;
+  }
+  .header .header-top--mobile .header-top-button {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-left: 0.0625em solid #eee;
+  }
+  .header .header-top--mobile .header-top-button:before {
+    display: inline-block;
+    font-family: "icon-font";
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    speak: none;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    vertical-align: middle;
+    /* stylelint-disable */
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    /* stylelint-enable */
+    color: #000;
+    font-size: 1.8rem;
+    line-height: 1.45em;
+  }
+  .header .header-top--mobile .header-top-button:after {
+    display: none;
+  }
+  .header .header-top--mobile .header-top-button--login:before,
+  .header .header-top--mobile .header-top-button--keycloak-login:before {
+    content: "";
+  }
+  .header .header-top--mobile .header-top-button--logout:before {
+    content: "";
+    color: #097;
+  }
+  .header .header-top--mobile .header-top-button--close:before {
+    font-size: 1.25em;
+    color: #097;
+    content: "";
+  }
+}
+
+@media screen and (max-width: 47.9375em) {
+  #paywall-mobile-user:not(:checked) ~ #paywall-user {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 47.9375em) {
+  #paywall-mobile-user:checked ~ #paywall-user {
+    background: #fff;
+    display: block;
+    height: calc(100vh - 3.75rem);
+    position: relative;
+  }
+}
+@media screen and (max-width: 47.9375em) {
+  #paywall-mobile-user:checked ~ #paywall-user .paywall-wrapper {
+    box-shadow: none;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+  }
+}
+@media screen and (max-width: 47.9375em) {
+  #paywall-mobile-user:checked
+    ~ #paywall-user
+    .paywall-wrapper.remodal-is-initialized.paywall-user-header {
+    min-height: 12.5rem;
+  }
+}
+@media screen and (max-width: 47.9375em) {
+  #paywall-mobile-user:checked ~ #paywall-user #header_profile--logout {
+    bottom: 1.25rem;
+    left: 0;
+    position: fixed;
+    z-index: 2;
+  }
+}
+@media screen and (max-width: 47.9375em) {
+  #paywall-mobile-user:checked ~ #paywall-user .remodal_content {
+    position: relative;
+  }
+}
+
+.paywall-user-header.remodal-overlay.remodal-is-opening {
+  animation: remodal-overlay-opening-keyframes 0s;
+}
+.paywall-user-header .header_profile--logout {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  display: none;
+}
+@media screen and (max-width: 47.9375em) {
+  .paywall-user-header .header_profile--logout {
+    display: block;
+  }
+}
+
+.tp-container-inner,
+.tp-container-inner > iframe {
+  transition: none !important;
+}
+
+.header-top-button--abonement {
+  display: none !important;
+}

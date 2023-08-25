@@ -1,1 +1,19 @@
-
+[{
+    'headline': '1. Monat',
+    'price': '0,99€',
+    'cta': 'Jetzt testen',
+    'description':'Regulär zurzeit 4,99€ mtl.',
+    'salesprice':'0,50€',
+}, {
+    'headline': '12 Monate',
+    'price': '40,00€',
+    'cta': 'Jetzt sparen',
+    'description':'Danach zurzeit 4,99€ mtl.',
+    'salesprice':'0,80€',
+}, {
+    'headline': '24 Monate',
+    '-..price': '72,00€',
+    'cta': 'Jetzt sparen',
+    'description':'Danach zurzeit 4,99€ mtl.',
+    'salesprice':'UVP 14050€',
+}, ]
