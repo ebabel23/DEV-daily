@@ -1,0 +1,115 @@
+@font-face {
+  font-family: FiraSansBold;
+  src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot");
+  src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.woff2") format("woff2"),
+    url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: FiraSans;
+  src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-regular/fira-sans-regular.eot");
+  src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-regular/fira-sans-regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-regular/fira-sans-regular.woff2") format("woff2"),
+    url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-regular/fira-sans-regular.ttf") format("truetype");
+}
+
+.plus-banner {
+  // background: [%% Background_Color_Head_CTA %%];
+  background: #3669ba;
+  // color: [%% Text_Color_Head_CTA %%];
+  color: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  width: 100%;
+  height: 50px;
+  transition: all 0.2s ease-out;
+  font-family: FiraSansBold, sans-serif;
+}
+
+.plus-banner__body {
+  background: #eee;
+  height: 165px;
+  padding: 16px 36px;
+}
+
+h3 {
+  // color: [%% Text_Color_Body %%];
+  color: #525252;
+  font-size: 18px;
+  text-align: center;
+  line-height: 22px;
+}
+
+.btn {
+  // background: [%% Background_Color_Head_CTA %%];
+  background: #3669ba;
+  // color: [%% Text_Color_Head_CTA %%];
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  width: 100%;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  margin: 16px 0 12px;
+  text-align: center;
+}
+
+.plus-banner__head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+}
+
+.plus-banner.sticky-hidden {
+  display: none;
+}
+
+.container-text {
+  display: block;
+  margin: auto 8px;
+}
+
+.plus-banner__text {
+  // font-size: [%% FontSize %%];
+  font-size: 16px;
+  font-family: FiraSansBold, sans-serif;
+}
+
+.container-logo {
+  display: block;
+  margin: auto 0;
+}
+
+.plus-logo {
+  margin: 0 8px;
+  // background: url("[%% Plus Logo %%]") no-repeat center;
+  background: url("https://extracontent.waz.de/nrw-waz/media/paywall-logo.svg") no-repeat center;
+  // width: [%% Logo_Width %%];
+  width: 60px;
+  max-width: 60px;
+  height: 32px;
+  background-size: contain;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  // color: [%% Text_Color_Head_CTA %%];
+  color: #fff;
+  width: 90%;
+}
+
+.plus-banner__close {
+  background: url(https://extracontent.waz.de/nrw-waz/media/close-24px.svg) no-repeat center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+  background-size: 30%;
+}

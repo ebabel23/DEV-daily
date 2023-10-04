@@ -57,10 +57,14 @@ body {
   src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot");
   src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot?#iefix") format("embedded-opentype"), url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.woff2") format("woff2"), url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.ttf") format("truetype");
 }
+.plus-banner-wrapper {
+  display: flex;
+}
+
 .plus-banner {
   display: flex;
   align-items: center;
-  background: #3669ba;
+  background: red;
   color: #fff;
   padding: 7px;
   transition: 0.2s all ease;
@@ -105,4 +109,16 @@ body {
   background: url("https://extracontent.waz.de/nrw-waz/media/close-24px.svg") 0 0 no-repeat;
   width: 12px;
   height: 12px;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.plus-banner__cta {
+  display: inline-block;
+  background-color: #fff;
+  border-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  color: red;
+  padding: 5px 10px;
+  width: auto;
+  margin: 0 2rem;
+}/*# sourceMappingURL=style-tp-desk.css.map */

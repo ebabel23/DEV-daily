@@ -2,19 +2,16 @@
   id="template-tracking"
   external-event
   external-event-trackingVars="'level': 'header', 'template': 'Header Plus-Banner-Sticky','variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoView'"
-  external-event-params="{{params}}"
-></div>
+  external-event-params="{{params}}"></div>
 <div custom-script>
-  // Tracking $( "#template-tracking" ).trigger( "click", function() { //
-  window.console.log("Tracking Clicked"); });
+  // Tracking $( "#template-tracking" ).trigger( "click", function() { // window.console.log("Tracking Clicked"); });
 </div>
 
 <a
   class="plus-banner"
   external-event="StickyHeader_LP"
   external-event-trackingVars="'level': 'header', 'template': 'Header Plus-Banner-Sticky', 'variant': '[%% Tracking_Variant %%]', 'event': 'eec.promoClick'"
-  external-event-params="{{params}}"
->
+  external-event-params="{{params}}">
   <span class="plus-banner__close"></span>
   <div class="banner-main">
     <div class="plus-logo"></div>

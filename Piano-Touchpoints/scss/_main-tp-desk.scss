@@ -1,0 +1,82 @@
+@font-face {
+  font-family: FiraSansBold;
+  src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot");
+  src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.woff2") format("woff2"),
+    url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.ttf") format("truetype");
+}
+
+.plus-banner-wrapper {
+  display: flex;
+}
+
+.plus-banner {
+  display: flex;
+  align-items: center;
+  // background: [%% BackgroundColor %%];
+  background: red;
+  // color: [%% Text_Color %%];
+  color: #fff;
+  padding: 7px;
+  transition: 0.2s all ease;
+  transform-origin: top right;
+  box-sizing: border-box;
+  text-decoration: none;
+  // width: [%% Banner-Width %%];
+  width: 980px;
+  height: 46px;
+  padding: 10px 12px;
+}
+
+.plus-banner.sticky-hidden {
+  display: none;
+}
+
+.plus-banner:hover {
+  // background: [%% HoverBackgroundColor %%];
+  background: #2a5393;
+}
+
+.plus-banner__text {
+  // font-size: [%% FontSize %%];
+  font-size: 20px;
+  font-weight: bold;
+  font-family: FiraSansBold, sans-serif;
+}
+
+.plus-logo {
+  margin: 0 12px;
+  // background: url("[%% Plus Logo %%]") 0 0 no-repeat;
+  background: url("https://extracontent.waz.de/nrw-waz/media/paywall-logo.svg") 0 0 no-repeat;
+  // width: [%% Logo-Width %%];
+  width: 97px;
+  // height: [%% Logo-Height %%];
+  height: 27px;
+  background-size: contain;
+}
+
+.plus-banner__arrow {
+  background: url("https://extracontent.waz.de/nrw-waz/media/arrow-alt-circle-right-solid.svg") 0 0 no-repeat;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 auto;
+}
+
+.plus-banner__close {
+  background: url("https://extracontent.waz.de/nrw-waz/media/close-24px.svg") 0 0 no-repeat;
+  width: 12px;
+  height: 12px;
+}
+
+.plus-banner__cta {
+  display: inline-block;
+  background-color: #fff;
+  border-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  color: red;
+  padding: 5px 10px;
+  width: auto;
+  margin: 0 2rem;
+}
