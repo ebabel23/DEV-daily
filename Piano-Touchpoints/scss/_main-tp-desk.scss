@@ -43,10 +43,11 @@
   font-size: 20px;
   font-weight: bold;
   font-family: FiraSansBold, sans-serif;
+  min-width: 50%;
 }
 
 .plus-logo {
-  margin: 0 12px;
+  margin: 0 10px;
   // background: url("[%% Plus Logo %%]") 0 0 no-repeat;
   background: url("https://extracontent.waz.de/nrw-waz/media/paywall-logo.svg") 0 0 no-repeat;
   // width: [%% Logo-Width %%];
@@ -55,8 +56,22 @@
   height: 27px;
   background-size: contain;
 }
+.plus-icon {
+  // display: [new cf];
+  // display: none;
+  margin-right: 12px;
+  // background: url("[%% Plus Logo %%]") 0 0 no-repeat;
+  background: url("../img/icon_gift_white.svg") 0 0 no-repeat;
+  // width: [%% Icon-Width %%];
+  width: 50px;
+  // height: [%% Icon-Height %%];
+  height: 50px;
+  background-size: contain;
+}
 
 .plus-banner__arrow {
+  // display: [new cf];
+  display: none;
   background: url("https://extracontent.waz.de/nrw-waz/media/arrow-alt-circle-right-solid.svg") 0 0 no-repeat;
   width: 30px;
   height: 30px;
@@ -70,13 +85,167 @@
 }
 
 .plus-banner__cta {
-  display: inline-block;
-  background-color: #fff;
-  border-color: #fff;
+  // display: [new cf];
+  display: block;
+
+  background-color: unset;
+  // border-color: #fff;
   border: 2px solid #fff;
   border-radius: 25px;
-  color: red;
+  // color: red;
   padding: 5px 10px;
   width: auto;
-  margin: 0 2rem;
+  margin: 0 auto;
+}
+
+.animateElement-entry__shake {
+  animation: shake 500ms linear 0s 3 normal none;
+  @keyframes shake {
+    0% {
+      transform: translate(0);
+    }
+
+    20% {
+      transform: translate(-2px, 2px);
+    }
+
+    40% {
+      transform: translate(-2px, -2px);
+    }
+
+    60% {
+      transform: translate(2px, 2px);
+    }
+
+    80% {
+      transform: translate(2px, -2px);
+    }
+
+    100% {
+      transform: translate(0);
+    }
+  }
+}
+
+.animateElement-entry__splash {
+  color: #fff;
+  opacity: 1;
+
+  animation: 1s anim-popoutin ease;
+}
+
+@keyframes anim-popoutin {
+  0% {
+    color: white;
+    transform: scale(0);
+    opacity: 0;
+    text-shadow: 0 0 0 white(0, 0, 0, 0);
+  }
+  25% {
+    color: white;
+    transform: scale(2);
+    opacity: 1;
+    text-shadow: 3px 10px 5px white(0, 0, 0, 0.5);
+  }
+  50% {
+    color: white;
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 1px 0 0 white(0, 0, 0, 0);
+  }
+  100% {
+    /* animate nothing to add pause at the end of animation */
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 1px 0 0 white(0, 0, 0, 0);
+  }
+}
+
+.animateElement-entry__ease {
+  color: #fff;
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.animateElement-exit__ease {
+  color: #fff;
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.animateElement-entry__slide {
+  animation: slideIn 1s ease 0s 1 normal forwards;
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(250px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.animateElement-exit__slide {
+  animation: slideOut 1s ease 0s 1 normal forwards;
+
+  @keyframes slideOut {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-250px);
+    }
+  }
+}
+
+.animateElement-entry__fade {
+  animation: fadeIn 1s ease 0s 1 normal forwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.animateElement-exit__fade {
+  animation: fadeOut 1s ease 0s 1 normal forwards;
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+}
+
+.animateElement-exit__rightOut {
+  animation: slideRight 1s ease 0s 1 normal forwards;
+
+  @keyframes slideRight {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(250px);
+    }
+  }
 }

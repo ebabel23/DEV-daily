@@ -20,6 +20,7 @@
       <div id="wide-wrapper">
         <div class="plus-banner-wrapper">
           <a
+            id="sticky-banner"
             href="[%% Link %%]?tpcc=[%% Tracking_Variant %%]_subscribe-banner-sticky-desktop"
             target="_[%% Link-Ziel %%]"
             class="plus-banner"
@@ -28,14 +29,31 @@
             external-event-params="{{params}}">
             <span class="plus-banner__close"></span>
             <div class="plus-logo"></div>
+            <div class="plus-icon"></div>
             <!-- <div class="plus-banner__text">[%% Text %%]</div> -->
-            <div class="plus-banner__text">Jetzt WAZ PLUS testen und Zugriff auf alle Artikel erhalten</div>
-            <span class="plus-banner__cta">Rabatt sichern!</span>
+            <div
+              id="plus-banner__text"
+              class="plus-banner__text animateElement-entry__ease">
+              <!-- Jetzt WAZ PLUS testen und alle Artikel lesen -->
+              Tolle Rabatte und viel Geld sichern!
+            </div>
+            <!-- <div
+              id="plus-banner__alterText"
+              class="plus-banner__text">
+              Jetzt WAZ PLUS testen und alle Artikel lesen
+            </div> -->
+            <div
+              id="sticky-banner-cta"
+              class="plus-banner__cta">
+              Rabatt sichern!
+            </div>
             <span class="plus-banner__arrow"></span>
           </a>
         </div>
       </div>
     </div>
     <div id="spacer"></div>
+
+    <script src="./js/animationInterval.js"></script>
   </body>
 </html>

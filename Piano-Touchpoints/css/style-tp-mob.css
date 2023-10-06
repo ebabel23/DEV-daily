@@ -68,7 +68,7 @@ body {
   box-sizing: border-box;
   text-decoration: none;
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   transition: all 0.2s ease-out;
   font-family: FiraSansBold, sans-serif;
 }
@@ -103,7 +103,7 @@ h3 {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 50px;
+  min-height: 50px;
   cursor: pointer;
 }
 
@@ -127,7 +127,7 @@ h3 {
 }
 
 .plus-logo {
-  margin: 0 8px;
+  margin: 0 12px;
   background: url("https://extracontent.waz.de/nrw-waz/media/paywall-logo.svg") no-repeat center;
   width: 60px;
   max-width: 60px;
@@ -140,7 +140,7 @@ h3 {
   align-items: center;
   text-decoration: none;
   color: #fff;
-  width: 90%;
+  width: 95%;
 }
 
 .plus-banner__close {
@@ -149,4 +149,52 @@ h3 {
   height: 44px;
   margin: 0 auto;
   background-size: 30%;
+}
+
+.plus-banner__cta {
+  display: inline-flex;
+  border-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  padding: 0px 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 40px;
+  margin: 0 5px;
+  white-space: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.plus-banner__close_x {
+  background: url(https://extracontent.waz.de/nrw-waz/media/close-24px.svg) no-repeat center;
+  width: 25px;
+  height: 25px;
+  margin-left: auto;
+  background-size: 30%;
+  display: block;
+  position: relative;
+  background-color: blue;
+  /* border-radius: 52% 50%; */
+  border: 0px solid;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #3669ba;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  /* float: right; */
+}
+
+.plus-icon {
+  margin-right: 12px;
+  background: url("../img/icon_gift_white.svg") 0 0 no-repeat;
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+}
+
+.logo-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=style-tp-mob.css.map */
