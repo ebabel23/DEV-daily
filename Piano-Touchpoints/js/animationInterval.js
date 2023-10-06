@@ -20,12 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-document.getElementById("sticky-banner-cta").addEventListener("mouseover", function () {
-  if (nIntervId) {
-    clearInterval(nIntervId);
+// Stop Animation-Intervall on mouseover
+document.getElementById("sticky-banner-cta").addEventListener("click", function () {
+  if (animatorIntervallID) {
+    clearInterval(animatorIntervallID);
     console.log("calm it");
-    nIntervId = null;
+    animatorIntervallID = null;
   }
 });
  */
@@ -83,3 +83,13 @@ function animatedTextChange() {
     purgedTextArrayCounter = 0;
   }
 }
+
+// Stop Animation-Intervall on mouseover
+document.getElementById("plus-banner__close").addEventListener("click", function () {
+  if (animatorIntervallID) {
+    clearInterval(animatorIntervallID);
+    console.log("calm it");
+    animatorIntervallID = null;
+    document.getElementsByClassName("plus-banner-wrapper")[0].style.display = "none";
+  }
+});
