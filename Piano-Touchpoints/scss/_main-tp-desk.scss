@@ -7,6 +7,11 @@
     url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.ttf") format("truetype");
 }
 
+:root {
+  --akzentfarbe1: unset;
+  --akzentfarbe2: lightgreen;
+}
+
 .plus-banner-wrapper {
   display: flex;
 }
@@ -17,7 +22,7 @@
   // background: [%% BackgroundColor %%];
   background: red;
   // color: [%% Text_Color %%];
-  color: #fff;
+  color: var(--akzentfarbe1, var(--akzentfarbe2));
   padding: 7px;
   transition: 0.2s all ease;
   transform-origin: top right;
@@ -134,32 +139,32 @@
   opacity: 1;
 
   animation: 1s anim-popoutin ease;
-}
 
-@keyframes anim-popoutin {
-  0% {
-    color: white;
-    transform: scale(0);
-    opacity: 0;
-    text-shadow: 0 0 0 white(0, 0, 0, 0);
-  }
-  25% {
-    color: white;
-    transform: scale(2);
-    opacity: 1;
-    text-shadow: 3px 10px 5px white(0, 0, 0, 0.5);
-  }
-  50% {
-    color: white;
-    transform: scale(1);
-    opacity: 1;
-    text-shadow: 1px 0 0 white(0, 0, 0, 0);
-  }
-  100% {
-    /* animate nothing to add pause at the end of animation */
-    transform: scale(1);
-    opacity: 1;
-    text-shadow: 1px 0 0 white(0, 0, 0, 0);
+  @keyframes anim-popoutin {
+    0% {
+      color: white;
+      transform: scale(0);
+      opacity: 0;
+      text-shadow: 0 0 0 white(0, 0, 0, 0);
+    }
+    25% {
+      color: white;
+      transform: scale(2);
+      opacity: 1;
+      text-shadow: 3px 10px 5px white(0, 0, 0, 0.5);
+    }
+    50% {
+      color: white;
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 white(0, 0, 0, 0);
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 white(0, 0, 0, 0);
+    }
   }
 }
 
