@@ -1,0 +1,176 @@
+.cmpbox {
+  --color-primary-500: #dd0000;
+  --color-primary-700: #9a0000;
+  --color-copy-primary: #242424;
+  --color-copy-secondary: #666;
+  --color-background-400: #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cmpbox * {
+  color: var(--color-copy-primary);
+  font-family: FiraSans, sans-serif !important;
+  font-weight: 400;
+}
+
+div.cmpboxinner {
+  margin-right: auto !important;
+  max-width: 700px;
+  order: 2;
+}
+
+.cmp-hero-title {
+  font-size: 30px;
+  line-height: 1.5;
+  font-weight: 600;
+  padding-bottom: 16px;
+  width: auto;
+  margin: auto;
+  text-align: center;
+}
+.cmpboxbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 46px;
+  transition: all 0.2s ease-in-out;
+}
+.cmpboxbtn span {
+  color: inherit;
+  display: inline-block;
+}
+.cmpboxbtn,
+.cmpboxbtn span {
+  text-transform: uppercase;
+  font-weight: 500 !important;
+  font-size: 15px;
+}
+
+.cmpboxbtn:hover {
+  background: var(--color-primary-700) !important;
+  border-color: var(--color-primary-700) !important;
+  color: white !important;
+}
+
+.cmpboxhl {
+  min-height: 48px;
+}
+
+.cmpbox,
+.cmpbox * {
+  transition: none !important;
+}
+
+.cmpboxbtns {
+  width: 100% !important;
+}
+
+.cmpboxbtnrejectcustomchoices {
+  max-width: 290px !important;
+}
+
+.cmpboxbtnyescustomchoices,
+.cmpboxbtnyescustom2choices {
+  max-width: 290px !important;
+}
+
+.cmpboxbtnyescustom,
+.cmpboxbtnyescustom2 {
+  max-width: 290px !important;
+}
+
+.cmplogo {
+  display: none !important;
+  position: static;
+  order: 1;
+  transform: unset !important;
+  justify-content: center;
+}
+
+div.cmpmore {
+  margin-right: auto !important;
+  max-width: 100%;
+}
+
+.cmpcontentpassboxbottom2 {
+  margin-bottom: 5px !important;
+}
+
+.cmpbox .cmpboxbtns {
+  width: 50%;
+  float: left;
+  margin: 0px !important;
+}
+
+.cmpbox .login-anchor {
+  color: var(--color-primary-500) !important;
+}
+
+.cmpbox a {
+  color: var(--color-copy-primary);
+}
+
+.cmpbox a:hover {
+  color: black;
+}
+
+.cmpbox .login-anchor {
+  font-weight: 600 !important;
+}
+
+.cmpbox .login-anchor:hover {
+  color: black;
+}
+
+.cmpboxtxt p,
+.cmpboxtxt font {
+  margin-block-start: 1rem;
+  color: var(--color-copy-secondary) !important;
+}
+
+.cmpbox .choice-item {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  min-height: 100%;
+}
+
+.cmpbox div.choice-text {
+  padding-bottom: 8px;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.cmpbox .choice-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.cmpbox .login-wrapper {
+  display: flex;
+  height: 40px;
+  margin: 0 5px;
+  margin: 5px auto;
+  gap: 8px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cmpbox .cmp-seperator {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  height: 1px;
+  background: var(--color-background-400);
+}
+
+.cmpbox strong {
+  font-weight: 600 !important;
+}
+.cmpbox b {
+  font-weight: 500 !important;
+}

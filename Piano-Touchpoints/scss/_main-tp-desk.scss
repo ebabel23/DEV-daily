@@ -8,8 +8,14 @@
 }
 
 :root {
-  --akzentfarbe1: unset;
-  --akzentfarbe2: lightgreen;
+  --main-text-color: [%% Text_Color %%];
+  --override-cta-color: [%% Cta_Color %%];
+  --override-cta-backgroundcolor: [%% Cta_BackgroundColor %%];
+  --override-cta-bordercolor: [%% Cta_BorderColor %%];
+  --main-text-color: lightblue;
+  --override-cta-color: red;
+  --override-cta-backgroundcolor: green;
+  --override-cta-bordercolor: blue;
 }
 
 .plus-banner-wrapper {
@@ -22,7 +28,7 @@
   // background: [%% BackgroundColor %%];
   background: red;
   // color: [%% Text_Color %%];
-  color: var(--akzentfarbe1, var(--akzentfarbe2));
+  color: var(--main-text-color, white);
   padding: 7px;
   transition: 0.2s all ease;
   transform-origin: top right;
@@ -93,166 +99,168 @@
   // display: [new cf];
   display: block;
 
-  background-color: unset;
+  background-color: var(--override-cta-backgroundcolor);
+
   // border-color: #fff;
-  border: 2px solid #fff;
+  border: 2px solid (var(--override-cta-bordercolor, var(--override-cta-backgroundcolor, white)));
   border-radius: 25px;
-  // color: red;
+  color: var(--override-cta-color, var(--main-text-color, white));
   padding: 5px 10px;
   width: auto;
   margin: 0 auto;
 }
 
 //Animations
+@keyframes shake {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
 
 .animateElement-entry__shake {
   animation: shake 500ms linear 0s 3 normal none;
-  @keyframes shake {
-    0% {
-      transform: translate(0);
-    }
+}
 
-    20% {
-      transform: translate(-2px, 2px);
-    }
-
-    40% {
-      transform: translate(-2px, -2px);
-    }
-
-    60% {
-      transform: translate(2px, 2px);
-    }
-
-    80% {
-      transform: translate(2px, -2px);
-    }
-
-    100% {
-      transform: translate(0);
-    }
+@keyframes anim-popoutin {
+  0% {
+    //color: var(--main-text-color, white);
+    transform: scale(0);
+    opacity: 0;
+    text-shadow: 0 0 0 white(0, 0, 0, 0);
+  }
+  25% {
+    //color: var(--main-text-color, white);
+    transform: scale(2);
+    opacity: 1;
+    text-shadow: 3px 10px 5px white(0, 0, 0, 0.5);
+  }
+  50% {
+    //color: var(--main-text-color, white);
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 1px 0 0 white(0, 0, 0, 0);
+  }
+  100% {
+    /* animate nothing to add pause at the end of animation */
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 1px 0 0 white(0, 0, 0, 0);
   }
 }
 
 .animateElement-entry__splash {
-  color: #fff;
+  color: var(--main-text-color, white);
   opacity: 1;
-
   animation: 1s anim-popoutin ease;
-
-  @keyframes anim-popoutin {
-    0% {
-      color: white;
-      transform: scale(0);
-      opacity: 0;
-      text-shadow: 0 0 0 white(0, 0, 0, 0);
-    }
-    25% {
-      color: white;
-      transform: scale(2);
-      opacity: 1;
-      text-shadow: 3px 10px 5px white(0, 0, 0, 0.5);
-    }
-    50% {
-      color: white;
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 white(0, 0, 0, 0);
-    }
-    100% {
-      /* animate nothing to add pause at the end of animation */
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 white(0, 0, 0, 0);
-    }
-  }
 }
 
 .animateElement-entry__ease {
-  color: #fff;
+  color: var(--main-text-color, white);
   opacity: 1;
   transition: all 1s ease;
 }
 
 .animateElement-exit__ease {
-  color: #fff;
+  color: var(--main-text-color, white);
   opacity: 0;
   transition: all 1s ease;
 }
 
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .animateElement-entry__slide {
   animation: slideIn 1s ease 0s 1 normal forwards;
-  @keyframes slideIn {
-    0% {
-      opacity: 0;
-      transform: translateY(250px);
-    }
+}
 
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-250px);
   }
 }
 
 .animateElement-exit__slide {
   animation: slideOut 1s ease 0s 1 normal forwards;
+}
 
-  @keyframes slideOut {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 
-    100% {
-      opacity: 0;
-      transform: translateY(-250px);
-    }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
 .animateElement-entry__fade {
   animation: fadeIn 1s ease 0s 1 normal forwards;
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.6);
-    }
+}
 
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
   }
 }
 
 .animateElement-exit__fade {
   animation: fadeOut 1s ease 0s 1 normal forwards;
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
+}
 
-    100% {
-      opacity: 0;
-      transform: scale(0.6);
-    }
+@keyframes slideRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(250px);
   }
 }
 
 .animateElement-exit__rightOut {
   animation: slideRight 1s ease 0s 1 normal forwards;
-
-  @keyframes slideRight {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translateX(250px);
-    }
-  }
 }

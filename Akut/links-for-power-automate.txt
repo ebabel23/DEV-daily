@@ -1,0 +1,8 @@
+https://funkemedien.sharepoint.com/sites/UserLeserMarktGesamt2/Shared%20Documents/Forms/AllItems.aspx?login_hint=Christian%2ESchmuecker%40funkemedien%2Ede&FolderCTID=0x0120009258A80A46D91C4087FB361BB93B81D4&id=%2Fsites%2FUserLeserMarktGesamt2%2FShared%20Documents%2F200%20%2D%20Teams%2FProduct%20Management%2FInitiativen%2FDocs%2FDoc%5FRestore%2FScoring%5FMatrix%5FFull%5F1%2E0%2Epdf&parent=%2Fsites%2FUserLeserMarktGesamt2%2FShared%20Documents%2F200%20%2D%20Teams%2FProduct%20Management%2FInitiativen%2FDocs%2FDoc%5FRestore
+
+https://funkemedien.sharepoint.com/:b:/r/sites/UserLeserMarktGesamt2/Shared%20Documents/200%20-%20Teams/Product%20Management/Initiativen/Docs/Doc_Restore/Scoring_Matrix_Full_1.0.pdf?csf=1&web=1&e=Jpd7cb
+
+
+https://<yourdomain>.sharepoint.com/sites/<yoursite>/_layouts/download.aspx?SourceUrl=<document-URL>
+
+https://funkemedien.sharepoint.com/sites/UserLeserMarktGesamt2/Shared%20Documents/_layouts/download.aspx?SourceUrl=https://funkemedien.sharepoint.com/:b:/s/UserLeserMarktGesamt2/ETfjHwxRD2lPry2uBlfv_NkB2HPUQXTXmobizv4PjyLOEA

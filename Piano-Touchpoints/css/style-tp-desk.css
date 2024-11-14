@@ -58,8 +58,14 @@ body {
   src: url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.eot?#iefix") format("embedded-opentype"), url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.woff2") format("woff2"), url("https://www.waz.de/resources/fonts/fira-sans/fira-sans-bold/fira-sans-bold.ttf") format("truetype");
 }
 :root {
-  --akzentfarbe1: unset;
-  --akzentfarbe2: lightgreen;
+  --main-text-color: [%% Text_Color %%];
+  --override-cta-color: [%% Cta_Color %%];
+  --override-cta-backgroundcolor: [%% Cta_BackgroundColor %%];
+  --override-cta-bordercolor: [%% Cta_BorderColor %%];
+  --main-text-color: lightblue;
+  --override-cta-color: red;
+  --override-cta-backgroundcolor: green;
+  --override-cta-bordercolor: blue;
 }
 
 .plus-banner-wrapper {
@@ -70,7 +76,7 @@ body {
   display: flex;
   align-items: center;
   background: red;
-  color: var(--akzentfarbe1, var(--akzentfarbe2));
+  color: var(--main-text-color, white);
   padding: 7px;
   transition: 0.2s all ease;
   transform-origin: top right;
@@ -128,17 +134,15 @@ body {
 
 .plus-banner__cta {
   display: block;
-  background-color: unset;
-  border: 2px solid #fff;
+  background-color: var(--override-cta-backgroundcolor);
+  border: 2px solid var(--override-cta-bordercolor, var(--override-cta-backgroundcolor, white));
   border-radius: 25px;
+  color: var(--override-cta-color, var(--main-text-color, white));
   padding: 5px 10px;
   width: auto;
   margin: 0 auto;
 }
 
-.animateElement-entry__shake {
-  animation: shake 500ms linear 0s 3 normal none;
-}
 @keyframes shake {
   0% {
     transform: translate(0);
@@ -159,27 +163,22 @@ body {
     transform: translate(0);
   }
 }
-
-.animateElement-entry__splash {
-  color: #fff;
-  opacity: 1;
-  animation: 1s anim-popoutin ease;
+.animateElement-entry__shake {
+  animation: shake 500ms linear 0s 3 normal none;
 }
+
 @keyframes anim-popoutin {
   0% {
-    color: white;
     transform: scale(0);
     opacity: 0;
     text-shadow: 0 0 0 white(0, 0, 0, 0);
   }
   25% {
-    color: white;
     transform: scale(2);
     opacity: 1;
     text-shadow: 3px 10px 5px white(0, 0, 0, 0.5);
   }
   50% {
-    color: white;
     transform: scale(1);
     opacity: 1;
     text-shadow: 1px 0 0 white(0, 0, 0, 0);
@@ -191,22 +190,24 @@ body {
     text-shadow: 1px 0 0 white(0, 0, 0, 0);
   }
 }
+.animateElement-entry__splash {
+  color: var(--main-text-color, white);
+  opacity: 1;
+  animation: 1s anim-popoutin ease;
+}
 
 .animateElement-entry__ease {
-  color: #fff;
+  color: var(--main-text-color, white);
   opacity: 1;
   transition: all 1s ease;
 }
 
 .animateElement-exit__ease {
-  color: #fff;
+  color: var(--main-text-color, white);
   opacity: 0;
   transition: all 1s ease;
 }
 
-.animateElement-entry__slide {
-  animation: slideIn 1s ease 0s 1 normal forwards;
-}
 @keyframes slideIn {
   0% {
     opacity: 0;
@@ -217,10 +218,10 @@ body {
     transform: translateY(0);
   }
 }
-
-.animateElement-exit__slide {
-  animation: slideOut 1s ease 0s 1 normal forwards;
+.animateElement-entry__slide {
+  animation: slideIn 1s ease 0s 1 normal forwards;
 }
+
 @keyframes slideOut {
   0% {
     opacity: 1;
@@ -231,10 +232,10 @@ body {
     transform: translateY(-250px);
   }
 }
-
-.animateElement-entry__fade {
-  animation: fadeIn 1s ease 0s 1 normal forwards;
+.animateElement-exit__slide {
+  animation: slideOut 1s ease 0s 1 normal forwards;
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -245,10 +246,10 @@ body {
     transform: scale(1);
   }
 }
-
-.animateElement-exit__fade {
-  animation: fadeOut 1s ease 0s 1 normal forwards;
+.animateElement-entry__fade {
+  animation: fadeIn 1s ease 0s 1 normal forwards;
 }
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -259,10 +260,10 @@ body {
     transform: scale(0.6);
   }
 }
-
-.animateElement-exit__rightOut {
-  animation: slideRight 1s ease 0s 1 normal forwards;
+.animateElement-exit__fade {
+  animation: fadeOut 1s ease 0s 1 normal forwards;
 }
+
 @keyframes slideRight {
   0% {
     opacity: 1;
@@ -272,4 +273,7 @@ body {
     opacity: 0;
     transform: translateX(250px);
   }
+}
+.animateElement-exit__rightOut {
+  animation: slideRight 1s ease 0s 1 normal forwards;
 }/*# sourceMappingURL=style-tp-desk.css.map */
