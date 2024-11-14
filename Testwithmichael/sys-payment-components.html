@@ -1,0 +1,1770 @@
+<!-- payment-form-component -->
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/payment-form-component.html">
+            <div ng-init="resetPaymentSelection()"></div>
+
+  <div ng-show="!isSelectedTermLocked()">
+   <div ng-show="isPaymentMethodRequired()">
+    <div billing-country></div>
+    <div ng-show="canSelectPaymentMethod()">
+     <div desktop>
+      <div payment-method-selector-component></div>
+     </div>
+     <div mobile>
+      <div payment-method-selector-component ng-hide="isPaymentMethodSelected()"></div>
+     </div>
+    </div>
+    <div ng-show="isPaymentMethodSelected()">
+     <div mobile>
+      <div class="back-to-payment-methods" ng-show="isPaymentMethodSelected() &amp;&amp; canSelectPaymentMethod()" ng-click="resetPaymentSelection()">
+       <h4>
+        <t>
+         Back to payment methods
+        </t></h4>
+      </div>
+     </div> <new-flow-components-c-h ng-if="hasNewFlow()" payment-source="flags.selectedPaymentMethod.id"></new-flow-components-c-h>
+     <div class="new-card-form" ng-show="!hasNewFlow()">
+      <div ng-if="isPaymentMethod(CREDIT_CARD)">
+       <div cc-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(PAYPAL)">
+       <div paypal-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Continue to PayPal' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Continue to PayPal' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(DWOLLA)">
+       <div dwolla-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         <div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(AMAZON)">
+       <div amazon-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(COINBASE)">
+       <div coinbase-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Continue to Bitcoin' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Continue to Bitcoin' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethodSelected() &amp;&amp; isMockUsed()">
+       <div mock-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="hidden" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(PAYPAL_BT)">
+       <div paypal-through-braintree-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button paypal-throught-braintree" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button paypal-throught-braintree" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(APPLE_PAY_BT)">
+       <div apple-pay-through-braintree-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isSupportedWorldpayCcMethod()">
+       <div worldpay-rxml-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div class="complete-purchase-button" complete-purchase-button title="Complete Purchase"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(WORLDPAY_HPP)">
+       <div worldpay-hpp-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div class="complete-purchase-button" complete-purchase-button title="Complete Purchase"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(WORLDPAY_CC_TOKEN)">
+       <div worldpay-token-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isSupportedSpreedlyCcMethod()">
+       <div spreedly-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t></label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(EDGIL_PAYWAY)">
+       <div edgil-payway-provider-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(PAYPAL_EXPRESS_CHECKOUT)">
+       <div paypal-express-checkout-provider-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(EIGEN)">
+       <div eigen-provider-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(OPENPAY_CASH)">
+       <div openpay-cash-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(EASYPAY_MULTIBANCO)">
+       <div easypay-multibanco-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(EASYPAY_MBWAY)">
+       <div easypay-mbway-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(EASYPAY_DIRECT_DEBIT)">
+       <div easypay-direct-debit-provider-form-component is-valid="$isEasyPayDDValid">
+        <div class="footer-modal">
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}" is-disabled="!$isEasyPayDDValid"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(EASYPAY_BOLETO)">
+       <div easypay-boleto-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Next' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Next' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(KLARNA)">
+       <div klarna-form-component>
+        <div consents-list></div>
+        <div class="footer-modal">
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Next' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Next' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(OBI)">
+       <div obi-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(OBI_PAYPAL)">
+       <div obi-paypal-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(DATATRANS)">
+       <div datatrans-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+      <div ng-if="isPaymentMethod(DATATRANS_POSTFINANCE)">
+       <div datatrans-postfinance-form-component>
+        <div class="footer-modal">
+         <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+          <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew" id="auto_renew"> <label class="auto-renew-purchase-label" for="auto_renew">
+           <t>
+            Automatically renew my subscription when the time comes.
+           </t> </label>
+         </div>
+         <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button title="{{'Complete Purchase' | t}}"></div>
+         <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div ng-if="isPaymentMethod(ZERO)">
+      <div zero-form-component>
+       <div consents-list></div>
+       <div class="footer-modal">
+        <div class="complete-purchase-button" complete-purchase-button title="{{'Complete' | t}}"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div ng-show="!isPaymentMethodRequired()">
+    <div pass-through-form-component>
+     <div consents-list></div>
+     <div class="footer-modal">
+      <div class="complete-purchase-button" complete-purchase-button title="{{'Complete Purchase' | t}}"></div>
+     </div>
+    </div>
+   </div>
+  </div>
+</script>
+<!-- cc-form-component -->
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/cc-form-component.html">
+
+  <div ng-show="isPaymentMethod(CREDIT_CARD) && !isMockUsed()">
+
+      <div class="row">
+
+          <div desktop class="cc_stored_cards" ng-show="!cc.payWithNew && cc.initiated">
+              <div class="add-credit-card-wrapper">
+                  <h4><t>Your credit and debit cards</t></h4>
+                  <a href="javascript:void(0)" class="add-credit-card" ng-click="cc.payWithNew = true" ng-show="cc.stored.length > 0">
+                      + <t>Add a card</t>
+                  </a>
+              </div>
+              <table class="payment-method-card" ng-show="cc.stored.length > 0">
+                  <tr class="payment-method-card-row" ng-repeat="method in cc.stored" ng-class="{'selected' : $parent.cc.selectedUpiId == method.id}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" value="{{method.id}}" ng-model="$parent.cc.selectedUpiId"/>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div class="credit-card-{{method.identifier}}"></div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div>{{method.type}} *{{method.ending_in}}</div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <t>Expires in</t> {{method.expire_month}}/{{method.expire_year}}
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div mobile class="cc_stored_cards" ng-show="cc.initiated">
+              <table class="payment-method-card" ng-show="cc.stored.length > 0">
+                  <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+                      ng-class="{'selected' : $parent.cc.selectedUpiId == method.id && $parent.cc.payWithNew != true}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" value="{{method.id}}"
+                                 ng-model="$parent.cc.selectedUpiId" ng-click="$parent.cc.payWithNew = false"/>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div class="credit-card-{{method.identifier}}"></div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div>*{{method.ending_in}}</div>
+                      </td>
+                  </tr>
+                  <tr class="payment-method-card-row" ng-class="{'selected' : $parent.cc.payWithNew == true}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" ng-model="$parent.cc.payWithNew" ng-value="true"/>
+                      </td>
+                      <td class="payment-method-card-cell" colspan="2">
+                          <t>Add a new card</t>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div class="cc_new_card" ng-show="cc.payWithNew && cc.initiated">
+              <div desktop class="go-back-to-cards-wrapper">
+                  <a href="javascript:void(0)" class="go-back-to-cards" ng-click="cc.payWithNew = false" ng-show="cc.stored.length > 0">
+                      <t>Return to saved cards</t>
+                  </a>
+
+                  <h4>
+                      <t>Add a new credit or debit card</t>
+                  </h4>
+
+              </div>
+              <form class="new-card-form" name="ccForm" role="form">
+                  <div ng-show="isBraintreeV3() === true">
+                      <table class="table-form-inline" cellpadding="0" cellspacing="0">
+                          <tr>
+                              <td class="field-card-number">
+                                  <div class="field-wrapper">
+                                      <label class="icon card"></label>
+                                      <div class="input">
+                                          <div id="card-number" class="cc-field__input-wrap-container"></div>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td class="field-card-expiry-month">
+                                  <div class="field-wrapper">
+                                      <label class="icon expiry"></label>
+                                      <div class="input">
+                                          <div id="expiration-date" class="cc-field__input-wrap-container"></div>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td class="field-card-cvv">
+                                  <div class="field-wrapper">
+                                      <label class="icon password"></label>
+                                      <div class="input">
+                                          <div id="cvv" class="cc-field__input-wrap-container"></div>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td class="field-card-postal-code">
+                                  <div class="field-wrapper">
+                                      <label class="icon cc-field__icon--zip-code"></label>
+                                      <div class="input">
+                                          <div id="postal-code" class="cc-field__input-wrap-container" disabled></div>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+                  <table ng-show="isBraintreeV3() !== true" class="table-form-inline" cellpadding="0" cellspacing="0">
+                      <tr>
+                          <td class="field-card-number">
+                              <div class="field-wrapper">
+                                  <label class="icon card"></label>
+
+                                  <div class="input">
+                                      <input type="text" name="num" class="flat" placeholder="{{'Card number' | t}}"
+                                             ng-model="credit_card.num" required/>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="field-card-expiry-month">
+                              <div class="field-wrapper">
+                                  <label class="icon expiry"></label>
+
+                                  <div class="input whitespace-nowrap">
+                                      <input class="flat inline input-date" type="text" name="expire_month"
+                                             placeholder="{{'MM' | t}}" maxlength="2"
+                                             ng-model="credit_card.expire_month" required/>
+
+                                      <div class="date-slash"> /</div>
+                                      <input class="flat inline input-date" type="text" name="expire_year"
+                                             placeholder="{{'YY' | t}}" maxlength="2"
+                                             ng-model="credit_card.expire_year" required/>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="field-card-cvv">
+                              <div class="field-wrapper">
+                                  <label class="icon password"></label>
+
+                                  <div class="input">
+                                      <input class="flat" type="text" name="cvv" placeholder="{{'CVV' | t}}"
+                                             maxlength="5" ng-model="credit_card.cvv"
+                                             required/>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="field-card-postal-code">
+                              <div class="field-wrapper">
+
+
+                                  <div class="input ml10">
+                                      <input class="flat" type="text" name="postal_code"
+                                             placeholder="{{'Postal code' | t}}" ng-model="input.zipCode"/>
+                                  </div>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+                  <div class="payment-system-condition">
+
+                      <span ng-if="!isSubscription()">
+                          <div class="custom-checkbox">
+                              <input type="checkbox" name="store_in_vault" ng-model="credit_card.store_in_vault"
+                                     id="rermber-my-card"/>
+                              <label for="rermber-my-card"><t>Remember my card for future payments</t></label>
+                          </div>
+                      </span>
+                      <span ng-if="isSubscription()">
+                          <input type="hidden" name="store_in_vault" ng-model="credit_card.store_in_vault"
+                                 ng-value="true"/>
+                      </span>
+                      <div class="custom-checkbox apply-this-method" ng-if="credit_card.store_in_vault">
+                          <input type="checkbox" name="defaultPaymentMethodId" ng-model="cc.defaultPaymentMethodId"
+                                 id="default-payment-method-credit-card"/>
+                          <label for="default-payment-method-credit-card">
+                              <t>Apply this payment method to all active subscriptions</t>
+                          </label>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div ng-transclude></div>
+      </div>
+  </div>
+</script>
+<!-- payment-method-selector-component -->
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/payment-method-selector-component.html">
+  <div class="select-payment-options"><h4><t>Select a payment method</t></h4></div>
+  <div class="payment-options-wrapper">
+      <ul class="payment-options {{selectedPaymentMethod.identifier}}">
+          <li ng-repeat="pm in paymentMethods">
+              <a
+                      ng-click="selectPaymentMethod(pm)"
+                      ng-class="{'payment-method-selected': pm.selected}"
+                      class="button pay select-payment {{pm.identifier}}"
+                      ng-checked="isPaymentMethod(pm.id)">
+              </a>
+          </li>
+      </ul>
+  </div>
+</script>
+<!-- pay-what-you-want-form-component -->
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/pay-what-you-want-form-component.html">
+  <!--
+  Available methods:
+      isCustomPrice() - checks if widget is available for selected term
+  Available variables (read-only):
+       minPriceBase - Minimal allowed amount in base currency.
+       maxPriceBase - Maximum allowed amount in base currency.
+       currencyBase - Base currency.
+       minPrice - Minimum allowed amount in the choosed currency.
+       maxPrice - Maximum allowed amount in the choosed currency.
+       currency - Choosed currency.
+       currencyRate - Rate between choosed and base currency.
+       amountBase - Calculated amount in base currency.
+       customAmount - Entered amount in the choosed currency.
+       loading - Determines if the component is loading initial data.
+       validating - Flag determine if the component is in validating state, that means it waits for the server respond.
+       validated - Whether amount is already validated, by default it's valid, 'cause the server passes us the correct value.
+       validationError - If the amount isn't validated then it contains the last error message.
+       applied - Whether this price was applied.
+   - ng-model vars
+      customAmount
+  -->
+
+  <div ng-show="isCustomPrice()" class="custom-price">
+          <span>
+              <span>
+                  <span class="custom-amount-edit custom-amount-edit-input">
+                      <input id="custom-price-amount-input"
+                             name="custom-amount"
+                             ng-change="startValidating()"
+                             type="text"
+                             ng-model="customAmount"
+                             placeholder="{{minPrice}} {{'minimum' | t}}"
+                             error-message="field-error"><span class="currency-name">{{currency}}</span>
+                  </span>
+                  <div class="custom-amount-info">
+                      <div>
+                          <span class="billing_period"><t>for {{getSelectedTerm().firstPeriod}}</t></span>
+                          <span ng-if="getSelectedTerm().isSubscription" class="until"><t>until canceled</t></span>
+                      </div>
+                  </div>
+
+                  <span ng-show="validating">
+                      <!--TODO GIF SPINNER-->
+                      </span>
+              </span>
+          </span>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/billing-country-component.html">
+  <div ng-if="isBillingCountryEnabled()" class="billing-country-form">
+      <div ng-if="isEuBillingCountryLabel()">
+          <h4>
+              <t>Country of residence</t>
+          </h4>
+      </div>
+      <div ng-if="isUsBillingCountryLabel()">
+          <h4>
+              <t>Select your billing country</t>
+          </h4>
+      </div>
+
+      <div class="billing-country billing">
+          <div class="billing-country-group">
+              <div
+                      class="tp-dropdown__select"
+                      tp-country-selector
+                      selector-options="selectorOptions"
+                      selector-label="{{'Select a country or region' | t}}"
+                      dropdown-styles="{width: 320, zIndex: 1004}">
+              </div>
+          </div>
+
+          <div class="billing-country-group" ng-if="billingConfig.requiredZipCode">
+              <input
+                      type="text"
+                      class=""
+                      ng-model='billingConfig.zipCode'
+                      ng-change="onZipCodeChanged()"
+                      placeholder="{{'Postal code' | t}}">
+          </div>
+      </div>
+
+      <div ng-if="billingConfig.needResidence">
+          <div class="custom-checkbox">
+              <input type="checkbox" ng-model="billingConfig.sameResidence" id="same-residence"
+                     ng-change="onChangeSameResidence()"/>
+              <label for="same-residence">
+                  <t>I reside in the same country as my billing address</t>
+              </label>
+          </div>
+
+          <div ng-if="!billingConfig.sameResidence">
+              <div>
+                  <h4>
+                      <t>Select your billing country</t>
+                  </h4>
+              </div>
+
+              <div class="billing-country residence">
+                  <div class="billing-country-group">
+                      <div
+                              class="tp-dropdown__select"
+                              tp-country-selector
+                              selector-options="residenceOptions"
+                              selector-label="{{'Select a country or region' | t}}"
+                              dropdown-styles="{width: 320, zIndex: 1004}">
+                      </div>
+                  </div>
+                  <div class="billing-country-group" ng-if="billingConfig.residenceRequireZipCode">
+                      <input
+                              type="text"
+                              class=""
+                              ng-model='billingConfig.zipCode'
+                              ng-change="onZipCodeChanged()"
+                              placeholder="{{'Postal code' | t}}">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/select-selector.html">
+  <div class="tp-dropdown__container">
+      <ul class="tp-dropdown__list">
+          <li class="tp-dropdown__item tp-dropdown__item_control tp-dropdown__tail tp-dropdown__tail_position_bottom tp-dropdown__tail_position_left tp-dropdown__tail_theme_white">
+              <input type="text" class="input-full-width search-query light-blue"
+                     ng-change="update()"
+                     ng-model="searchItemModel"
+                     placeholder="{{'Search...' | t}}">
+          </li>
+          <li class="tp-dropdown__item tp-dropdown__item_divider"></li>
+          <li>
+              <div class="tp-dropdown__scrollable-list tp-dropdown__scrollable-list_medium" style="overflow: auto">
+                  <div class="tp-dropdown__item" dynamic-html="countryListHtml">
+                  </div>
+              </div>
+          </li>
+      </ul>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/country-selector.html">
+  <span class="ellipsis tp-dropdown__select_auto_width tp-dropdown__item-color blue">
+      <span ng-show="selectorOptions.selectorModel.label == '' ">{{selectorLabel}}</span>
+      <span ng-show="selectorOptions.selectorModel.label !== '' ">{{selectorOptions.selectorModel.label}}</span>
+  </span>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/calling-code-selector.html">
+  <span class="ellipsis tp-dropdown__select_auto_width tp-dropdown__item-color">
+      <span ng-show="selectorOptions.selectorModel.label == '' || selectorOptions.selectorModel.label === undefined " class="placeholder">{{selectorLabel}}</span>
+      <span ng-show="selectorOptions.selectorModel.label !== '' ">
+          <div class="country-icon country-icon-{{selectorOptions.selectorModel.item.countryCode.toLowerCase()}}"></div> (+{{selectorOptions.selectorModel.item.callingCode}})
+      </span>
+  </span>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/canadian-taxes.html">
+  <div class="canadian-taxes" ng-if="input.canadianTaxes.length ">
+      <div ng-repeat="canadianTax in input.canadianTaxes" class="tax {{canadianTax.name}}">
+          <div class="name">{{ canadianTax.name }}</div>
+          <div class="amount"><b>{{ canadianTax.amount }}</b></div>
+      </div>
+      <div class="tax total">
+          <div class="name">
+              <t>Total</t>
+          </div>
+          <div class="amount"><b>{{input.confirmated.taxAmount}}</b></div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/canadian-taxes-hint.html">
+  <span class="taxes-info-tooltip" ng-if="billingConfig.countryCode == 'CA' && isVatCanadaEnabled(interval) && interval.tax">
+      <span class="icon-info-dark"></span>
+      <span class="taxes-info-tooltip-body">
+          <span ng-if="interval.hstRate">HST {{ interval.hstAmount }} </span>
+          <span ng-if="interval.pstRate && interval.hstRate">&nbsp;+&nbsp;</span>
+          <span ng-if="interval.pstRate">PST {{ interval.pstAmount }} </span>
+          <span ng-if="interval.qstRate && (interval.hstRate||interval.pstRate)">&nbsp;+&nbsp;</span>
+          <span ng-if="interval.qstRate">QST {{ interval.qstAmount }} </span>
+          <span ng-if="interval.gstRate && (interval.hstRate||interval.pstRate ||interval.qstRate)">&nbsp;+&nbsp;</span>
+          <span ng-if="interval.gstRate">GST {{ interval.gstAmount }} </span>
+      </span>
+  </span>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/datatrans-form-component.html">
+  <div class="datatrans new-card-form" ng-show="isPaymentMethod(DATATRANS)">
+      <div class="row">
+          <div desktop class="cc_stored_cards" ng-show="!cc.payWithNew && cc.initiated">
+              <div class="add-credit-card-wrapper">
+                  <h4>
+                      <t>Your credit and debit cards</t>
+                  </h4>
+                  <a href="javascript:void(0)" class="add-credit-card" ng-click="cc.payWithNew = true" ng-show="cc.stored.length > 0">
+                      +
+                      <t>Add a card</t>
+                  </a>
+              </div>
+              <table class="payment-method-card" ng-show="cc.stored.length > 0">
+                  <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+                      ng-class="{'selected' : $parent.cc.selectedUpiId == method.id}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" value="{{method.id}}" ng-model="$parent.cc.selectedUpiId"/>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div class="credit-card-{{method.identifier}}"></div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div>{{method.type}} *{{method.ending_in}}</div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <t>Expires in</t>
+                          {{method.expire_month}}/{{method.expire_year}}
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div mobile class="cc_stored_cards" ng-show="cc.initiated">
+              <table class="payment-method-card" ng-show="cc.stored.length > 0">
+                  <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+                      ng-class="{'selected' : $parent.cc.selectedUpiId == method.id && $parent.cc.payWithNew != true}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" value="{{method.id}}" ng-model="$parent.cc.selectedUpiId"
+                                 ng-click="$parent.cc.payWithNew = false"/>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div class="credit-card-{{method.identifier}}"></div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div>*{{method.ending_in}}</div>
+                      </td>
+                  </tr>
+                  <tr class="payment-method-card-row" ng-class="{'selected' : $parent.cc.payWithNew == true}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" ng-model="$parent.cc.payWithNew" ng-value="true"/>
+                      </td>
+                      <td class="payment-method-card-cell" colspan="2">
+                          <t>Add a new card</t>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div class="cc_new_card" ng-show="cc.payWithNew && cc.initiated">
+              <div desktop class="go-back-to-cards-wrapper">
+                  <a href="javascript:void(0)" class="go-back-to-cards" ng-click="cc.payWithNew = false" ng-show="cc.stored.length > 0">
+                      <t>Return to saved cards</t>
+                  </a>
+                  <div>
+                      <t>Add a new credit or debit card</t>
+                  </div>
+              </div>
+              <form class="new-card-form" name="ccForm" role="form">
+                  <table class="table-form-inline" cellpadding="0" cellspacing="0">
+                      <tr>
+                          <td class="field-card-number">
+                              <div class="field-wrapper">
+                                  <label class="icon card"></label>
+                                  <div id="datatrans-card-number" class="datatrans-card-number input"></div>
+                              </div>
+                          </td>
+                          <td class="field-card-expiry-month">
+                              <div class="field-wrapper">
+                                  <label class="icon expiry"></label>
+                                  <div class="input whitespace-nowrap">
+                                      <input class="flat inline input-date" type="text" name="expire_month" placeholder="{{'MM' | t}}"
+                                             maxlength="2" ng-model="credit_card.expire_month" required/>
+                                      <div class="date-slash">/</div>
+                                      <input class="flat inline input-date" type="text" name="expire_year" placeholder="{{'YY' | t}}"
+                                             maxlength="2" ng-model="credit_card.expire_year" required/>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="field-card-cvv">
+                              <div class="field-wrapper">
+                                  <label class="icon password"></label>
+                                  <div id="datatrans-cvv" class="datatrans-cvv input"></div>
+                              </div>
+                          </td>
+                          <td class="field-card-postal-code">
+                              <div class="field-wrapper">
+                                  <div class="input ml10">
+                                      <input class="flat" type="text" name="cardZipCode"
+                                             placeholder="{{'ZIP / Postal code' | tc:'checkout.platform'}}" ng-model="credit_card.cardZipCode"/>
+                                  </div>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+                  <div class="payment-system-condition">
+                      <span ng-if="!isSubscription()">
+                          <div class="custom-checkbox">
+                              <input type="checkbox" name="store_in_vault" ng-model="credit_card.store_in_vault"
+                                     id="remember-my-card-datatrans"/>
+                              <label for="remember-my-card-datatrans">
+                                  <t>Remember my card for future payments</t>
+                              </label>
+                          </div>
+                      </span>
+                      <span ng-if="isSubscription()">
+                          <input type="hidden" name="store_in_vault" ng-model="credit_card.store_in_vault"/>
+                      </span>
+                  </div>
+              </form>
+          </div>
+
+          <div ng-transclude></div>
+      </div>
+      <div id="datatrans-input-cardnumber-cvv-common-style">
+          font-family: "Graphik Web Regular", Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          font-weight: normal;
+          box-sizing: border-box;
+          color: #333;
+          background-color: #ffffff;
+          transition: border linear 0.1s, box-shadow linear 0.1s;
+          width: 100%;
+          height: 40px;
+      </div>
+      <div id="datatrans-input-cardnumber-cvv-error-style">border: 1px solid #f00</div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/obi-paypal-form-component.html">
+  <div ng-show="isPaymentMethod(OBI_PAYPAL)">
+      <div class="paypal-payment-form row">
+          <div class="errors"></div>
+          <div class="obi-paypal-payment-form">
+              <div ng-if="stored.length">
+                  <span class="obi-paypal-title"><t>Your PayPal accounts</t></span>
+                  <table class="payment-method-obi-paypal">
+                      <tr class="payment-method-obi-paypal-row existing-upi" ng-repeat="upi in stored" ng-class="{'selected' : $parent.data.selectedUpi.id === upi.id}">
+                          <td class="payment-method-obi-paypal-cell">
+                              <input type="radio" name="stored_method" ng-model="$parent.data.selectedUpi" ng-value="upi" radio-track-by="id" />
+                          </td>
+                          <td class="payment-method-obi-paypal-cell" ng-if="!upi.isNew">
+                              {{upi.paypalEmail}}
+                          </td>
+                          <td class="payment-method-obi-paypal-cell" ng-if="upi.isNew">
+                              <div class="obi-paypal-loggedin">
+                                  <span class="obi-paypal-name"><t>PayPal</t></span>
+                                  <span class="obi-paypal-email">{{upi.paypalEmail}}</span>
+                                  <button ng-click="cancelNewAccount()" class="obi-paypal-cancel-button"><t>Cancel</t></button>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div ng-if="!data.newUpi" >
+                  <div>
+                      <h4>
+                          <t>Select country to add new account</t>
+                      </h4>
+                  </div>
+                  <div class="billing-country" id="obi-paypal-country-selector">
+                      <div class="billing-country-group">
+                          <div>
+                              <div class="tp-dropdown__select"
+                                   tp-country-selector
+                                   selector-options="countrySelectorOptions"
+                                   default-country="defaultCountryCode"
+                                   click-on-select="selectCountry"
+                                   selector-label="{{'Select a country or region' | t}}"
+                                   dropdown-styles="{width: 320, zIndex: 1004}">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="pm-login-button paypal-login-button" ng-class="{ 'obi-disabled': data.selectedCountry === null }" ng-click="addNewAccount()"></div>
+                  <div class="add-new-account-msg"><t>Add new PayPal account</t></div>
+              </div>
+          </div>
+
+          <div consents-list></div>
+
+          <div ng-if="canContinue()" ng-transclude></div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/datatrans-postfinance-form-component.html">
+  <div ng-show="isPaymentMethod(DATATRANS_POSTFINANCE)">
+      <div class="postfinance-payment-form row">
+          <div class="errors"></div>
+          <div class="postfinance-checkout-payment-form">
+              <div ng-if="stored.length">
+                  <span class="postfinance-checkout-title"><t context="checkout.platform">Your Postfinance cards</t></span>
+                  <table class="payment-method-postfinance-checkout">
+                      <tr class="payment-method-postfinance-checkout-row existing-upi" ng-repeat="upi in stored" ng-class="{'selected' : $parent.data.selectedUpi.id === upi.id}">
+                          <td class="payment-method-postfinance-checkout-cell">
+                              <input type="radio" name="stored_method" ng-model="$parent.data.selectedUpi" ng-value="upi" radio-track-by="id" />
+                          </td>
+                          <td class="payment-method-postfinance-checkout-cell" ng-if="!upi.isNew">
+                              {{upi.number}}
+                          </td>
+                          <td class="payment-method-postfinance-checkout-cell" ng-if="upi.isNew">
+                              <div class="postfinance-checkout-loggedin">
+                                  <span class="postfinance-checkout-payerInfo">{{upi.payerInfo}}</span>
+                                  <button ng-click="cancelNewAccount()" class="postfinance-checkout-cancel-button"><t>Cancel</t></button>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div ng-if="!data.newUpi">
+                  <div class="pm-login-button postfinance-login-button" ng-click="startWithNewAccount()"></div>
+                  <div class="add-new-account-msg"><t context="checkout.platform">Add new PostFinance card</t></div>
+              </div>
+          </div>
+
+          <div consents-list></div>
+
+          <div ng-if="canContinue()" ng-transclude></div>
+      </div>
+
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/obi-form-component.html">
+  <div ng-if="isPaymentMethod(OBI)">
+    <div class="obi-payment-form row">
+
+      <div desktop class="cc_stored_cards" ng-show="!cc.payWithNew && cc.initiated">
+        <div class="add-credit-card-wrapper">
+          <h4>
+            <t>Your credit and debit cards</t>
+          </h4>
+          <a href="javascript:void(0)" class="add-credit-card" ng-click="cc.payWithNew = true"
+             ng-show="cc.stored.length > 0">
+            +
+            <t>Add a card</t>
+          </a>
+        </div>
+        <table class="payment-method-card" ng-show="cc.stored.length > 0">
+          <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+              ng-class="{'selected' : $parent.cc.selectedUpiId == method.id}">
+            <td class="payment-method-card-cell">
+              <input type="radio" name="stored_method" value="{{method.id}}" ng-model="$parent.cc.selectedUpiId"/>
+            </td>
+            <td class="payment-method-card-cell">
+              <div class="credit-card-{{method.identifier}}"></div>
+            </td>
+            <td class="payment-method-card-cell">
+              <div>{{method.type}} *{{method.ending_in}}</div>
+            </td>
+            <td class="payment-method-card-cell">
+              <t>Expires in</t>
+              {{method.expire_month}}/{{method.expire_year}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div mobile class="cc_stored_cards" ng-show="cc.initiated">
+        <table class="payment-method-card" ng-show="cc.stored.length > 0">
+          <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+              ng-class="{'selected' : $parent.cc.selectedUpiId == method.id && $parent.cc.payWithNew != true}">
+            <td class="payment-method-card-cell">
+              <input type="radio" name="stored_method" value="{{method.id}}" ng-model="$parent.cc.selectedUpiId"
+                     ng-click="$parent.cc.payWithNew = false"/>
+            </td>
+            <td class="payment-method-card-cell">
+              <div class="credit-card-{{method.identifier}}"></div>
+            </td>
+            <td class="payment-method-card-cell">
+              <div>*{{method.ending_in}}</div>
+            </td>
+          </tr>
+          <tr class="payment-method-card-row" ng-class="{'selected' : $parent.cc.payWithNew == true}">
+            <td class="payment-method-card-cell">
+              <input type="radio" name="stored_method" ng-model="$parent.cc.payWithNew" ng-value="true"/>
+            </td>
+            <td class="payment-method-card-cell" colspan="2">
+              <t>Add a new card</t>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="cc_new_card" ng-show="cc.payWithNew && cc.initiated">
+        <div desktop class="go-back-to-cards-wrapper">
+          <a href="javascript:void(0)" class="go-back-to-cards" ng-click="cc.payWithNew = false"
+             ng-show="cc.stored.length > 0">
+            <t>Return to saved cards</t>
+          </a>
+          <div>
+            <t>Add a new credit or debit card</t>
+          </div>
+        </div>
+        <div class="new-card-form">
+          <table class="table-form-inline" cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="field-card-number">
+                <div class="field-wrapper">
+                  <label class="icon card"></label>
+                  <div id="obi-number" class="obick-card-number input"></div>
+                </div>
+              </td>
+              <td class="field-card-expiry-month">
+                <div class="field-wrapper">
+                  <label class="icon expiry"></label>
+                  <div class="input whitespace-nowrap">
+                    <input class="flat inline input-date" type="text" name="expire_month" placeholder="{{'MM' | t}}"
+                           maxlength="2" ng-model="credit_card.expire_month" required/>
+                    <div class="date-slash">/</div>
+                    <input class="flat inline input-date" type="text" name="expire_year" placeholder="{{'YY' | t}}"
+                           maxlength="2" ng-model="credit_card.expire_year" required/>
+                  </div>
+                </div>
+              </td>
+              <td class="field-card-cvv">
+                <div class="field-wrapper">
+                  <label class="icon password"></label>
+                  <div id="obi-cvv" class="obick-cvv input"></div>
+                </div>
+              </td>
+              <td class="field-card-postal-code">
+                <div class="field-wrapper">
+                  <div class="input ml10">
+                    <input class="flat" type="text" name="cardZipCode"
+                           placeholder="{{'Postal code' | t}}" ng-model="credit_card.cardZipCode"/>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <table class="table-form-inline" cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="field-card">
+                <div class="field-wrapper">
+                  <label class="icon cardholder"></label>
+                  <input class="flat" required type="text" name="first-name" maxlength="255"
+                         placeholder="{{'First name' | t}}" ng-model="credit_card.first_name"/>
+                </div>
+              </td>
+
+              <td class="field-card">
+                <div class="field-wrapper">
+                  <label class="icon cardholder"></label>
+                  <input class="flat" required type="text" name="last-name" maxlength="255"
+                         placeholder="{{'Last name' | t}}" ng-model="credit_card.last_name"/>
+                </div>
+              </td>
+              <td class="field-card">
+                <div class="field-wrapper">
+                  <label class="icon email"></label>
+                  <input class="flat" required type="text" name="email" maxlength="255"
+                         placeholder="{{'Email' | t}}" ng-model="credit_card.email"/>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <table class="table-form-inline" cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="field-card field-card--half">
+                <div class="billing-country">
+                  <div class="billing-country-group">
+                    <div>
+                      <div class="tp-dropdown__select"
+                           tp-country-selector
+                           selector-options="countrySelectorOptions"
+                           default-country="defaultCountryCode"
+                           click-on-select="selectCountry"
+                           selector-label="{{'Select a country or region' | t}}"
+                           dropdown-styles="{width: 320, zIndex: 1004}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="field-card field-card--half">
+                <div ng-if="!hasStates()" class="field-wrapper">
+                  <label class="icon map-pin"></label>
+                  <input class="flat" required type="text" name="state" maxlength="40"
+                         placeholder="{{'State' | tc:'checkout.platform'}}" ng-model="state.billingData.stateCode"/>
+                </div>
+                <div ng-if="hasStates()" class="billing-country">
+                  <div class="billing-country-group">
+                    <div>
+                      <div class="tp-dropdown__select"
+                           tp-state-selector
+                           selector-options="stateSelectorOptions"
+                           click-on-select="selectState"
+                           selector-label="{{'Select a state' | tc:'checkout.platform'}}"
+                           dropdown-styles="{width: 320, zIndex: 1004}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <table class="table-form-inline" cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="field-card field-card--half">
+                <div class="field-wrapper">
+                  <label class="icon city"></label>
+                  <input class="flat" required type="text" name="city" maxlength="50"
+                         placeholder="{{'City' | t}}" ng-model="credit_card.city"/>
+                </div>
+              </td>
+              <td class="field-card">
+                <div class="field-wrapper">
+                  <label class=" icon road"></label>
+                  <input class="flat" required type="text" name="address1" maxlength="100"
+                         placeholder="{{'Street' | tc:'checkout.platform'}}" ng-model="credit_card.address1"/>
+                </div>
+              </td>
+
+            </tr>
+          </table>
+          <div class="payment-system-condition">
+            <span ng-if="!isSubscription()">
+              <div class="custom-checkbox">
+                <input type="checkbox" name="store_in_vault" ng-model="credit_card.store_in_vault"
+                       id="remember-my-card-obi"/>
+                <label for="remember-my-card-obi">
+                  <t>Remember my card for future payments</t>
+                </label>
+              </div>
+            </span>
+            <span ng-if="isSubscription()">
+              <input type="hidden" name="store_in_vault" ng-model="credit_card.store_in_vault"/>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div consents-list></div>
+    <div ng-transclude></div>
+  </div>
+</script>
+<!-- klarna-provider-form-component -->
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/klarna-provider-form-component.html">
+  <div ng-if="isPaymentMethod(KLARNA)">
+    <div class="klarna-provider">
+      <div class="errors"></div>
+      <div class="klarna-payment-form" ng-class="{'klarna-payment-form--only': isTheOnlyPaymentMethod() && !isBillingCountryEnabled()}">
+
+        <!--Country selector-->
+        <div ng-hide="isBillingCountryEnabled()"
+             class="billing-country">
+          <div class="billing-country-group">
+            <div class="heading-4">Select your billing country:</div>
+            <div>
+              <div
+                class="tp-dropdown__select"
+                tp-country-selector
+                selector-options="countrySelectorOptions"
+                default-country="defaultCountryCode"
+                selector-label="{{'Select a country or region' | t}}"
+                dropdown-styles="{width: 320, zIndex: 1004}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+  <!-- FDP - Klarna Auto Trigger - Set Countryselector automaticly. Just edit const countrySelectorDisabled = true|false; Countryselector will be visible(false) or hidden(true) with auto trigger of Germany. -->
+    	<script>
+          (function() {
+          	const countrySelectorDisabled = true;
+          	let timeoutClear = true;
+
+          	if(countrySelectorDisabled) {
+            	const intervalAutoTrigger = setInterval(function () {
+  			const countrySelector = angular.element(document.querySelector('.tp-dropdown__select'));
+                  	if (countrySelector.length) {
+                    	countrySelector.click();
+                      	const listSelector = angular.element(document.querySelector('.country-icon-de'));
+
+                        if (listSelector.length) {
+                        	clearInterval(intervalAutoTrigger);
+          					timeoutClear = false;
+                            listSelector.click();
+                        }
+  		}
+  		setTimeout( () => {
+          			if(timeoutClear) {
+                      clearInterval(intervalAutoTrigger);
+                      angular.element(document.querySelector('.billing-country-group')).css('display', 'block');
+          			}
+          		}, 6000 )
+              }, 50);
+          	} else {
+          		angular.element(document.querySelector('.billing-country-group')).css('display', 'block');
+          	}
+          })();
+    	</script>
+        <style>
+  			.klarna-payment-form .billing-country-group {
+        		display: none;
+          	}
+
+          	.klarna-payment-buttons {
+            	display: none;
+          	}
+  		</style>
+        <!-- FDP - END Klarna Auto Trigger -->
+
+        <div class="klarna-payment-buttons">
+          <div class="klarna-button-wrapper" ng-repeat="paymentMethod in paymentMethods()">
+            <button id="paymentMethod-{{paymentMethod.identifier}}"
+                    class="klarna-button klarna-button--{{paymentMethod.identifier}}"
+                    ng-class="{'klarna-button--selected': state.billingData.selectedPaymentMethod === paymentMethod.identifier}"
+                    ng-click="selectPaymentMethod(paymentMethod.identifier)">
+              <span class="klarna-button-payment-name
+                           klarna-button-payment-name--{{paymentMethod.identifier}}
+                           heading-4">{{paymentMethod.name}}</span>
+            </button>
+          </div>
+        </div>
+
+        <div ng-show="paymentMethods().length > 0">
+          <div class="klarna-iframe-container" id="klarna_container"></div>
+        </div>
+
+      </div>
+      <div ng-transclude></div>
+    </div>
+   </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/easypay-bill-controls.html">
+  <div class="easypay-cash-receipt-links">
+    <a class="button big" id="easypay-open-bill" href="{{billUrl}}" target="_blank">{{openBillTitle}}</a>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/easypay-multibanco-form-component.html">
+  <div ng-if="isPaymentMethod(EASYPAY_MULTIBANCO)">
+    <div class="easypay-multibanco-payment-form row">
+      <h4 class="payment-form-title">
+        <t>The most commonly used Portuguese payment system. Highly recommended for every business selling to Portugal.</t>
+      </h4>
+      <div class="warning-wrapper">
+        <strong><t>Instructions</t></strong>
+        <ol>
+          <li>
+            <t>Use this information for paying via ATM or online banking system</t>
+          </li>
+          <li>
+            <t>When payment is complete, you will receive an e-mail notifying you of your access</t>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div ng-transclude></div>
+  </div>
+</script>
+<!-- easypay-direct-debit-provider-form-component -->
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/easypay-direct-debit-provider-form-component.html">
+  <div ng-show="isPaymentMethod(EASYPAY_DIRECT_DEBIT)">
+    <div class="easypay-payment-form row">
+      <div class="errors"></div>
+      <div class="easypay-direct-debit-payment-form">
+        <div ng-if="stored.length">
+          <span class="easypay-direct-debit-title"><t>Your Direct Debit agreements</t></span>
+          <table class="payment-method-easypay-direct-debit">
+            <tr class="payment-method-easypay-direct-debit-row existing-upi" ng-repeat="upi in stored" ng-class="{'selected' : $parent.data.selectedUpi.id == upi.id}">
+              <td class="payment-method-easypay-direct-debit-cell">
+                <input type="radio" id="radio-{{upi.token.slice(-4)}}" name="stored_method" ng-model="$parent.data.selectedUpi" ng-value="upi" radio-track-by="id" />
+              </td>
+              <td class="payment-method-easypay-direct-debit-cell" ng-if="!upi.isNew">
+                <label for="radio-{{upi.token.slice(-4)}}"><t>Agreement *</t>{{upi.token.slice(-4)}}</label>
+              </td>
+              <td class="payment-method-easypay-direct-debit-cell" ng-if="upi.isNew">
+                <label class="inline-label" for="radio-{{upi.token.slice(-4)}}">
+                  <div class="easypay-direct-debit-loggedin">
+                    <span class="easypay-direct-debit-agreement"><t><b>New</b> agreement *</t>{{upi.token.slice(-4)}}</span>
+                  </div>
+                </label>
+                <button ng-click="cancelNewAccount()" class="easypay-direct-debit-cancel-button" id="cancel-direct-debit-account"><t>Cancel</t></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div ng-if="!data.newUpi">
+          <div class="table-cell table-cell--centered">
+            <a id="add-direct-debit-account" class="button big add-account" ng-click="addNewAccount()"><t>Create agreement</t></a>
+          </div>
+          <div class="table-cell table-cell--centered">
+            <t>You will be redirected to EasyPay website, go back to finish purchase.</t>
+          </div>
+        </div>
+      </div>
+
+      <div consents-list></div>
+
+      <div ng-transclude></div>
+    </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/easypay-mbway-form-component.html">
+  <div ng-if="isPaymentMethod(EASYPAY_MBWAY)">
+    <div class="easypay-mbway-payment-form row">
+      <h4 class="payment-form-title">
+        <t>Associates your customer's debit or credit card to a mobile number using just an app, enabling them to go shopping and pay instantly.</t>
+      </h4>
+      <div class="phone-information-wrapper">
+        <div class="phone-information-cell calling-cell">
+          <div
+            id="phone-country"
+            class="tp-dropdown__select"
+            tp-calling-code-selector
+            click-on-select="onCallingCodeSelect"
+            selector-options="selectorOptions"
+            selector-label="{{'Country code' | t}}"
+            dropdown-classes="'no-triangle'"
+            dropdown-styles="{width: 320, zIndex: 1004, left: 40}">
+          </div>
+        </div>
+        <div class="phone-information-cell phone-input-cell">
+          <input class="default-input phone-number-input" type="text" id="phone-number" placeholder="{{'Phone number' | t}}" ng-model="phone.number"/>
+        </div>
+      </div>
+      <div class="app-notification-info"><t>We will send you notification in your MBWAY mobile app</t></div>
+    </div>
+    <div ng-transclude></div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/widget/checkout/component/partials/easypay-boleto-form-component.html">
+  <div ng-if="isPaymentMethod(EASYPAY_BOLETO)">
+    <div ng-transclude></div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/common/credit-card-expire.html">
+  <div class="cc-field-outer-wrap" data-e2e="cc_expire">
+      <div class="cc-field-outer-wrap__left-placeholder">
+          Expiration
+      </div>
+      <div class="cc-field-outer-wrap__field cc-field cc-field--expire" ng-class="{'cc-field--not-valid': !valid}">
+          <label class="cc-field__icon cc-field__icon--expiration" ng-class="{'cc-field__icon--readonly': readonly}"></label>
+          <div class="cc-field__input-wrap">
+              <input type="text"
+                     ng-class="{'cc-field__input--readonly': readonly}"
+                     name="expire"
+                     class="cc-field__input flat"
+                     ng-model="text"
+                     placeholder="{{ 'MM/YY' | t }}"
+                     format-expiry-date
+                     format-year="2"
+                     ng-change="onChange(text)"
+                     ng-readonly="readonly"
+                     ng-required="required"
+                     ng-disabled="disabled"
+              />
+          </div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/common/credit-card-text-input.html">
+  <div class="cc-field-outer-wrap">
+      <div class="cc-field-outer-wrap__left-placeholder">
+          {{ placeholder | t }}
+      </div>
+      <div class="cc-field-outer-wrap__field cc-field" ng-class="getFieldClass()">
+          <label ng-if="icon || iconClass" class="cc-field__icon" ng-class="getIconClass()"></label>
+          <div class="cc-field__input-wrap" ng-class="{'cc-field__input-wrap--no-icon': !(icon || iconClass)}">
+              <input type="text"
+                     class="cc-field__input flat {{className}}"
+                     ng-class="{'cc-field__input--readonly': readonly}"
+                     ng-model="text"
+                     placeholder="{{ placeholder | t }}"
+                     maxlength="{{ maxlength }}"
+                     ng-readonly="readonly"
+                     ng-required="required"
+                     ng-disabled="disabled"
+                     ng-change="onChange()"
+              />
+          </div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/common/credit-card-number.html">
+  <cc-text-input placeholder="'Card number'"
+                 ng-model="text"
+                 ng-readonly="readonly"
+                 ng-required="required"
+                 ng-disabled="disabled"
+                 icon="'card'"
+                 class="cc-field-wrap"
+                 class-name="className"
+                 on-change="onChange"
+                 name="name"
+                 data-e2e="cc_number"
+                 valid="valid"
+  ></cc-text-input>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/common/credit-card-cvv.html">
+  <cc-text-input
+          ng-readonly="readonly"
+          ng-required="required"
+          ng-disabled="disabled"
+          placeholder="'CVV'"
+          ng-model="text"
+          icon="'cvv'"
+          maxlength="5"
+          class="cc-field-wrap"
+          class-name="className"
+          on-change="onChange"
+          name="name"
+          data-e2e="cc_cvv"
+          valid="valid"
+  ></cc-text-input>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/common/credit-card-postal-code.html">
+  <cc-text-input placeholder="'Postal code'"
+                 ng-readonly="readonly"
+                 ng-required="required"
+                 ng-disabled="disabled"
+                 ng-model="text"
+                 class="cc-field-wrap"
+                 class-name="className"
+                 on-change="onChange"
+                 name="name"
+                 icon="'zip-code'"
+                 data-e2e="cc_zip"
+                 valid="valid"
+  ></cc-text-input>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/components/applepayss/checkout/component.shtml">
+  <div class="applepay-ss-wrapper new-card-form">
+      <div class="row">
+          <div class="footer-modal">
+              <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+                  <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew"
+                         id="auto_renew"/>
+                  <label class="auto-renew-purchase-label" for="auto_renew">
+                      <t>Automatically renew my subscription when the time comes.</t>
+                  </label>
+              </div>
+              <div>
+                  <a ng-click="openApplePayWindow()" class="button big applepay-ss-complete-purchase"
+                     href="javascript:void(0)" ng-class="{'disabled': isApplePaySsEnabled !== true}">&nbsp;</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/components/applepayss/common/baseTemplate.shtml">
+  <div class="cc-fields-layout">
+      <div class="cc-fields-layout__field cc-fields-layout__card-number">
+          <credit-card-number ng-model="credit_card.num.value"
+                              on-change="credit_card.num.onChangeCallback"
+                              ng-disabled="credit_card.num.disabled"
+                              ng-required="credit_card.num.required"
+                              ng-readonly="credit_card.num.readonly"
+                              maxlength="credit_card.num.maxlength"
+                              valid="credit_card.num.valid"
+                              name="'num'">
+          </credit-card-number>
+      </div>
+      <div class="cc-fields-layout__field cc-fields-layout__expire">
+          <cc-expire-component ng-model="credit_card.expire.value"
+                               on-change="credit_card.expire.onChangeCallback"
+                               ng-disabled="credit_card.expire.disabled"
+                               ng-required="credit_card.expire.required"
+                               ng-readonly="credit_card.expire.readonly"
+                               maxlength="credit_card.expire.maxlength"
+                               valid="credit_card.expire.valid"
+                               name="'expire'"
+                               on-change="onChangeCallback">
+          </cc-expire-component>
+      </div>
+      <div class="cc-fields-layout__field cc-fields-layout__cvv">
+          <credit-card-cvv ng-model="credit_card.cvv.value"
+                           on-change="credit_card.cvv.onChangeCallback"
+                           ng-disabled="credit_card.cvv.disabled"
+                           ng-required="credit_card.cvv.required"
+                           ng-readonly="credit_card.cvv.readonly"
+                           maxlength="credit_card.cvv.maxlength"
+                           valid="credit_card.cvv.valid"
+                           name="'cvv'">
+          </credit-card-cvv>
+      </div>
+      <div class="cc-fields-layout__field cc-fields-layout__postal-code">
+          <credit-card-postal-code ng-model="credit_card.postal_code.value"
+                                   on-change="credit_card.postal_code.onChangeCallback"
+                                   ng-disabled="credit_card.postal_code.disabled"
+                                   ng-required="credit_card.postal_code.required"
+                                   ng-readonly="credit_card.postal_code.readonly"
+                                   maxlength="credit_card.postal_code.maxlength"
+                                   valid="credit_card.postal_code.valid"
+                                   name="'postal_code'">
+          </credit-card-postal-code>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/components/onet/checkout/component.shtml">
+  <div class="onet-payway-wrapper new-card-form">
+      <div class="row">
+          <!--TODO - find a way to isolate this component and logic outside, in checkout, or at least make components-->
+          <div desktop class="cc_stored_cards" ng-show="!cc.payWithNew && cc.initiated">
+              <div class="add-credit-card-wrapper">
+                  <h4>
+                      <t>Your credit and debit cards</t>
+                  </h4>
+                  <a href="javascript:void(0)" class="add-credit-card" ng-click="cc.payWithNew = true"
+                     ng-show="cc.stored.length > 0">
+                      +
+                      <t>Add a card</t>
+                  </a>
+              </div>
+              <table class="payment-method-card" ng-show="cc.stored.length > 0">
+                  <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+                      ng-class="{'selected' : $parent.cc.selectedUpiId == method.id}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" value="{{method.id}}"
+                                 ng-model="$parent.cc.selectedUpiId"/>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div class="credit-card-{{method.identifier}}"></div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div>{{method.type}} *{{method.ending_in}}</div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <t>Expires</t> <t>N/A</t>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div mobile class="cc_stored_cards" ng-show="cc.initiated">
+              <table class="payment-method-card" ng-show="cc.stored.length > 0">
+                  <tr class="payment-method-card-row" ng-repeat="method in cc.stored"
+                      ng-class="{'selected' : $parent.cc.selectedUpiId == method.id && $parent.cc.payWithNew != true}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" value="{{method.id}}"
+                                 ng-model="$parent.cc.selectedUpiId"
+                                 ng-click="$parent.cc.payWithNew = false"/>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div class="credit-card-{{method.identifier}}"></div>
+                      </td>
+                      <td class="payment-method-card-cell">
+                          <div>*{{method.ending_in}}</div>
+                      </td>
+                  </tr>
+                  <tr class="payment-method-card-row" ng-class="{'selected' : $parent.cc.payWithNew == true}">
+                      <td class="payment-method-card-cell">
+                          <input type="radio" name="stored_method" ng-model="$parent.cc.payWithNew" ng-value="true"/>
+                      </td>
+                      <td class="payment-method-card-cell" colspan="2">
+                          <t>Add a new card</t>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+          <div class="cc_new_card" ng-show="cc.payWithNew && cc.initiated">
+              <div desktop class="go-back-to-cards-wrapper">
+                  <a href="javascript:void(0)" class="go-back-to-cards" ng-click="cc.payWithNew = false"
+                     ng-show="cc.stored.length > 0">
+                      <t>Return to saved cards</t>
+                  </a>
+                  <h4>
+                      <t>Add a new credit or debit card</t>
+                  </h4>
+              </div>
+              <form class="new-card-form" name="ccForm" role="form">
+                  <dynamic-base-inputs-component name="providerName"
+                                                 credit-card="credit_card"></dynamic-base-inputs-component>
+                  <div class="payment-system-condition">
+                          <span ng-if="!isSubscription()">
+                              <div class="custom-checkbox">
+                                  <input type="checkbox" name="store_in_vault" class="payu-agreement" ng-model="credit_card.store_in_vault"
+                                         id="rermber-my-card-onet1"/>
+                                  <label for="rermber-my-card-onet1">
+                                      <t>Remember my card for future payments</t>
+                                  </label>
+                              </div>
+                          </span>
+                      <span ng-if="isSubscription()">
+                          <div class="custom-checkbox">
+                              <input type="checkbox" name="store_in_vault" class="payu-agreement" ng-model="credit_card.store_in_vault"
+                                     id="rermber-my-card-onet2" disabled/>
+                              <label for="rermber-my-card-onet2">
+                                  <t>Remember my card for future payments</t>
+                              </label>
+                          </div>
+                      </span>
+                  </div>
+              </form>
+          </div>
+          <div consents-list></div>
+          <div class="footer-modal">
+              <div class="auto-renew-purchase" ng-show="isSelectedTermAutoRenewChoiceAvailable()">
+                  <input class="auto-renew-purchase-checkbox" type="checkbox" ng-model="input.autoRenew"
+                         id="auto_renew"/>
+                  <label class="auto-renew-purchase-label" for="auto_renew">
+                      <t>Automatically renew my subscription when the time comes.</t>
+                  </label>
+              </div>
+              <div ng-show="isConfirmStepEnabled()" class="complete-purchase-button" goto-confirmation-button
+                   title="{{'Complete Purchase' | t}}"></div>
+              <div ng-show="!isConfirmStepEnabled()" class="complete-purchase-button" complete-purchase-button
+                   title="{{'Complete Purchase' | t}}"></div>
+          </div>
+      </div>
+  </div>
+</script>
+<script
+  type="text/ng-template"
+  id="/frontend/providers/components/onet/common/baseTemplate.shtml">
+  <div class="cc-fields-layout">
+      <div class="cc-fields-layout__field cc-fields-layout__card-number">
+          <credit-card-number ng-model="credit_card.num.value"
+                              on-change="credit_card.num.onChangeCallback"
+                              ng-disabled="credit_card.num.disabled"
+                              ng-required="credit_card.num.required"
+                              ng-readonly="credit_card.num.readonly"
+                              maxlength="credit_card.num.maxlength"
+                              valid="credit_card.num.valid"
+                              class-name="'payu-card-number'"
+                              name="'num'">
+          </credit-card-number>
+      </div>
+      <div class="cc-fields-layout__field cc-fields-layout__expire">
+          <cc-expire-component ng-model="credit_card.expire.value"
+                               on-change="credit_card.expire.onChangeCallback"
+                               ng-disabled="credit_card.expire.disabled"
+                               ng-required="credit_card.expire.required"
+                               ng-readonly="credit_card.expire.readonly"
+                               maxlength="credit_card.expire.maxlength"
+                               valid="credit_card.expire.valid"
+                               name="'expire'">
+          </cc-expire-component>
+          <input type="hidden" class="payu-card-expm" value="{{credit_card.expire.month}}">
+          <input type="hidden" class="payu-card-expy" value="{{credit_card.expire.year}}">
+      </div>
+      <div class="cc-fields-layout__field cc-fields-layout__cvv">
+          <credit-card-cvv ng-model="credit_card.cvv.value"
+                           on-change="credit_card.cvv.onChangeCallback"
+                           ng-disabled="credit_card.cvv.disabled"
+                           ng-required="credit_card.cvv.required"
+                           ng-readonly="credit_card.cvv.readonly"
+                           maxlength="credit_card.cvv.maxlength"
+                           valid="credit_card.cvv.valid"
+                           class-name="'payu-card-cvv'"
+                           name="'cvv'">
+          </credit-card-cvv>
+      </div>
+  </div>
+</script>

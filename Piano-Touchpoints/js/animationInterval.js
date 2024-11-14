@@ -90,6 +90,24 @@ document.getElementById("plus-banner__close").addEventListener("click", function
     clearInterval(animatorIntervallID);
     console.log("calm it");
     animatorIntervallID = null;
-    document.getElementsByClassName("plus-banner-wrapper")[0].style.display = "none";
+    docdcument.getElementsByClassName("plus-banner-wrapper")[0].style.display = "none";
   }
 });
+
+/* let trackableElementsIds = [];
+
+let trackableElementsList = document.getElementsByClassName("trackElementView");
+for (var i = 0; trackableElementsList.length > i; i++) {
+  trackableElementsIds.push(trackableElementsList[i].id);
+}
+console.log(trackableElementsIds);
+
+scope.trackIDs = trackableElementsIds;
+scope.visibiltyCheck("plus-banner__text");
+scope.trackingView("main");
+
+for (let name of scope.trackIDs) {
+  if (condition) {
+    console.log(name);
+  }
+} */

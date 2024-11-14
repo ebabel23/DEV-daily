@@ -1,6 +1,6 @@
 console.log("Hi from store.js");
 
-let  scope = {};
+let scope = {};
 
 function setScope(params) {
   scope = {
@@ -203,8 +203,7 @@ function setScope(params) {
           url: null,
           imageUrl: null,
         },
-        displayLine:
-          "4,99 € pro Monat / mit Probeversion zu 0,99 € für 1 Monat",
+        displayLine: "4,99 € pro Monat / mit Probeversion zu 0,99 € für 1 Monat",
         billingPlanTable: [
           {
             date: "Heute",
@@ -388,8 +387,7 @@ function setScope(params) {
           url: null,
           imageUrl: null,
         },
-        displayLine:
-          "4,99 € pro Monat / mit Probeversion zu 40,00 € für 1 Jahr",
+        displayLine: "4,99 € pro Monat / mit Probeversion zu 40,00 € für 1 Jahr",
         billingPlanTable: [
           {
             date: "Heute",
@@ -573,8 +571,7 @@ function setScope(params) {
           url: null,
           imageUrl: null,
         },
-        displayLine:
-          "4,99 € pro Monat / mit Probeversion zu 72,00 € für 24 Monate",
+        displayLine: "4,99 € pro Monat / mit Probeversion zu 72,00 € für 24 Monate",
         billingPlanTable: [
           {
             date: "Heute",
@@ -809,9 +806,7 @@ const trackingPosition = [%% Tracking_Position %%];
 const trackingCategory = [%% Tracking_Category %%]; */
 
 let selectedTermId = "TMBWZE8NIOE7";
-let selectedTermIndex = scope.terms.findIndex(
-  (x) => x.termId === selectedTermId
-);
+let selectedTermIndex = scope.terms.findIndex((x) => x.termId === selectedTermId);
 
 function setSelectedTermId() {
   //ng-click {{ term.termId }}
@@ -880,10 +875,8 @@ class PiObject {
       this.content.id = scope.custom.e2p_articleId;
       this.offerId = scope.params.offerId;
       this.terms.listed = scope.terms.map((term) => term.termId);
-      this.terms.selected.description =
-        scope.terms[selectedTermIndex].description;
-      this.terms.selected.displayLine =
-        scope.terms[selectedTermIndex].displayLine;
+      this.terms.selected.description = scope.terms[selectedTermIndex].description;
+      this.terms.selected.displayLine = scope.terms[selectedTermIndex].displayLine;
       this.terms.selected.hasTrial = scope.terms[0].billingPlanTable.length > 1;
       this.terms.selected.termId = scope.terms[selectedTermIndex].termId;
       this.terms.selected.regularPrice =
@@ -899,16 +892,11 @@ class PiObject {
           ? scope.terms[selectedTermIndex].billingPlanTable[1].billingPeriod
           : scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
       this.terms.selected.resource = {};
-      this.terms.selected.resource.name =
-        scope.terms[selectedTermIndex].resource.name;
-      this.terms.selected.resource.rid =
-        scope.terms[selectedTermIndex].resource.rid;
-      this.terms.selected.trialPrice =
-        scope.terms[selectedTermIndex].billingPlanTable[0].price;
-      this.terms.selected.trialPriceValue =
-        scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
-      this.terms.selected.trialBillingPeriod =
-        scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
+      this.terms.selected.resource.name = scope.terms[selectedTermIndex].resource.name;
+      this.terms.selected.resource.rid = scope.terms[selectedTermIndex].resource.rid;
+      this.terms.selected.trialPrice = scope.terms[selectedTermIndex].billingPlanTable[0].price;
+      this.terms.selected.trialPriceValue = scope.terms[selectedTermIndex].billingPlanTable[0].priceValue;
+      this.terms.selected.trialBillingPeriod = scope.terms[selectedTermIndex].billingPlanTable[0].billingPeriod;
       this.actualState = "enhanced on click via function";
       //TODO: Check if User-Object edits term for trial, if user had trial before
     };
@@ -923,18 +911,26 @@ class PiObject {
       return clone;
     };
     this.pasteString64 = function createStringifiedObject64() {
-     let clone = btoa(encodeURI(JSON.stringify(Object.assign({}, this))));
+      let clone = btoa(encodeURI(JSON.stringify(Object.assign({}, this))));
       return clone;
     };
-    }
   }
-
-
+}
 
 let testobj = new PiObject("export");
 
-let listenerObject = new PiObject("listenexport");
+let loadedObject = new PiObject("listenexport");
 
-window.addEventListener("DOMContentLoaded", listenerObject.init());
+window.addEventListener("DOMContentLoaded", loadedObject.init());
 
-listenerObject;
+loadedObject;
+
+let enhancedObject = new PiObject("enhancedExport");
+
+window.addEventListener("DOMContentLoaded", enhancedObject.init());
+window.addEventListener("DOMContentLoaded", enhancedObject.enhance());
+
+enhancedObject;
+
+console.log("Object-Status on Load", loadedObject);
+console.log("Object-Status nach Click", enhancedObject);
