@@ -1,4 +1,4 @@
-Keycloak-Login  edit
+
 https://auth.cloud.funkedigital.de/auth/realms/funke-nrw/protocol/openid-connect/auth?client_id=piano-wr&scope=openid%20profile%20email&response_type=id_token%20token&nonce=3c22629f-d2de-4f8b-afb6-b0a5236ea68b&redirect_uri=https%3A%2F%2Fwww.wr.de%2Fresources%2Fstatic%2Fkeycloak-redirect.html
 
 Keycloak_Register
