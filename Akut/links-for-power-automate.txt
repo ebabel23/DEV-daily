@@ -2,6 +2,7 @@ https://funkemedien.sharepoint.com/sites/UserLeserMarktGesamt2/Shared%20Document
 
 https://funkemedien.sharepoint.com/:b:/r/sites/UserLeserMarktGesamt2/Shared%20Documents/200%20-%20Teams/Product%20Management/Initiativen/Docs/Doc_Restore/Scoring_Matrix_Full_1.0.pdf?csf=1&web=1&e=Jpd7cb
 
+11
 
 https://<yourdomain>.sharepoint.com/sites/<yoursite>/_layouts/download.aspx?SourceUrl=<document-URL>
 
